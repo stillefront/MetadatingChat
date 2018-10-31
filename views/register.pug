@@ -1,0 +1,23 @@
+extends layout
+
+
+block content
+  section.login
+    h3 register new account
+      div.input
+        label(for='login') name
+        br
+        input(type='text' id='login' name='login').input
+
+      div.input
+        label(for='password') password
+        br
+        input(type='text' id='password' name='password').input
+        
+      div.input
+        label(for='password_repeat') repeat password
+        br
+        input(type='text' id='password_repeat' name='password_repeat').input
+
+      br
+      button(type='login') register!
