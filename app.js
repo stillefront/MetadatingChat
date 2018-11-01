@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var insertRouter = require('./routes/insert');
+var successRouter = require('./routes/success');
 var adminRouter = require('./routes/admin');
 var botRouter = require('./routes/bots');
 var chatRouter = require('./routes/chat');
@@ -31,6 +32,7 @@ app.use('/chat', chatRouter);
 app.use('/admin', adminRouter);
 app.use('/register', registerRouter);
 app.use('/insert', insertRouter);
+app.use('/success', successRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

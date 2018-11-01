@@ -1,6 +1,9 @@
 // implementing login
 // https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
 
+// implementing sessions for later use:
+// https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions
+
 var express = require('express');
 var router = express.Router();
 
@@ -31,8 +34,6 @@ router.post('/', function(req, res, next) {
 
     user.save(function (err, user){
       if (err) return console.error(err);
-      user.username;
-      user.password;
     });
 
     Login.find(function (err, users) {
@@ -40,7 +41,7 @@ router.post('/', function(req, res, next) {
     console.log(users);
   });
 
-res.redirect('/login');
+res.redirect('/success');
 
 });
 
