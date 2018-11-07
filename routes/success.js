@@ -18,38 +18,33 @@ router.get('/', function(req, res, next) {
 
   Login.find(function (err, users) {
   if (err) return console.error(err);
-  //console.log(users);
 });
 
 
-Login.findOne({}, {}, { sort: { '_id' : -1 }}, function(err, recent) {
 
-  test = recent.username;
-  console.log("Testfall:", recent.username);
-  console.log("Testfall:", recent.password);
-
-});
+//JavaScript Promises with async and await
 
 
-//JavaScript Promises
+async function recentUser(){
+  const recentUser = await getRecentUser();
+  console.log('most recent User in database: ', recentUser.username);
+  nameTest = recentUser.username;
+  pwTest = recentUser.password;
 
-const p = new Promise(function(resolve, reject){
-  resolve(Login.findOne({}, {}, {sort : { '_id' : -1}}, function(err, recent){
-    nameTest = recent.username;
-    pwTest = recent.password;
-  }));
+  res.render('success', {item: nameTest, item2: pwTest});
+}
 
-  reject(new Error('hat nicht geklappt'));
-});
+recentUser();
 
-p.then(function(result){
-  //var nameTest = result.username;
-  console.log('Testfall 2: ', nameTest);
-  console.log('Testfall 2: ', pwTest);
-});
+function getRecentUser() {
+  return new Promise(function(resolve, reject){
+    resolve(Login.findOne({}, {}, {sort :{'_id' : -1}}, function(err, recent){
+      //more stuff to do and to get...
+    }));
+  });
+}
 
-
-res.render('success', {item: nameTest, item2: pwTest});
+//TODO: resolve Errors!
 
 
 });
