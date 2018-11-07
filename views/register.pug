@@ -4,11 +4,11 @@ extends layout
 block content
   section.register
     h3 register new account
-    form(action='/insert' method='post')
+    form(action='/users' method='post')
         div.input
-          label(for='login') name
+          label(for='username') name
           br
-          input(type='text' id='login' name='login').input
+          input(type='text' id='username' name='username').input
 
         div.input
           label(for='password') password

@@ -4,15 +4,16 @@ extends layout
 block content
   section.login
     h3 login
+    form(action='/auth' method='post')
       div.input
-        label(for='login') name
+        label(for='username') name
         br
-        input(type='text' id='login' name='login').input
+        input(type='text' id='username' name='username').input
 
       div.input
         label(for='password') password
         br
-        input(type='text' id='password' name='password').input
+        input(type='password' id='password' name='password').input
 
-      br
-      button(type='login') insert
+        br
+        button(type='submit') login    

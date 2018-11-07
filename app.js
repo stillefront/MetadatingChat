@@ -3,17 +3,35 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const config = require('config');
 
 const indexRouter = require('./routes/index');
-const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
-const insertRouter = require('./routes/insert');
-const successRouter = require('./routes/success');
 const adminRouter = require('./routes/admin');
 const botRouter = require('./routes/bots');
 const chatRouter = require('./routes/chat');
+const userRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
+const login = require('./routes/login');
 
 const app = express();
+
+if (!config.get('PrivateKeyjwt')) {
+  console.error('FATAL ERROR: PrivateKeyjwt is not defined.');
+  process.exit(1);
+}
+
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/botDB')
+  .then(function(){
+    console.log('Connected to MongoDB');
+  })
+  .catch(function(err){
+    console.error('Could not connect to MongoDB');
+  });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,13 +44,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
 app.use('/bots', botRouter);
 app.use('/chat', chatRouter);
 app.use('/admin', adminRouter);
 app.use('/register', registerRouter);
-app.use('/insert', insertRouter);
-app.use('/success', successRouter);
+app.use('/users', userRouter);
+app.use('/auth', authRouter);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,43 @@
 extends layout
 
-
 block content
-    h3 admin panel comes here
-      
+
+  section.insert
+    h3 Botcredentials Eingeben (future: CRUD)
+      form(action='/insert' method='post')
+        div.input
+          label(for='name') Name
+          br
+          input(type='text' id='name' name='name').input
+
+        div.input
+          label(for='description') Beschreibung
+          br
+          input(type='text' id='description' name='description').input
+
+        div.input
+          label(for='workspace_id') Workspace ID
+          br
+          input(type='text' id='workspace_id' name='workspace_id').input
+
+        div.input
+          label(for='user_token') Username Token
+          br
+          input(type='text' id='user_token' name='user_token').input
+
+        div.input
+          label(for='password_token') Passwort Token
+          br
+          input(type='text' id='password_token' name='password_token').input
+
+          br
+          button(type='submit') insert
+
+  section.show
+    h3 Bots in der Datenbank
+
+  section.update
+    h3 Bots bearbeiten
+
+  section.delete
+    h3 Bots löschen
