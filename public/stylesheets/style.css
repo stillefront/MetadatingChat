@@ -6,3 +6,53 @@ body {
 a {
   color: #00B7FF;
 }
+
+p.description {
+  font: 12px "Monospace", monospace;
+}
+
+p.name {
+  font: 16px bold, monospace;
+}
+
+
+div.botdocument {
+  margin: auto;
+  padding: 1%;
+  padding-top: 0;
+}
+
+div.botdocument:hover {
+  background: lightsalmon;
+  cursor: pointer;
+}
+
+
+label {
+  font: 14px bold, monospace;
+}
+
+.insert {
+  float: left;
+
+  margin: auto;
+  padding: 3%;
+}
+
+.show {
+  float: left;
+  margin: auto;
+  padding: 3%;
+}
+
+.update {
+  float: left;
+  margin: auto;
+  padding: 3%;
+}
+
+.delete {
+  float: left;
+  margin: auto;
+  padding: 3%;
+}

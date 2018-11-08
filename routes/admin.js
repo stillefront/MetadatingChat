@@ -9,8 +9,11 @@ const mongoose = require('mongoose');
 // CRUD operations on bot database come here!
 
 
-router.get('/', function (req, res, next){
-  res.render('admin');
+router.get('/', async function (req, res, next){
+  
+  const bot_query = await Bot.find(); 
+  res.render('admin', {bot_query : bot_query});
+  
 });
 
 router.post('/newbot', async function (req, res){
@@ -25,17 +28,19 @@ router.post('/newbot', async function (req, res){
 
   await bot.save();
 
-  res.render('admin');
+  const bot_query = await Bot.find();
+   
+  res.render('admin', {bot_query : bot_query});
+
+  //res.render('admin');
 
 });
 
-router.get('/show', async function (req, res, next){
+router.get('/refresh', async function (req, res, next){
 
-  const bot_queries = await Bot.find();
- 
-  console.log(bot_queries);
+  const bot_query = await Bot.find(); 
+  res.render('admin', {bot_query : bot_query});
 
-  res.render('admin');
 });
 
 

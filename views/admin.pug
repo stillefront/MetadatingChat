@@ -3,7 +3,8 @@ extends layout
 block content
 
   section.insert
-    h3 Botcredentials Eingeben (future: CRUD)
+    h2 Neuen Bot erstellen
+      br
       form(action='/admin/newbot' method='post')
         div.input
           label(for='name') Name
@@ -39,10 +40,17 @@ block content
           button(type='submit') insert
 
   section.show
-    h3 Bots in der Datenbank
+    h2 Bots in der Datenbank
+      br
+      each bots in bot_query
+        div.botdocument.clickable
+          p.name #{bots.name}
+          p.description #{bots.description}
      
   section.update
-    h3 Bots bearbeiten
+    h2 Bots bearbeiten
+      br
 
   section.delete
-    h3 Bots löschen
+    h2 Bots löschen
+      br
