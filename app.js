@@ -69,3 +69,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// export metadating_PrivateKeyjwt=sicheresPasswort

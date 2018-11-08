@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
-/* GET users listing. */
+/* POST  new users. */
 router.post('/', async function(req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);

@@ -1,7 +1,8 @@
-
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
-const BotSchema = new mongoose.Schema ({
+
+const botSchema = new mongoose.Schema ({
         name: {
           type: String, 
           required: true
@@ -12,7 +13,7 @@ const BotSchema = new mongoose.Schema ({
         image_path: {
           type: String
         },
-        workspace_id_token: {
+        workspace_id_url: {
           type: String,
           required: true
         },
@@ -30,15 +31,35 @@ const BotSchema = new mongoose.Schema ({
         },
         owner: {
           type: String,
-          required: true
+          //required: true
         },
         isPublic: {
           type: Boolean,
-          required: true
+          //required: true
         }
 });
 
+const Bot = mongoose.model('Bot', botSchema);
 
-module.exports = mongoose.model('Bot', BotSchema);
+function validateBot(bot) {
+  const schema = {
+    name: Joi.string().min(5).max(50).required(),
+    description: Joi.string().min(5).max(255),
+    image_path: Joi.string().min(5).max(255),
+    workspace_id_url: Joi.string().min(5).max(255).required(),
+    username_token: Joi.string().min(5).max(255).required(),
+    password_token: Joi.string().min(5).max(255).required(),
+    date_created: Joi.string().min(5).max(255),
+    owner: Joi.string().min(5).max(255)
+  };
+
+  return Joi.validate(bot, schema);
+}
+
+
+exports.Bot = Bot;
+exports.validate = validateBot;
+
+//module.exports = mongoose.model('Bot', BotSchema);
 
 
