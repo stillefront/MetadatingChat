@@ -13,6 +13,7 @@ router.get('/', async function (req, res, next){
   
   const bot_query = await Bot.find(); 
   res.render('admin', {bot_query : bot_query});
+  //console.log(bot_query);
   
 });
 
@@ -29,6 +30,7 @@ router.post('/newbot', async function (req, res){
   await bot.save();
 
   const bot_query = await Bot.find();
+
    
   res.render('admin', {bot_query : bot_query});
 
@@ -36,10 +38,17 @@ router.post('/newbot', async function (req, res){
 
 });
 
-router.get('/refresh', async function (req, res, next){
+router.post('/refresh', async function (req, res, next){
 
-  const bot_query = await Bot.find(); 
-  res.render('admin', {bot_query : bot_query});
+ 
+  console.log(req.body);
+  let id = req.body._id;
+
+  let singleBotRequest = await Bot.findOne( { _id: id} );
+  console.log(singleBotRequest);
+  
+  
+  res.render('admin', bot_query);
 
 });
 

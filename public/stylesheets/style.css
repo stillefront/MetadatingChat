@@ -7,13 +7,23 @@ a {
   color: #00B7FF;
 }
 
-p.description {
+.botlink {
+  text-decoration: none;
+  color: black;
+}
+
+p.show_id {
+  font: 10px bold, monospace;
+}
+
+p.show_description {
   font: 12px "Monospace", monospace;
 }
 
-p.name {
+p.show_name {
   font: 16px bold, monospace;
 }
+
 
 
 div.botdocument {
@@ -28,8 +38,19 @@ div.botdocument:hover {
 }
 
 
+.clicked {
+  background-color: lightsalmon;
+}
+
 label {
   font: 14px bold, monospace;
+}
+
+.center {
+  margin: 0 auto;
+
+  width: 100%;
+  height: 100%;
 }
 
 .insert {
