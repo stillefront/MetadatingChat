@@ -19,10 +19,12 @@ $(document).ready(function() {
               //success: function() { ... },
               //error: function(){ ... },
               url: '/admin/refresh',
-              cache:false
+              cache: false
             });
         
     });
 
 
 });
+
+// next try: no mongodb fuckery, just transfer the values via jquery DOM manipulation and 'this' keyword

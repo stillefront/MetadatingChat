@@ -45,49 +45,8 @@ block content
       h2 Bots in der Datenbank
         br
         each bots in bot_query
-          div.botdocument.clickable
-            p.show_name #{bots.name}
-            p.show_description #{bots.description}
-            p.show_id #{bots._id} 
+            div.botdocument.clickable
+              p.show_name #{bots.name}
+              p.show_description #{bots.description}
+              p.show_id #{bots._id} 
       
-    section.update
-      h2 Bot bearbeiten
-        br
-        form(action='/admin/update' method='post').update
-          div.input
-            label(for='name') Name
-            br
-            input(type='text' id='name' name='name' value= name).input
-
-          div.input
-            label(for='description') Beschreibung
-            br
-            input(type='text' id='description' name='description').input
-
-          div.input
-            label(for='image_path') Profilbild (URL)
-            br
-            input(type='text' id='image_path' name='image_path').input
-
-          div.input
-            label(for='workspace_id_url') Workspace ID URL
-            br
-            input(type='text' id='workspace_id_url' name='workspace_id_url').input
-
-          div.input
-            label(for='username_token') Username Token
-            br
-            input(type='text' id='username_token' name='username_token').input
-
-          div.input
-            label(for='password_token') Passwort Token
-            br
-            input(type='text' id='password_token' name='password_token').input
-
-            br
-            button(type='submit') update
-        
-
-    section.delete
-      h2 Bot löschen
-        br

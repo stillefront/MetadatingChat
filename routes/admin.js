@@ -34,21 +34,22 @@ router.post('/newbot', async function (req, res){
    
   res.render('admin', {bot_query : bot_query});
 
-  //res.render('admin');
 
 });
 
-router.post('/refresh', async function (req, res, next){
+
+router.post('/refresh', async function (req, res){
 
  
-  console.log(req.body);
+  console.log( 'req.body: ', req.body); //debug
   let id = req.body._id;
 
   let singleBotRequest = await Bot.findOne( { _id: id} );
-  console.log(singleBotRequest);
+  console.log('singleBotRequest: ', singleBotRequest);
+
+  res.render('update', { bot : singleBotRequest } );
+
   
-  
-  res.render('admin', bot_query);
 
 });
 
