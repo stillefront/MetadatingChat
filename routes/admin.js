@@ -37,7 +37,7 @@ router.post('/newbot', async function (req, res){
 
 });
 
-
+/*
 router.post('/refresh', async function (req, res){
 
  
@@ -52,7 +52,7 @@ router.post('/refresh', async function (req, res){
   
 
 });
-
+*/
 
 /*
 router.post('/update', function (req, res, next){

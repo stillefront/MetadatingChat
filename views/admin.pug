@@ -4,7 +4,7 @@ block content
 
 
     section.insert
-      h2 Neuen Bot erstellen
+      h2 Neuen Bot hinterlegen
         br
         form(action='/admin/newbot' method='post').insert
           div.input
@@ -48,5 +48,51 @@ block content
             div.botdocument.clickable
               p.show_name #{bots.name}
               p.show_description #{bots.description}
-              p.show_id #{bots._id} 
-      
+              p.show_image_path #{bots.image_path} 
+              p.show_workspace_id_url.hidden #{bots.workspace_id_url}
+              p.show_username_token.hidden #{bots.username_token}
+              p.show_password_token.hidden #{bots.password_token} 
+
+
+    section.update
+          h2 Bot updaten
+            br
+            form(action='/admin/update' method='post').update
+              div.input
+                label(for='name') Name
+                br
+                input.updateName(type='text' id='name' name='name').input
+
+              div.input
+                label(for='description') Beschreibung
+                br
+                input.updateDescription(type='text' id='description' name='description' ).input
+
+              div.input
+                label(for='image_path') Profilbild (URL)
+                br
+                input.updateImageUrl(type='text' id='image_path' name='image_path').input
+
+              div.input
+                label(for='workspace_id_url') Workspace ID URL
+                br
+                input.updateWorkspaceID(type='text' id='workspace_id_url' name='workspace_id_url').input
+
+              div.input
+                label(for='username_token') Username Token
+                br
+                input.updateUsernameToken(type='text' id='username_token' name='username_token').input
+
+              div.input
+                label(for='password_token') Passwort Token
+                br
+                input.updatePasswordToken(type='text' id='password_token' name='password_token').input
+
+                br
+                button(type='submit') update
+            
+
+    section.delete
+          h2 Bot löschen
+            br
+        
