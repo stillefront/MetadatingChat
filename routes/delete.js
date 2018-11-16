@@ -12,7 +12,7 @@ router.post('/', async function(req, res) {
   console.log('submitted document ID:', botID); //debug
 
   const result = await Bot.deleteOne({ _id: botID});
-  if (result) return res.status(400).send('Bot nicht in der Datenbank verfügbar!');
+  
 
   console.log(result); // debug
   
