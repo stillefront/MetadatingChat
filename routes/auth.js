@@ -21,7 +21,9 @@ router.post('/', async function(req, res, next) {
   const token = user.generateAuthToken();  
   
   res.send(token);
+  // res.header('x-auth-token', token).send(_.pick(user, ['username']));
 
+  // res.cookie('jwt', token).send(_.pick(user, ['username']));
 
   function validate(req) {
     const schema = {

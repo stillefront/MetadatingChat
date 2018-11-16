@@ -1,4 +1,4 @@
-
+const auth = require('../middleware/auth')
 
 const express = require('express');
 const router = express.Router();
@@ -8,8 +8,6 @@ const {Bot, validate} = require('../models/bot');
 const mongoose = require('mongoose');
 
 /* Route to admin panel */
-// CRUD operations on bot database come here!
-
 
 router.get('/', async function (req, res, next){
   
@@ -38,19 +36,6 @@ router.post('/newbot', async function (req, res){
 
 
 });
-
-
-/*
-router.post('/update', function (req, res, next){
-  
-});
-
-router.post('/delete', function (req, res, next){
-  
-});
-
-*/
-
 
 module.exports = router;
 
