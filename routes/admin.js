@@ -1,5 +1,7 @@
-var express = require('express');
-var router = express.Router();
+
+
+const express = require('express');
+const router = express.Router();
 
 const _ = require('lodash');
 const {Bot, validate} = require('../models/bot');
@@ -37,22 +39,6 @@ router.post('/newbot', async function (req, res){
 
 });
 
-/*
-router.post('/refresh', async function (req, res){
-
- 
-  console.log( 'req.body: ', req.body); //debug
-  let id = req.body._id;
-
-  let singleBotRequest = await Bot.findOne( { _id: id} );
-  console.log('singleBotRequest: ', singleBotRequest);
-
-  res.render('update', { bot : singleBotRequest } );
-
-  
-
-});
-*/
 
 /*
 router.post('/update', function (req, res, next){

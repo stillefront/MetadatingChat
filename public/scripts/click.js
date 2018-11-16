@@ -6,12 +6,7 @@ $(document).ready(function() {
     });
 
     $(".clickable").on("click", function(){
-        let botName = $(this).find(".show_name").text();
-        let botDescription = $(this).find(".show_description").text();
-        let botID = $(this).find(".show_id").text();
-
-        console.log(botName, botDescription, botID);
-
+        
         var updateName = {};
         updateName.value = $(this).find(".show_name").text();
 
@@ -29,6 +24,10 @@ $(document).ready(function() {
 
         var updatePasswordToken = {};
         updatePasswordToken.value = $(this).find(".show_password_token").text();
+
+        var showDocumentID = {};
+        //showDocumentID.value = $(this).find(".show_document_id").text();
+        showDocumentID.value = $.trim($(this).find(".show_document_id").text());
         
         $('.updateName').attr(updateName);
         $('.updateDescription').attr(updateDescription);
@@ -36,6 +35,12 @@ $(document).ready(function() {
         $('.updateImageUrl').attr(updateImageUrl);
         $('.updateUsernameToken').attr(updateUsernameToken);
         $('.updatePasswordToken').attr(updatePasswordToken);
+        $('.showDocumentID').attr(showDocumentID);
+
+        $('.confirmTick').attr(showDocumentID);
+
+        //$('.showDocumentID').empty();
+        //$('.showDocumentID').append(showDocumentID);
 
     });
 

@@ -13,9 +13,7 @@ a {
 }
 
 .hidden {
-  visibility: hidden;
-  padding: 0;
-  margin: 0;
+  display: none;
 }
 
 p.show_id {
@@ -42,6 +40,9 @@ p.show_image_path {
   font: 10px bold, monospace;
 }
 
+p.show_document_id {
+  font: 10px bold, monospace;
+}
 
 p.show_description {
   font: 12px "Monospace", monospace;
@@ -49,6 +50,10 @@ p.show_description {
 
 p.show_name {
   font: 16px bold, monospace;
+}
+
+p.showDocumentID {
+  font: 10px bold, monospace;
 }
 
 
@@ -100,7 +105,7 @@ label {
 }
 
 .delete {
-  float: left;
+  /*float: left;*/
   margin: auto;
   padding: 3%;
 }

@@ -51,13 +51,14 @@ block content
               p.show_image_path #{bots.image_path} 
               p.show_workspace_id_url.hidden #{bots.workspace_id_url}
               p.show_username_token.hidden #{bots.username_token}
-              p.show_password_token.hidden #{bots.password_token} 
+              p.show_password_token.hidden #{bots.password_token}
+              p.show_document_id.hidden #{bots._id} 
 
 
     section.update
           h2 Bot updaten
             br
-            form(action='/admin/update' method='post').update
+            form(action='/update' method='post').update
               div.input
                 label(for='name') Name
                 br
@@ -87,12 +88,23 @@ block content
                 label(for='password_token') Passwort Token
                 br
                 input.updatePasswordToken(type='text' id='password_token' name='password_token').input
-
+              
+              div.input.hidden
+                label(for='document_id') Document ID
                 br
-                button(type='submit') update
+                input.showDocumentID(type='text' id='document_id' name='document_id').input
+                
+              br
+              button(type='submit') update
             
 
     section.delete
           h2 Bot löschen
             br
+            form(action='/delete' method='post').delete
+              div.delete
+              label(for='confirm') Ja, ich will.
+              input.confirmTick(type='checkbox' id='confirm' name='confirm').delete
+              br
+              button(type='submit') delete
         
