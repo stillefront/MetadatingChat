@@ -1,18 +1,17 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const {User} = require('../models/user');
+const session = require('express-session');
 
-function auth(req, res, next) {
-    const token = req.header('x-auth-token');
-    if (!token) return res.status(401).send('Access denied. No token provided.');
-
+async function auth(req, res, next) {
+    if (!req.session.userId) { 
+        res.redirect('/login');
+    }
     try {
-    const decoded = jwt.verify(token, config.get('PrivateKeyjwt'));
-    req.user = decoded;
+    User.findById(req.session.userId);
     next();
     }
 
     catch (ex) {
-        res.status(400).send('Invalid Token.');
+        res.redirect('/login');
     }
 }
 

@@ -2,7 +2,9 @@ extends layout
 
 block content
 
-
+    section.profile
+      h2 Hallo #{userName}!
+      a(href="/logout") logout
     section.insert
       h2 Neuen Bot hinterlegen
         br
@@ -41,7 +43,6 @@ block content
             button(type='submit') insert
 
     section.show
-      
       h2 Bots in der Datenbank
         br
         each bots in bot_query

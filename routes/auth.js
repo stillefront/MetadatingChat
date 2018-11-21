@@ -9,15 +9,22 @@ router.post('/', async function(req, res) {
   if (error) return res.status(400).send(error.details[0].message);
   
   let user = await User.findOne( { username: req.body.username} );
-  if (!user) return res.status(400).send('Nutzername oder Passwort nicht vorhanden!');
+  // if (!user) return res.status(400).send('Nutzername oder Passwort nicht vorhanden!');
+  if (!user) {
+    res.redirect('/login');
+  }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send('Nutzername oder Passwort nicht vorhanden!');
+  // if (!validPassword) return res.status(400).send('Nutzername oder Passwort nicht vorhanden!');
+  if (!validPassword) {
+    res.redirect('/login');
+  }
 
   // new session strategy
   // create session
-  sess = req.session;
-  sess.userId = await user._id;
+  //sess = req.session;
+  req.session.userId = await user._id;
+  req.session.userName = await user.username;
  
   res.redirect('/admin');
 

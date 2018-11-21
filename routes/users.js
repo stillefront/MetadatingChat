@@ -25,8 +25,10 @@ router.post('/', async function(req, res) {
   const token = user.generateAuthToken();
 
   //save userID for session
-  sess = req.session;
-  sess.userId = user._id;
+  //sess = req.session;
+  //sess.userId = user._id;
+  req.session.userId = await user._id;
+  req.session.userName = await user.username;
   //req.session.userID = user._id;
   //console.log(req.session.userID);
   res.redirect('/admin');

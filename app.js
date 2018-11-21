@@ -18,6 +18,9 @@ const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 
 const login = require('./routes/login');
+const logout = require('./routes/logout');
+
+//const sessionCheck = require('../middleware/sessionCheck');
 
 const app = express();
 
@@ -27,13 +30,21 @@ if (!config.get('PrivateKeyjwt')) {
   process.exit(1);
 }
 
-// use sessions for tracking logins
+// use sessions and cookies for tracking logins
+const privateKey = config.get('PrivateKeyjwt');
+
 app.use(session({
-  secret: 'sicherheitsluecke',
-  resave: true,
-  saveUninitialized: false
+  key: 'user_session',
+  secret: privateKey,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: 600000
+  }
 
 }));
+
+
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/botDB')
@@ -55,6 +66,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//check for cookies without session and delete them, put it into middleware folder!
+
+app.use((req, res, next) => {
+  if (req.cookies.user_session && !req.session.userId) {
+      res.clearCookie('user_session');
+      console.log("cookie cleared");        
+  }
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/bots', botRouter);
 app.use('/chat', chatRouter);
@@ -65,6 +86,10 @@ app.use('/register', registerRouter);
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/login', login);
+app.use('/logout', logout);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
