@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
@@ -21,21 +20,15 @@ router.post('/', async function(req, res) {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
-
-  const token = user.generateAuthToken();
-
+  
   //save userID for session
-  //sess = req.session;
-  //sess.userId = user._id;
+ 
   req.session.userId = await user._id;
   req.session.userName = await user.username;
-  //req.session.userID = user._id;
-  //console.log(req.session.userID);
+  
   res.redirect('/admin');
 
-  /* jwt authentication strategy*/ 
-  // response with jwt in header and print registered username to the browserwindow
-  // res.header('x-auth-token', token).send(_.pick(user, ['username']));
+ 
 
   
 });

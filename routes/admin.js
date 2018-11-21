@@ -10,7 +10,7 @@ const {Bot, validate} = require('../models/bot');
 
 router.get('/', auth, async function (req, res){
 
-  console.log( "/admin: user id:" , req.session.userId, " user name: " , req.session.userName);
+  //console.log( "/admin: user id:" , req.session.userId, " user name: " , req.session.userName);
   const userName = req.session.userName;
   const userId = req.session.userId;
   

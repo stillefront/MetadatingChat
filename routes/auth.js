@@ -20,19 +20,12 @@ router.post('/', async function(req, res) {
     res.redirect('/login');
   }
 
-  // new session strategy
-  // create session
-  //sess = req.session;
   req.session.userId = await user._id;
   req.session.userName = await user.username;
  
   res.redirect('/admin');
 
-  /* old jwt authentication strategy*/
-  // res.send(token);
-  // res.header('x-auth-token', token).send(_.pick(user, ['username']));
-
-  // res.cookie('jwt', token).send(_.pick(user, ['username']));
+  
 
   function validate(req) {
     const schema = {

@@ -7,7 +7,13 @@ const mongoose = require('mongoose');
 /*POST updated bots into database */
 router.post('/', async function(req, res) {
 
-  let botID = await req.body.document_id;
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  
+  let bot = await Bot.findOne( { name: req.body.name} );
+  if (bot) return res.status(400).send('Ein Bot mit diesem Namen ist bereits vorhanden!');
+
+  let botID = await req.body._id;
 
   let name = await req.body.name;
   let description = await req.body.description;
@@ -15,6 +21,8 @@ router.post('/', async function(req, res) {
   let workspace_id_url = await req.body.workspace_id_url;
   let username_token = await req.body.username_token;
   let password_token = await req.body.password_token;
+
+  
 
 
   console.log('submitted document ID:', botID); //debug

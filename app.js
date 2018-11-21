@@ -25,13 +25,13 @@ const logout = require('./routes/logout');
 const app = express();
 
 // change the following for a proper session secret in backend?
-if (!config.get('PrivateKeyjwt')) {
-  console.error('FATAL ERROR: PrivateKeyjwt is not defined.');
+if (!config.get('PrivateKey')) {
+  console.error('FATAL ERROR: PrivateKey is not defined.');
   process.exit(1);
 }
 
 // use sessions and cookies for tracking logins
-const privateKey = config.get('PrivateKeyjwt');
+const privateKey = config.get('PrivateKey');
 
 app.use(session({
   key: 'user_session',
@@ -39,7 +39,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: 600000
+    expires: 600000,
+    domain: 'localhost'
   }
 
 }));
@@ -76,6 +77,8 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 app.use('/', indexRouter);
 app.use('/bots', botRouter);
 app.use('/chat', chatRouter);
@@ -109,4 +112,4 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// export metadating_PrivateKeyjwt=sicheresPasswort
+// export metadating_PrivateKey=sicheresPasswort
