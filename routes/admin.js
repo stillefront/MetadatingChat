@@ -1,4 +1,5 @@
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
+const sessionauth = require('../middleware/sessionauth');
 
 const express = require('express');
 const router = express.Router();
@@ -9,7 +10,9 @@ const mongoose = require('mongoose');
 
 /* Route to admin panel */
 
-router.get('/', async function (req, res, next){
+router.get('/', sessionauth, async function (req, res, next){
+
+  console.log( "/admin: user id:" , sess.userId);
   
   const bot_query = await Bot.find(); 
   res.render('admin', {bot_query : bot_query});

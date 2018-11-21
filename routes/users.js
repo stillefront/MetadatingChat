@@ -24,7 +24,16 @@ router.post('/', async function(req, res) {
 
   const token = user.generateAuthToken();
 
-  res.header('x-auth-token', token).send(_.pick(user, ['username']));
+  //save userID for session
+  sess = req.session;
+  sess.userId = user._id;
+  //req.session.userID = user._id;
+  //console.log(req.session.userID);
+  res.redirect('/admin');
+
+  /* jwt authentication strategy*/ 
+  // response with jwt in header and print registered username to the browserwindow
+  // res.header('x-auth-token', token).send(_.pick(user, ['username']));
 
   
 });

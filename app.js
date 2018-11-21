@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const config = require('config');
+const session = require('express-session');
+
 
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
@@ -19,11 +21,19 @@ const login = require('./routes/login');
 
 const app = express();
 
+// change the following for a proper session secret in backend?
 if (!config.get('PrivateKeyjwt')) {
   console.error('FATAL ERROR: PrivateKeyjwt is not defined.');
   process.exit(1);
 }
 
+// use sessions for tracking logins
+app.use(session({
+  secret: 'sicherheitsluecke',
+  resave: true,
+  saveUninitialized: false
+
+}));
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/botDB')
