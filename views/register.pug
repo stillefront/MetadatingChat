@@ -2,18 +2,24 @@ extends layout
 
 
 block content
+  div.register
   section.register
-    h3 register new account
+    h3 Neuen Account anlegen
     form(action='/users' method='post')
         div.input
-          label(for='username') name
+          label(for='username') Name (mind. 3 Zeichen)
           br
           input(type='text' id='username' name='username').input
-
+        br
         div.input
-          label(for='password') password
+          label(for='password') Passwort
           br
           input(type='password' id='password' name='password').input
+        br
+        div.input
+          label(for='confirmationPassword') Passwort bestätigen
+          br
+          input(type='password' id='confirmationPassword' name='confirmationPassword').input
           
         br
-        button(type='submit') register!
+        button(type='submit') registrieren!

@@ -1,19 +1,19 @@
 extends layout
 
-
 block content
+  div.login
   section.login
     h3 login
     form(action='/auth' method='post')
       div.input
-        label(for='username') name
+        label(for='username') Name
         br
         input(type='text' id='username' name='username').input
-
+      br
       div.input
-        label(for='password') password
+        label(for='password') Passwort
         br
         input(type='password' id='password' name='password').input
 
-        br
-        button(type='submit') login    
+      br
+      button(type='submit') login    
