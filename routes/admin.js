@@ -39,6 +39,7 @@ router.post('/newbot', async function (req, res){
     'owner' : req.session.userId, 
     'isPublic' : req.body.isPublic
   };
+  console.log(botData);
 
   bot = new Bot(_.pick(botData, ['name', 'description', 'image_path', 'workspace_id_url', 'username_token', 'password_token', 'date_created', 'owner', 'isPublic']));
 

@@ -117,7 +117,7 @@ function socket(io) {
             socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room
 
             bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id_token, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
+                workspace_id: botAuth1[socket.id].workspace_id_url, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
                 context: context_bot1_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 
@@ -147,7 +147,7 @@ function socket(io) {
             console.log(context_bot2_update[socket.id])
 
             bot_array[bot_id_2].message({
-                workspace_id: botAuth2[socket.id].workspace_id_token, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
+                workspace_id: botAuth2[socket.id].workspace_id_url, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
                 context: context_bot2_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 
@@ -176,7 +176,7 @@ function socket(io) {
             console.log(context_bot1_update[socket.id])
 
             bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id_token, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
+                workspace_id: botAuth1[socket.id].workspace_id_url, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
                 context: context_bot1_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 

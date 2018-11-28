@@ -1,10 +1,10 @@
 // Sessions info for users using the chat app
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var User_sessions_informationsSchema = new Schema (
+const User_sessions_informationsSchema = new Schema (
     {
         user_id: {type: String},
         bot1: {type: String},

@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const {Bot} = require('../models/bot');
 
 /* Route to available bot list*/
-router.get('/', function(req, res, next) {
-  res.render('bots');
+//list all available bots; future: check for "public = 'true' in DB document"
+router.get('/', async function(req, res, next) { 
+
+  const list_bots = await Bot.find({}, 'name description image_path'); 
+  res.render('bot_select', {title: 'meta.dating 2018: BOTIFY!', list_bots : list_bots});
+  console.log(req.session.test);
+  
 });
 
 module.exports = router;

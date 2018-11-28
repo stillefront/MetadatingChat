@@ -1,7 +1,39 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
 
+    script(src='/scripts/bot_select.js')
 
-block content
-  section.bots
-    h3 list of available bots
-      
+    link(rel='stylesheet', href='/stylesheets/bot_style.css')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js")
+    script(src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js')
+    link(rel='stylesheet', href="https://fonts.googleapis.com/css?family=Roboto")
+
+  body
+    .welcome-container
+        .welcome-header
+            .welcome-logo
+                .welcome-logo-text
+                    p METADATING
+                    p BOTIFY
+        .welcome-button
+            .welcome-button-text
+                p Bitte wähle zwei Bots aus:
+        .welcome-bot-container
+                each bots in list_bots
+                    .welcome-bot-box.klick 
+                        .bot-name-description
+                            //.bot-img    
+                                img(src="/images/bot_profile_picture/optimized_bot_images/" + bots.image_path + ".png", height="100" width="100", alt="no picture") 
+                            .bot-name
+                                p #{bots.name}                                   
+                        .bot-description    
+                                p #{bots.description}
+                        .bot-box-mouse-hover        
+                        p#bot-hidden-text #{bots.name}
+
+                else
+                    p doesnt work  

@@ -2,8 +2,8 @@
 $( document ).ready(function() {
     console.log( "ready!" );
   
-  var counter = 0;
-  var bot_array =[];
+  let counter = 0;
+  let bot_array =[];
   
   
   // if you click on bots
@@ -69,8 +69,8 @@ $( document ).ready(function() {
         Cookies.set('userId', userId);
         console.log("do you have a cookie?" + Cookies.get('userId'));
         console.log("Send Bot information to the server and start chat between two Bots!");
-        $.post( "/bot/chat", { bot1: bot_array[0], bot2: bot_array[1], userId: userId} );
-        window.location.href = "/bot/chat";
+        $.post( "/fetch", { bot1: bot_array[0], bot2: bot_array[1], userId: userId} );
+        window.location.href = "/chat";
       }
       else {
         console.log("not working!");

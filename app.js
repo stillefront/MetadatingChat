@@ -6,6 +6,7 @@ const logger = require('morgan');
 const config = require('config');
 const session = require('express-session');
 
+const socket = require ('./controller/socket');
 
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
@@ -13,6 +14,7 @@ const adminRouter = require('./routes/admin');
 const updateRouter = require('./routes/update');
 const deleteRouter = require('./routes/delete');
 const botRouter = require('./routes/bots');
+const fetchRouter = require('./routes/fetch');
 const chatRouter = require('./routes/chat');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
@@ -23,6 +25,19 @@ const logout = require('./routes/logout');
 //const sessionCheck = require('../middleware/sessionCheck');
 
 const app = express();
+
+// socket.io serverside integration
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+socket(io);
+
+
+/*
+app.io = require('socket.io')();
+socket(app.io); // connecting socket.io to the app
+*/
+
+
 
 // change the following for a proper session secret in backend?
 if (!config.get('PrivateKey')) {
@@ -81,6 +96,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/bots', botRouter);
+app.use('/fetch', fetchRouter);
 app.use('/chat', chatRouter);
 app.use('/admin', adminRouter);
 app.use('/update', updateRouter);
@@ -110,6 +126,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+
+module.exports = {app: app, server: server};
+//module.exports = app;
 
 // export metadating_PrivateKey=sicheresPasswort
