@@ -57,6 +57,13 @@ function validateBot(bot) {
   return Joi.validate(bot, schema);
 }
 
+// Virtual for Bot's URL
+botSchema
+.virtual('url')
+.get(function () {
+  return '/main/bot/' + this._id;
+});
+
 
 exports.Bot = Bot;
 exports.validate = validateBot;

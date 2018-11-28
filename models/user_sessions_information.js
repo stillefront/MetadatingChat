@@ -1,6 +1,5 @@
 // Sessions info for users using the chat app
 
-/*
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -22,4 +21,4 @@ User_sessions_informationsSchema
 
 module.exports = mongoose.model('User_sessions_informations', User_sessions_informationsSchema);
 
-*/
+
