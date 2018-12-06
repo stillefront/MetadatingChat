@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 //mongo database models
-var Bot = require ('../models/bot');
+const {Bot} = require ('../models/bot');
 var User_sessions_informations = require ('../models/user_sessions_informations');
 
 //bot objects
@@ -111,7 +111,7 @@ function socket(io) {
                 version: '2018-07-10'
             });
 
-            console.log("what is the bot1 token?" + botAuth1[socket.id].workspace_id_token);
+            console.log("what is the bot1 token?" + botAuth1[socket.id].workspace_id_url);
 
             socket.emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to client
             socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room

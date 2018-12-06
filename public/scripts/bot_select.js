@@ -69,7 +69,7 @@ $( document ).ready(function() {
         Cookies.set('userId', userId);
         console.log("do you have a cookie?" + Cookies.get('userId'));
         console.log("Send Bot information to the server and start chat between two Bots!");
-        $.post( "/fetch", { bot1: bot_array[0], bot2: bot_array[1], userId: userId} );
+        $.post( "/chat", { bot1: bot_array[0], bot2: bot_array[1], userId: userId} );
         window.location.href = "/chat";
       }
       else {

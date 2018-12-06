@@ -43,7 +43,7 @@ $(document).ready(function(){
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: '/lottie-animation/data.json' // the path to the animation json
+            path: '/scripts/data.json' // the path to the animation json
           });
     
         lottie.setSpeed(3); 
@@ -166,7 +166,7 @@ $(document).ready(function(){
         //$( ".chat-button p" ).replaceWith( "<p>Zurück!<p>" );
         $( this ).removeClass( "chat-button" );
         $( this ).addClass( "chat-button-back" );
-        window.location.href = "/bot";
+        window.location.href = "/bots";
         //$( "div.chat-button" ).toggleClass( "chat-button-back" )
     });
 

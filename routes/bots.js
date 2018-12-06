@@ -9,7 +9,7 @@ router.get('/', async function(req, res, next) {
 
   const list_bots = await Bot.find({}, 'name description image_path'); 
   res.render('bot_select', {title: 'meta.dating 2018: BOTIFY!', list_bots : list_bots});
-  console.log(req.session.test);
+  
   
 });
 
