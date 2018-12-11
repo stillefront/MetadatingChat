@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const config = require('config');
 const session = require('express-session');
+const formidable = require('formidable');
 
 const socket = require ('./controller/socket');
 

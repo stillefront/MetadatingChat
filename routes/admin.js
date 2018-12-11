@@ -1,5 +1,7 @@
 const auth = require('../middleware/auth');
 
+const formidable = require('formidable');
+
 const express = require('express');
 const router = express.Router();
 
@@ -19,6 +21,30 @@ router.get('/', auth, async function (req, res){
   //console.log(bot_query);
   
 });
+
+// test area for image upload:
+
+router.post('/imgupload', async function (req, res){
+  
+  let form = await new formidable.IncomingForm();
+
+  form.parse(req);
+  
+  form.on('fileBegin', function (name, file){
+    file.path = 'uploads/' + file.name;
+  });
+
+  form.on('file', function (name, file){
+    console.log('Uploaded ' + file.name);
+  });
+
+  res.redirect('/admin');
+
+});
+
+// test end
+
+
 
 router.post('/newbot', async function (req, res){
   
