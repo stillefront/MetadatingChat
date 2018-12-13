@@ -2,111 +2,42 @@ extends layout
 
 block content
 
-    section.profile
-      h2 Hallo #{userName}!
-      a(href="/logout") logout
-    section.insert
-      h2 Neuen Bot hinterlegen
-        br
-        form(action='/admin/newbot' method='post').insert
-          div.input
-            label(for='name') Name
-            br
-            input(type='text' id='name' name='name').input
+  h2 Hallo #{userName}!
+  a(href="/logout").nav--links  logout
 
-          div.input
-            label(for='description') Beschreibung
-            br
-            input(type='text' id='description' name='description').input
+  each bots in bot_query
+    div.flip
+      div.front(style= "background-image: url(" + bots.image_path + ")")
+        h1.text-shadow #{bots.name}
+      div.back
+        form(action='/update' method='post')
+          input.updateName(type='text' id='name' name='name' value= bots.name).form--input-admin 
+          input.updateDescription(type='text' id='description' name='description' value= bots.description).form--input-admin 
+          input.updateImageUrl(type='text' id='image_path' name='image_path' value= bots.image_path).form--input-admin 
+          input.updateWorkspaceID(type='text' id='workspace_id_url' name='workspace_id_url' value= bots.workspace_id_url).form--input-admin 
+          input.updateUsernameToken(type='text' id='username_token' name='username_token' value= bots.username_token).form--input-admin 
+          input.updatePasswordToken(type='text' id='password_token' name='password_token' value= bots.password_token).form--input-admin 
+          input.showDocumentID(type='text' id='_id' name='_id' value= bots._id).form--input-admin
+          button(type='submit').form--button Bot updaten
+        form(action='/delete' method='post')
+          label(for='confirm') Bot löschen
+          input.confirmTick(type='checkbox' id='confirm' name='confirm')
+          button(type='submit') löschen
+      
 
-          div.input
-            label(for='image_path') Profilbild (URL)
-            br
-            input(type='text' id='image_path' name='image_path').input
-
-          div.input
-            label(for='workspace_id_url') Workspace ID URL
-            br
-            input(type='text' id='workspace_id_url' name='workspace_id_url').input
-
-          div.input
-            label(for='username_token') Username Token
-            br
-            input(type='text' id='username_token' name='username_token').input
-
-          div.input
-            label(for='password_token') Passwort Token
-            br
-            input(type='text' id='password_token' name='password_token').input
-          
-
-            br
-            button(type='submit') insert
-
-    section.show
-      h2 Bots in der Datenbank
-        br
-        each bots in bot_query
-            div.botdocument.clickable
-              p.show_name #{bots.name}
-              p.show_description #{bots.description}
-              p.show_image_path #{bots.image_path} 
-              p.show_workspace_id_url.hidden #{bots.workspace_id_url}
-              p.show_username_token.hidden #{bots.username_token}
-              p.show_password_token.hidden #{bots.password_token}
-              p.show_document_id.hidden #{bots._id} 
+  div.flip
+    div.front
+      h1.text-shadow Neuen Bot hinzufügen
+    div.back
+      form(action='/admin/newbot' method='post')
+        input(type='text' id='name' name='name' placeholder = "Name" ).form--input-admin 
+        input(type='text' id='description' name='description' placeholder = "Beschreibung" ).form--input-admin 
+        input(type='text' id='image_path' name='image_path' placeholder = "Image-URL" ).form--input-admin
+        input(type='text' id='workspace_id_url' name='workspace_id_url' placeholder = "Workspace-ID" ).form--input-admin 
+        input(type='text' id='username_token' name='username_token' placeholder = "Username_Token" ).form--input-admin 
+        input(type='text' id='password_token' name='password_token' placeholder = "Passwort_Token" ).form--input-admin 
+        button(type='submit').form--button Bot erstellen
 
 
-    section.update
-          h2 Bot updaten
-            br
-            form(action='/update' method='post').update
-              div.input
-                label(for='name') Name
-                br
-                input.updateName(type='text' id='name' name='name').input
 
-              div.input
-                label(for='description') Beschreibung
-                br
-                input.updateDescription(type='text' id='description' name='description' ).input
-
-              div.input
-                label(for='image_path') Profilbild (URL)
-                br
-                input.updateImageUrl(type='text' id='image_path' name='image_path').input
-
-              div.input
-                label(for='workspace_id_url') Workspace ID URL
-                br
-                input.updateWorkspaceID(type='text' id='workspace_id_url' name='workspace_id_url').input
-
-              div.input
-                label(for='username_token') Username Token
-                br
-                input.updateUsernameToken(type='text' id='username_token' name='username_token').input
-
-              div.input
-                label(for='password_token') Passwort Token
-                br
-                input.updatePasswordToken(type='text' id='password_token' name='password_token').input
-              
-              div.input.hidden
-                label(for='_id') Document ID
-                br
-                input.showDocumentID(type='text' id='_id' name='_id').input
-                
-              br
-              button(type='submit') update
-            
-
-    section.delete
-          h2 Bot löschen
-            br
-            form(action='/delete' method='post').delete
-              div.delete
-              label(for='confirm') Ja, ich will.
-              input.confirmTick(type='checkbox' id='confirm' name='confirm').delete
-              br
-              button(type='submit') delete
-        
+    

@@ -1,0 +1,456 @@
+/* ====== file import ====== */
+/* line 3, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+/* line 8, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+body {
+  text-align: center;
+}
+
+/* line 12, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+h1 {
+  font-size: 2.2em;
+}
+
+/* line 17, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip {
+  position: relative;
+}
+
+/* line 19, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip > .front,
+.flip > .back {
+  display: block;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: .5s;
+  transition-property: transform, opacity;
+}
+
+/* line 26, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip > .front {
+  transform: rotateY(0deg);
+}
+
+/* line 29, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip > .back {
+  position: absolute;
+  opacity: 0;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(-180deg);
+}
+
+/* line 39, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip:hover > .front {
+  transform: rotateY(180deg);
+}
+
+/* line 42, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip:hover > .back {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+/* line 48, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip.flip-vertical > .back {
+  transform: rotateX(-180deg);
+}
+
+/* line 52, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip.flip-vertical:hover > .front {
+  transform: rotateX(180deg);
+}
+
+/* line 55, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip.flip-vertical:hover > .back {
+  transform: rotateX(0deg);
+}
+
+/* line 63, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip {
+  position: relative;
+  display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 1em;
+  width: 400px;
+}
+
+/* line 69, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip > .front,
+.flip > .back {
+  display: block;
+  color: white;
+  width: inherit;
+  background-size: cover !important;
+  background-position: center !important;
+  height: 600px;
+  padding: 1em 2em;
+  background: #313131;
+  border-radius: 10px;
+}
+
+/* line 80, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.flip > .front p,
+.flip > .back p {
+  font-size: 0.9125rem;
+  line-height: 160%;
+  color: #999;
+}
+
+/* line 88, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/_card_flip.scss */
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.04), 2px 2px rgba(0, 0, 0, 0.04), 3px 3px rgba(0, 0, 0, 0.04), 4px 4px rgba(0, 0, 0, 0.04), 0.125rem 0.125rem rgba(0, 0, 0, 0.04), 6px 6px rgba(0, 0, 0, 0.04), 7px 7px rgba(0, 0, 0, 0.04), 8px 8px rgba(0, 0, 0, 0.04), 9px 9px rgba(0, 0, 0, 0.04), 0.3125rem 0.3125rem rgba(0, 0, 0, 0.04), 11px 11px rgba(0, 0, 0, 0.04), 12px 12px rgba(0, 0, 0, 0.04), 13px 13px rgba(0, 0, 0, 0.04), 14px 14px rgba(0, 0, 0, 0.04), 0.625rem 0.625rem rgba(0, 0, 0, 0.04), 16px 16px rgba(0, 0, 0, 0.04), 17px 17px rgba(0, 0, 0, 0.04), 18px 18px rgba(0, 0, 0, 0.04), 19px 19px rgba(0, 0, 0, 0.04), 1.25rem 1.25rem rgba(0, 0, 0, 0.04);
+}
+
+/* ====== font import ====== */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  src: local("Source Sans Pro ExtraLight"), local("SourceSansPro-ExtraLight"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Source Sans Pro Light"), local("SourceSansPro-Light"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format("truetype");
+}
+
+/* ====== basic variables ====== */
+/* ====== color variables ====== */
+/* ====== Elements ====== */
+/* line 31, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.hidden {
+  display: none;
+}
+
+/* line 35, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.visible {
+  display: block;
+}
+
+/* ====== Body ====== */
+/* line 40, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  color: white;
+  font-weight: 300;
+  background-image: linear-gradient(-45deg, #50a3a2 0%, #53e3a6 100%);
+}
+
+/* ====== Headings ====== */
+/* line 49, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+* {
+  font-weight: 300;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* ====== Login Animation ====== */
+/* line 57, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.wrapper {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  margin-top: -200px;
+  overflow: hidden;
+}
+
+/* line 66, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.wrapper.form-success .container h1 {
+  -webkit-transform: translateY(85px);
+  transform: translateY(85px);
+}
+
+/* ====== Login Animation ====== */
+/* line 74, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 0;
+  height: 400px;
+  text-align: center;
+}
+
+/* line 81, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.container h1 {
+  font-size: 40px;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-put;
+  font-weight: 200;
+}
+
+/* ====== Login Form ====== */
+/* line 90, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* line 96, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-login {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+/* line 115, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-admin {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+/* line 134, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+/* line 150, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-login {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+/* line 166, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-register {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+/* line 182, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-clean {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  padding: 0px 15px;
+  color: white;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+/* line 199, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.btn-2 {
+  letter-spacing: 0;
+  outline: 0;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  padding: 0px 15px;
+  color: white;
+  border-radius: 3px;
+  font-size: 18px;
+  transition-duration: 0.25s;
+  cursor: pointer;
+  line-height: 35px;
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+}
+
+/* line 219, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.btn-2:after,
+.btn-2:before {
+  backface-visibility: hidden;
+  border: 0.5px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+/* line 232, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.btn-2:hover:after,
+.btn-2:hover:before {
+  backface-visibility: hidden;
+  border-color: #fff;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+/* line 240, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.btn-2:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+/* line 248, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.section--orientation-left {
+  float: left;
+  margin: auto;
+  padding: 3%;
+}
+
+/* line 254, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+::placeholder {
+  color: white;
+}
+
+/* ====== Login Form Animation ====== */
+/* line 259, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-login:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* line 263, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-login:focus {
+  background-color: white;
+  width: 300px;
+  color: #53e3a6;
+}
+
+/* line 269, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-admin:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* line 273, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--input-admin:focus {
+  background-color: white;
+  color: #53e3a6;
+}
+
+/* line 278, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button:hover {
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+/* line 283, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-login:hover {
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+/* line 288, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-login:after {
+  content: 'Login';
+}
+
+/* line 291, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-login:hover:after {
+  content: 'Einloggen';
+}
+
+/* line 295, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-register:hover {
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+/* line 300, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-register:after {
+  content: 'Registrieren';
+}
+
+/* line 303, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.form--button-register:hover:after {
+  content: 'Los';
+}
+
+/* ====== Nav Bar ====== */
+/* line 309, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.wrapper--nav {
+  position: absolute;
+  top: 1%;
+  left: 0;
+  width: 100%;
+}
+
+/* line 317, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.container--nav {
+  text-align: center;
+}
+
+/* line 322, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.nav {
+  list-style-type: none;
+}
+
+/* line 326, /Users/philipprapp/Documents/Arbeit/UdK_Tutorium/meta.dating/Bot-Plattform/WIP/Beta/MetadatingChat-authentication/public/stylesheets/scss/style.scss */
+.nav--links {
+  padding: 3%;
+  color: white;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=../css/style.map */

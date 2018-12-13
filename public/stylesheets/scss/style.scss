@@ -1,0 +1,330 @@
+/* ====== file import ====== */
+@import "card_flip";
+
+/* ====== font import ====== */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+}
+
+
+/* ====== basic variables ====== */
+$font-stack: 'Source Sans Pro', sans-serif;
+$font-weight-standard: 300;
+
+
+/* ====== color variables ====== */
+$background-color: #50a3a2;
+$primary-color: white;
+
+
+/* ====== Elements ====== */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+/* ====== Body ====== */
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+  font-weight: $font-weight-standard;
+  background-image:linear-gradient(-45deg, #50a3a2 0%, #53e3a6 100%)
+}
+
+
+/* ====== Headings ====== */
+* {
+  font-weight: 300;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+
+/* ====== Login Animation ====== */
+.wrapper {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  margin-top: -200px;
+  overflow: hidden;
+}
+.wrapper.form-success .container h1 {
+  -webkit-transform: translateY(85px);
+          transform: translateY(85px);
+}
+
+
+
+/* ====== Login Animation ====== */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 0;
+  height: 400px;
+  text-align: center;
+}
+.container h1 {
+  font-size: 40px;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-put;
+  font-weight: 200;
+}
+
+
+/* ====== Login Form ====== */
+.form {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.form--input-login {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+.form--input-admin {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+.form--button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+.form--button-login {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+.form--button-register {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  color: #53e3a6;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+.form--button-clean {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  padding: 0px 15px;
+  color: white;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}
+
+
+.btn-2 {
+  letter-spacing: 0;
+  outline: 0;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  padding: 0px 15px;
+  color: white;
+  border-radius: 3px;
+  font-size: 18px;
+  transition-duration: 0.25s;
+  cursor: pointer;
+  line-height: 35px;
+  max-width: 160px; 
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+}
+
+
+
+.btn-2:after,
+.btn-2:before {
+backface-visibility: hidden;
+border: 0.5px solid rgba(#fff, 0);
+bottom: 0px;
+content: " ";
+display: block;
+margin: 0 auto;
+position: relative;
+transition: all 280ms ease-in-out;
+width: 0;
+}
+
+.btn-2:hover:after,
+.btn-2:hover:before {
+backface-visibility: hidden;
+border-color: #fff;
+transition: width 350ms ease-in-out;
+width: 70%;
+}
+
+.btn-2:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+
+
+.section--orientation-left {
+  float: left;
+  margin: auto;
+  padding: 3%;
+}
+
+::placeholder {
+  color: white;
+}
+
+/* ====== Login Form Animation ====== */
+.form--input-login:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.form--input-login:focus {
+  background-color: white;
+  width: 300px;
+  color: #53e3a6;
+}
+
+.form--input-admin:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.form--input-admin:focus {
+  background-color: white;
+  color: #53e3a6;
+}
+
+.form--button:hover{
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+.form--button-login:hover{
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+.form--button-login:after{
+  content:'Login';
+}
+.form--button-login:hover:after{
+  content:'Einloggen';
+}
+
+.form--button-register:hover{
+  background-color: #f5f7f9;
+  width: 300px;
+}
+
+.form--button-register:after{
+  content:'Registrieren';
+}
+.form--button-register:hover:after{
+  content:'Los';
+}
+
+
+/* ====== Nav Bar ====== */
+.wrapper--nav {
+  position: absolute;
+  top: 1%;
+  left: 0;
+  width: 100%;
+
+}
+
+.container--nav {
+  text-align: center;
+}
+
+
+.nav {
+  list-style-type: none;
+}
+
+.nav--links {
+  padding: 3%;
+  color: white;
+  text-decoration:none;
+}

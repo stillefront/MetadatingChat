@@ -48,16 +48,16 @@ if (!config.get('PrivateKey')) {
 // use sessions and cookies for tracking logins
 const privateKey = config.get('PrivateKey');
 
+
 app.use(session({
   key: 'user_session',
   secret: privateKey,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     expires: 600000,
-    domain: 'localhost'
+    path: '/'
   }
-
 }));
 
 

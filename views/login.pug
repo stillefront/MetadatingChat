@@ -1,19 +1,29 @@
 extends layout
 
-block content
-  div.login
-  section.login
-    h3 login
-    form(action='/auth' method='post')
-      div.input
-        label(for='username') Name
-        br
-        input(type='text' id='username' name='username').input
-      br
-      div.input
-        label(for='password') Passwort
-        br
-        input(type='password' id='password' name='password').input
 
-      br
-      button(type='submit') login    
+block content
+  section
+    div.wrapper--nav
+      div.container--nav
+        ul.nav
+          //a.nav--links(href="/login") test
+          a.nav--links(href="/") zurück
+
+    div.wrapper
+      div.container
+        h1(id="login") Login
+        form(id="form" action='/auth' method='post').form
+          input(type='text' placeholder = "Username" id='username' name='username').form--input-login
+          input(type='password' placeholder = "Passwort" id='password' name='password').form--input-login
+          button(id="login-button").form--button-login    
+
+    script.
+      $("#login-button").click(function(event){
+          event.preventDefault();
+        
+        $('form').fadeOut(500);
+        $('.wrapper').addClass('form-success');
+        document.getElementById("login").textContent="Willkommen bei Botify!";
+        setTimeout(function(){ document.getElementById("form").submit();}, 1000);
+        
+      });
