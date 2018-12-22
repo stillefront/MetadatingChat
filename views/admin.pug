@@ -38,9 +38,10 @@ block content
         br
         each bots in bot_query
             div.botdocument.clickable
+              - var url = bots.image_path
               p.show_name #{bots.name}
-              p.show_description #{bots.description}
-              p.show_image_path #{bots.image_path} 
+              p.show_description #{bots.description}    
+              img(src=url, height="50" width="50", alt="no picture") 
               p.show_workspace_id.hidden #{bots.workspace_id}
               p.show_iam_apikey.hidden #{bots.iam_apikey}
               p.show_document_id.hidden #{bots._id} 
