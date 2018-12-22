@@ -83,6 +83,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// route to bot static pictures
+app.use('*/uploads', express.static('uploads'));
+
 //check for cookies without session and delete them, put it into middleware folder!
 
 app.use((req, res, next) => {

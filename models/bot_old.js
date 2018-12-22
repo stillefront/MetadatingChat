@@ -13,11 +13,19 @@ const botSchema = new mongoose.Schema ({
         image_path: {
           type: String
         },
-        workspace_id: {
+        workspace_id_url: {
+          type: String,
+          required: true
+        },
+        username_token: {
           type: String,
           required: true
         },
         iam_apikey: {
+          type: String,
+          required: true
+        },
+        password_token: {
           type: String,
           required: true
         },
@@ -41,13 +49,14 @@ function validateBot(bot) {
   const schema = {
     _id: Joi.string().min(5).max(50),
     name: Joi.string().min(5).max(50).required(),
-    description: Joi.string().min(0).max(255),
-    workspace_id: Joi.string().min(5).max(255).required(),
+    description: Joi.string().min(5).max(255),
+    //image_path: Joi.string().min(5).max(255),
+    workspace_id_url: Joi.string().min(5).max(255).required(),
+    username_token: Joi.string().min(5).max(255).required(),
+    password_token: Joi.string().min(5).max(255).required(),
     iam_apikey: Joi.string().min(5).max(255).required(),
     date_created: Joi.string().min(5).max(255),
-    owner: Joi.string().min(5).max(255),
-    isPublic: Joi.boolean().truthy('true').falsy('false').insensitive(false),
-    upload: Joi.binary()
+    owner: Joi.string().min(5).max(255)
   };
 
   return Joi.validate(bot, schema);

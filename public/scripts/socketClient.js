@@ -10,7 +10,7 @@ $(document).ready(function(){
                 '<div class="' + botClass + '-msg-chat-box">' + 
                     '<p class="' + botClass + '-msg-text">' + botMsgContent + '</p>' +
                 '</div>' +
-                '<img class="' + botClass + '-msg-profilepicture" src="/images/bot_profile_picture/optimized_bot_images/' + botPicturePath + '.png">' + 
+                '<img class="' + botClass + '-msg-profilepicture" src=' + botPicturePath + 'profile.png' + '>' + 
             '</div>';
         return msgStructure   
     };
@@ -23,7 +23,7 @@ $(document).ready(function(){
                 '<div class="' + botClass + '-msg-chat-box">' + 
                     '<div id="lottie"></div>' +
                 '</div>' +
-                '<img class="' + botClass + '-msg-profilepicture" src="/images/bot_profile_picture/optimized_bot_images/' + botPicturePath + '.png">' + 
+                '<img class="' + botClass + '-msg-profilepicture" src=' + botPicturePath + 'profile.png' + '>' + 
             '</div>';
         return msgStructureIsTyping   
     };

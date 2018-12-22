@@ -14,16 +14,10 @@ $(document).ready(function() {
         updateDescription.value = $(this).find(".show_description").text();
 
         var updateWorkspaceID = {};
-        updateWorkspaceID.value = $(this).find(".show_workspace_id_url").text();
+        updateWorkspaceID.value = $(this).find(".show_workspace_id").text();
 
-        var updateImageUrl = {};
-        updateImageUrl.value = $(this).find(".show_image_path").text();
-
-        var updateUsernameToken = {};
-        updateUsernameToken.value = $(this).find(".show_username_token").text();
-
-        var updatePasswordToken = {};
-        updatePasswordToken.value = $(this).find(".show_password_token").text();
+        var updateIamApikey = {};
+        updateIamApikey.value = $(this).find(".show_iam_apikey").text();
 
         var showDocumentID = {};
         //showDocumentID.value = $(this).find(".show_document_id").text();
@@ -32,12 +26,12 @@ $(document).ready(function() {
         $('.updateName').attr(updateName);
         $('.updateDescription').attr(updateDescription);
         $('.updateWorkspaceID').attr(updateWorkspaceID);
-        $('.updateImageUrl').attr(updateImageUrl);
-        $('.updateUsernameToken').attr(updateUsernameToken);
-        $('.updatePasswordToken').attr(updatePasswordToken);
+        $('.updateIamApikey').attr(updateIamApikey);
         $('.showDocumentID').attr(showDocumentID);
 
         $('.confirmTick').attr(showDocumentID);
+
+        $('form.imgupload').removeClass("hidden");
 
         //$('.showDocumentID').empty();
         //$('.showDocumentID').append(showDocumentID);

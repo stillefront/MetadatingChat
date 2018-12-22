@@ -25,8 +25,8 @@ html
                 each bots in list_bots
                     .welcome-bot-box.klick 
                         .bot-name-description
-                            //.bot-img    
-                                img(src="/images/bot_profile_picture/optimized_bot_images/" + bots.image_path + ".png", height="100" width="100", alt="no picture") 
+                            .bot-img    
+                                img(src=bots.image_path, height="100" width="100", alt="no picture") 
                             .bot-name
                                 p #{bots.name}                                   
                         .bot-description    

@@ -3,8 +3,9 @@ const session = require('express-session');
 
 async function auth(req, res, next) {
     if (!req.session.userId) { 
-        res.redirect('/login');
-    }
+        return res.redirect('/login');
+    } 
+    
     try {
     User.findById(req.session.userId);
     next();

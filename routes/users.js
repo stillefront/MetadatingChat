@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+const fs = require('fs');
+
 /* POST  new users. */
 router.post('/', async function(req, res) {
   const { error } = validate(req.body);
@@ -25,6 +27,12 @@ router.post('/', async function(req, res) {
  
   req.session.userId = await user._id;
   req.session.userName = await user.username;
+
+   // make new directory for image uploads
+   let userDir = 'uploads/' + user._id + '/';
+   await fs.mkdir(userDir, {recursive: true}, function(err){
+     if(err) throw err;
+   });
   
   res.redirect('/admin');
 

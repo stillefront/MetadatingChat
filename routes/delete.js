@@ -12,6 +12,9 @@ router.post('/', async function(req, res) {
   console.log('submitted document ID:', botID); //debug
 
   const result = await Bot.deleteOne({ _id: botID});
+
+
+  // delete the directory with profile pics too!
   
 
   console.log(result); // debug

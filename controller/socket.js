@@ -96,20 +96,23 @@ function socket(io) {
             await getBot1Auth();
             await getBot2Auth();        
 
+                    
             console.log("what happend first?");
             bot_array[bot_id_1] = new watson.AssistantV1({
-                username: botAuth1[socket.id].username_token, //"0d5046eb-cdff-4aaf-812c-061f7d396d0d", //username1,
-                password: botAuth1[socket.id].password_token,//"cIVuLdIRCO4s", //password1, 
-                version: '2018-07-10'
+                iam_apikey: botAuth1[socket.id].iam_apikey, 
+                version: '2018-09-20',
+                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
             });
 
             //Watson deklarierung bot
             console.log("credentials for " + botAuth2[socket.id].name + " are " + botAuth2[socket.id].username_token)
             bot_array[bot_id_2] = new watson.AssistantV1({
-                username: botAuth2[socket.id].username_token,//"54b3e159-42a3-439b-9829-db3ca57d3f47", //username2,
-                password: botAuth2[socket.id].password_token,//"DRMhV1QoPcoY",//password2,
-                version: '2018-07-10'
+                iam_apikey: botAuth2[socket.id].iam_apikey,
+                version: '2018-09-20',
+                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
             });
+
+            
 
             console.log("what is the bot1 token?" + botAuth1[socket.id].workspace_id_url);
 
@@ -117,7 +120,7 @@ function socket(io) {
             socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room
 
             bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id_url, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
+                workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
                 context: context_bot1_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 
@@ -147,7 +150,7 @@ function socket(io) {
             console.log(context_bot2_update[socket.id])
 
             bot_array[bot_id_2].message({
-                workspace_id: botAuth2[socket.id].workspace_id_url, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
+                workspace_id: botAuth2[socket.id].workspace_id, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
                 context: context_bot2_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 
@@ -176,7 +179,7 @@ function socket(io) {
             console.log(context_bot1_update[socket.id])
 
             bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id_url, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
+                workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
                 context: context_bot1_update[socket.id],
                 input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 

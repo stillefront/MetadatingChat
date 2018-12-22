@@ -1,6 +1,7 @@
 const auth = require('../middleware/auth');
 
 const formidable = require('formidable');
+const fs = require('fs');
 
 const express = require('express');
 const router = express.Router();
@@ -22,29 +23,6 @@ router.get('/', auth, async function (req, res){
   
 });
 
-// test area for image upload:
-
-router.post('/imgupload', async function (req, res){
-  
-  let form = await new formidable.IncomingForm();
-
-  form.parse(req);
-  
-  form.on('fileBegin', function (name, file){
-    file.path = 'uploads/' + file.name;
-  });
-
-  form.on('file', function (name, file){
-    console.log('Uploaded ' + file.name);
-  });
-
-  res.redirect('/admin');
-
-});
-
-// test end
-
-
 
 router.post('/newbot', async function (req, res){
   
@@ -57,19 +35,42 @@ router.post('/newbot', async function (req, res){
   let botData = {
     'name' : req.body.name, 
     'description' : req.body.description, 
-    'image_path' : req.body.image_path, 
-    'workspace_id_url' : req.body.workspace_id_url, 
-    'username_token' : req.body.username_token, 
-    'password_token' : req.body.password_token, 
+    'image_path' : 'null', 
+    'workspace_id' : req.body.workspace_id,
+    'iam_apikey' : req.body.iam_apikey, 
     'date_created' : req.body.date_created, 
     'owner' : req.session.userId, 
     'isPublic' : req.body.isPublic
   };
   console.log(botData);
 
-  bot = new Bot(_.pick(botData, ['name', 'description', 'image_path', 'workspace_id_url', 'username_token', 'password_token', 'date_created', 'owner', 'isPublic']));
+  bot = new Bot(_.pick(botData, ['name', 'description', 'image_path', 'workspace_id', 'iam_apikey', 'date_created', 'owner', 'isPublic']));
 
   await bot.save();
+
+  let bot2 = await Bot.findOne( {name: req.body.name} );
+  
+  // make new directory for bot profile pic
+  // let botDir = 'uploads/' + req.session.userId + '/' + req.body.name + '/';
+  let botDir = 'uploads/' + req.session.userId + '/' + bot2._id + '/';
+  fs.mkdirSync(botDir, {recursive: true}, function(err){
+    if(err) throw err;
+  });
+
+  // copy default profile pic to new directory
+  let picDest = botDir + 'profile.png';
+  fs.copyFileSync('default.png', picDest, function(err){
+    if(err) throw err;
+  });
+
+  // update bot image path in database
+  const result = await Bot.updateOne({ name: req.body.name}, {
+    $set: {
+      image_path: picDest
+    }
+  });
+  console.log(result);
+ 
 
   res.redirect('/admin');
 

@@ -34,13 +34,13 @@ exports.searchForBothToken = function (req, res, next) {
               });
     
         //search for the Token from bot1
-        Bot.findOne({ 'name': app.locals.bot1 }, 'name image_path workspace_id_token username_token password_token', function (err, bot_1) {
+        Bot.findOne({ 'name': app.locals.bot1 }, 'name image_path workspace_id username_token password_token', function (err, bot_1) {
                 if (err) return handleError(err);
                 app.locals.bot1Ready = bot_1
                 //console.log("Der Token von " + bot_1.name + " ist " + bot_1.workspace_id_token);
               });
         //search for the Token from bot2
-        Bot.findOne({ 'name': app.locals.bot2 }, 'name image_path workspace_id_token username_token password_token', function (err, bot_2) {
+        Bot.findOne({ 'name': app.locals.bot2 }, 'name image_path workspace_id username_token password_token', function (err, bot_2) {
                 if (err) return handleError(err);
                 //console.log("Der Token von " + bot_2.name + " ist " + bot_2.workspace_id_token);
                 return bot_2
