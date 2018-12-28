@@ -41,7 +41,7 @@ block content
               - var url = bots.image_path
               p.show_name #{bots.name}
               p.show_description #{bots.description}    
-              img(src=url, height="50" width="50", alt="no picture") 
+              img.show_pic(src=url, height="50" width="50", alt="no picture") 
               p.show_workspace_id.hidden #{bots.workspace_id}
               p.show_iam_apikey.hidden #{bots.iam_apikey}
               p.show_document_id.hidden #{bots._id} 
@@ -72,11 +72,6 @@ block content
                 input.updateIamApikey(type='text' id='iam_apikey' name='iam_apikey').input
               
               div.input
-                label(for='image_upload') Profilbild
-                br
-                input(type='file' id='upload' name='upload').input
-              
-              div.input
                 select(id='isPublic' name='isPublic')
                   option(id='isPublic' value='true') öffentlich
                   option(id='isPublic' value='false') verborgen
@@ -88,6 +83,23 @@ block content
                 
               br
               button(type='submit') update
+              br
+
+
+    section.imgupload.hidden
+          h2 Profilbild ändern
+            form(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload.hidden
+              div.input
+                label(for='image_upload')
+                br
+                img(height="50" width="50", alt="no picture").imgClicked
+                br
+                input(type='file' id='upload' name='upload').input
+                br
+                div.input.hidden
+                input.showDocumentID(type='text' id='_id' name='_id').input.hidden
+                
+                button(type='submit') hochladen
             
 
     section.delete

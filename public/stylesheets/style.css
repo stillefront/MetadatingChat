@@ -78,6 +78,7 @@ body {
   label {
     font: 14px bold, monospace;
   }
+
   
   .center {
     margin: 0 auto;
@@ -100,6 +101,12 @@ body {
   }
   
   .update {
+    float: left;
+    margin: auto;
+    padding: 3%;
+  }
+
+  .imgupload {
     float: left;
     margin: auto;
     padding: 3%;

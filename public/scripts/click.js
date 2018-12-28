@@ -22,6 +22,10 @@ $(document).ready(function() {
         var showDocumentID = {};
         //showDocumentID.value = $(this).find(".show_document_id").text();
         showDocumentID.value = $.trim($(this).find(".show_document_id").text());
+
+        var showPic;
+        showPic = $(this).find(".show_pic").attr("src");
+        console.log('showPic: ', showPic);
         
         $('.updateName').attr(updateName);
         $('.updateDescription').attr(updateDescription);
@@ -32,6 +36,11 @@ $(document).ready(function() {
         $('.confirmTick').attr(showDocumentID);
 
         $('form.imgupload').removeClass("hidden");
+        $('section.imgupload').removeClass("hidden");
+
+        $('.imgClicked').removeAttr("src");
+        $('.imgClicked').attr("src", showPic);
+
 
         //$('.showDocumentID').empty();
         //$('.showDocumentID').append(showDocumentID);
