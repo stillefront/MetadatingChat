@@ -3,20 +3,19 @@ extends layout
 block content
 
   section.front
-    h2 meta.dating: botify!
-    p Hier kommt dann die Frontpage rein.
-    br
-    div.bot_select
-      a(href='/bots').bot_select zur Botübersicht
-    
-    h3 meta.meta
-    div.login
-      a(href='/login').login login
-    br
-    div.register
-      a(href='/register').register register
-    br
-    div.admin
-      a(href='/admin').admin admin
+  div.wrapper--nav
+    div.container--nav
+      ul.nav
+        //a.nav--links(href="/login") test
+        a.nav--links(href="/admin") Admin-Panel
 
-      
+  div.wrapper
+    div.container
+      img(height="40%" src="/images/bot_login.png")
+      br
+      br
+      form(action='/login').form
+        button.form--button-login
+        
+      form(action='/register')
+        a(href='/bots').btn-2 zu den Bots
