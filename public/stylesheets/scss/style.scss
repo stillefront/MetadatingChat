@@ -1,6 +1,8 @@
 /* ====== file import ====== */
 @import "card_flip";
 
+@import "compass/css3";
+
 /* ====== font import ====== */
 @font-face {
   font-family: 'Source Sans Pro';
@@ -61,7 +63,7 @@ html, body {
   top: 40%;
   left: 0;
   width: 100%;
-  height: 400px;
+  height: 600px;
   margin-top: -200px;
   overflow: hidden;
 }
@@ -87,6 +89,9 @@ html, body {
   font-weight: 200;
 }
 
+.img--index{
+  animation: bounce 1s infinite;
+}
 
 /* ====== Login Form ====== */
 .form {
@@ -246,6 +251,31 @@ width: 70%;
 }
 
 
+.container--index-bots {
+  width: 200px;
+  height: 100%;
+  margin: 0 auto 0;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  background: #fff;
+}
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
 
 .section--orientation-left {
   float: left;
@@ -310,15 +340,35 @@ width: 70%;
 /* ====== Admin Panel ====== */
 
 .img--bot-admin {
-  margin-top: 10%;
+  border-radius: 30px;
+  cursor:pointer;
+}
+
+.img--bot-admin:hover {
+  opacity: 0.8;
+}
+
+.img--add-admin {
   border-radius: 30px;
   margin-left: 30%;
+  margin-top: 10%;
+  cursor:pointer;
+}
+
+.img--add-admin:hover {
+  opacity: 0.8;
 }
 
 .form--admin {
   margin-left: 3%;
   margin-top: 10%;
   width: 800px;
+  text-align: left !important;
+}
+
+.form--admin-imgupload {
+  margin-left: 30%;
+  margin-top: 10%;
   text-align: left !important;
 }
 
@@ -612,3 +662,6 @@ width: 70%;
   color: #53e3a6;
 }
 
+
+
+/* ====== Bot Select Site ====== */

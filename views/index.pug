@@ -11,11 +11,23 @@ block content
 
   div.wrapper
     div.container
-      img(height="40%" src="/images/bot_login.png")
+      img(id = "img--index" height="40%" src="/images/bot_login.png")
       br
       br
       form(action='/login').form
         button.form--button-login
         
       form(action='/register')
-        a(href='/bots').btn-2 zu den Bots
+        button.btn-2 Registrieren
+      br
+      button(id = "gotobots" onclick="window.location.href='/bots'").form--button-bot zu den Bots
+
+  script.
+    $(document).ready(function(){
+      $('#gotobots').hover(
+       function(){ $("#img--index").addClass('img--index') },
+       function(){ $("#img--index").removeClass('img--index') }
+    )
+
+        
+    });

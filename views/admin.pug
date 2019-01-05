@@ -1,48 +1,3 @@
-//- extends layout
-
-//- block content
-
-//-   h2 Hallo #{userName}!
-//-   a(href="/logout").nav--links  logout
-
-//-   each bots in bot_query
-//-     div.flip
-//-       div.front(style= "background-image: url(" + bots.image_path + ")")
-//-         h1.text-shadow #{bots.name}
-//-       div.back
-//-         form(action='/update' method='post')
-//-           input.updateName(type='text' id='name' name='name' value= bots.name).form--input-admin 
-//-           input.updateDescription(type='text' id='description' name='description' value= bots.description).form--input-admin 
-//-           input.updateImageUrl(type='text' id='image_path' name='image_path' value= bots.image_path).form--input-admin 
-//-           input.updateWorkspaceID(type='text' id='workspace_id_url' name='workspace_id_url' value= bots.workspace_id_url).form--input-admin 
-//-           input.updateIamApikey(type='text' id='iam_apikey' name='iam_apikey' value= bots.iam_apikey).form--input-admin
-//-           input.showDocumentID(type='text' id='_id' name='_id' value= bots._id).form--input-admin
-//-           button(type='submit').form--button Bot updaten
-//-         form(action='/delete' method='post')
-//-           label(for='confirm') Bot löschen
-//-           input.confirmTick(type='checkbox' id='confirm' name='confirm')
-//-           button(type='submit') löschen
-      
-
-//-   div.flip
-//-     div.front
-//-       h1.text-shadow Neuen Bot hinzufügen
-//-     div.back
-//-       form(action='/admin/newbot' method='post')
-//-         input(type='text' id='name' name='name' placeholder = "Name" ).form--input-admin 
-//-         input(type='text' id='description' name='description' placeholder = "Beschreibung" ).form--input-admin 
-//-         input(type='text' id='workspace_id' name='workspace_id' placeholder = "Workspace-ID" ).form--input-admin 
-//-         input(type='text' id='iam_apikey' name='iam_apikey' placeholder = "iam_apikey" ).form--input-admin 
-//-         button(type='submit').form--button Bot erstellen
-
-//-       form(action='/update/imgupload' enctype='multipart/form-data' method='post')
-//-         input(type='file' id='upload' name='upload').input
-//-         input.showDocumentID(type='text' id='_id' name='_id').input.hidden
-//-         button(type='submit') hochladen
-
-
-
-
 extends layout
 
 block content
@@ -52,7 +7,9 @@ block content
         div.profile
           img(src="/images/bot_user.png", height="50" width="50", alt="no picture") 
           a.sidenav--a #{userName}
+          a.sidenav--a--logout(href="/bots") Zu den Bots
           a.sidenav--a--logout(href="/logout") logout
+          
         br
         div.sidenav--border--buttom 
         br
@@ -74,8 +31,13 @@ block content
         - var bot_id = bots._id
         div.hidden(id = bots._id)
           - var url = bots.image_path
-          img.img--bot-admin(src=url, height="200" width="auto", alt="no picture")
-          form.form--admin(action='/update' method='post')
+          //--img.img--bot-admin(src=url, height="200" width="auto", alt="no picture")
+          form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
+            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Heidi_Klum_Judges_Red_Carpet_event_April_2014_%28cropped%29.jpg/1280px-Heidi_Klum_Judges_Red_Carpet_event_April_2014_%28cropped%29.jpg").imgClicked
+            input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
+            input(type = "text" id = "_id" name = "_id" value = bots._id).hidden 
+
+          form.form--admin(action='/update' method='post').update
             input(type='text' id='name' name='name' value= bots.name).form--input-botname
             br
             input(type='textarea' id='description' name='description' value= bots.description rows="10" cols="30").form--input-botdescription
@@ -83,38 +45,36 @@ block content
             input(type='text' id='workspace_id' name='workspace_id' value= bots.workspace_id).form--input-botworkspace_id
             input(type='text' id='iam_apikey' name='iam_apikey' value= bots.iam_apikey).form--input-botiam_apikey
             br
-            button(type = "button" id='isPublic' name='isPublic' value = bots.isPublic).form--input-botpublic verborgen
+            //--button(type = "button" id='isPublic' name='isPublic' value = bots.isPublic).form--input-botpublic verborgen
+            div.input
+                select(id='isPublic' name='isPublic')
+                  option(id='isPublic' value="true") öffentlich
+                  option(id='isPublic' value="false") verborgen
             br
-            p.show_document_id.hidden #{bots._id} 
+            input(type = "text" id = "_id" name = "_id" value = bots._id).hidden 
             button(type='submit').form--button-bot Bot updaten
+        
+          
 
 
 
     section
       div.hidden(id = "addDIV")
-        img.img--bot-admin(src="/images/bot_user.png", height="200" width="auto", alt="no picture")
+        form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
+            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="/images/bot_user.png").imgClicked
+            input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
         form.form--admin(action='/admin/newbot'  method='post')
           input(type='text' id='name' name='name' placeholder = "Name" ).form--input-addname 
           input(type='text' id='description' name='description' placeholder = "Description").form--input-adddescription
           input(type='text' id='workspace_id' name='workspace_id' placeholder = "Workspace-ID").form--input-addworkspace_id
           input(type='text' id='iam_apikey' name='iam_apikey' placeholder = "IAM_Apikey" ).form--input-addiam_apikey
+          div.input
+                select(id='isPublic' name='isPublic')
+                  option(id='isPublic' value='true') öffentlich
+                  option(id='isPublic' value='false') verborgen
           button(type='submit').form--button-bot Hinzufügen
 
-
-    section.imgupload.hidden
-          h2 Profilbild ändern
-            form(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload.hidden
-              div.input
-                label(for='image_upload')
-                br
-                img(height="50" width="50", alt="no picture").imgClicked
-                br
-                input(type='file' id='upload' name='upload').input
-                br
-                div.input.hidden
-                input.showDocumentID(type='text' id='_id' name='_id').input.hidden
-                
-                button(type='submit') hochladen
+            
             
 
     section.delete.hidden
@@ -130,7 +90,7 @@ block content
     script.
       const aBot = document.querySelectorAll('.sidenav--img');
       for (let elem of aBot){
-          //console.log(elem);
+          console.log(elem);
           elem.addEventListener('click', () => {sbot(elem);});
       }
       function sbot(elem){
@@ -165,31 +125,38 @@ block content
         }
       }     
 
-      if ($("#isPublic").val() === "true") {
-          $("#isPublic").prop('value', 'true');
-        }
-      else if ($("#isPublic").val() === "false") { 
-        $("#isPublic").prop('value', 'false');
-        }
-      else {
-        $("#isPublic").prop('value', 'false');
-      }
-
-      $("#isPublic").click(function() {
-        var fired_button = $(this).val();
-        if (fired_button === "true") {
-          $("#isPublic").prop('value', 'false');
-          $("#isPublic").text("verborgen");
-          $("#isPublic").css({ 'background-color': '#9c3939', 'color': 'white' });
-        }
-      else if (fired_button === "false") { 
-        $("#isPublic").prop('value', 'true');
-        $("#isPublic").text("öffentlich");
-        $("#isPublic").css({ 'background-color': '#47dec6', 'color': 'white' });
-        }
-      else {
-        $("#isPublic").prop('value', 'false');
-        $("#isPublic").text("verborgen");
-        $("#isPublic").css({'background-color': '#9c3939', 'color': 'white' });
-      }
+      $('#imgupload').click(function(){
+        $('#upload').click();
       });
+
+      //- if ($("#isPublic").val() === "true") {
+      //-     $("#isPublic").prop('value', 'true');
+      //-   }
+      //- else if ($("#isPublic").val() === "false") { 
+      //-   $("#isPublic").prop('value', 'false');
+      //-   }
+      //- else {
+      //-   $("#isPublic").prop('value', 'false');
+      //- }
+
+      //- $("#isPublic").click(function() {
+      //-   var fired_button = $(this).val();
+      //-   if (fired_button === "true") {
+      //-     $("#isPublic").prop('value', 'false');
+      //-     $("#isPublic").text("verborgen");
+      //-     console.log("verborgen");
+      //-     $("#isPublic").css({ 'background-color': '#9c3939', 'color': 'white' });
+      //-   }
+      //- else if (fired_button === "false") { 
+      //-   $("#isPublic").prop('value', 'true');
+      //-   $("#isPublic").text("öffentlich");
+      //-   console.log("öffentlich");
+      //-   $("#isPublic").css({ 'background-color': '#47dec6', 'color': 'white' });
+      //-   }
+      //- else {
+      //-   $("#isPublic").prop('value', 'false');
+      //-   $("#isPublic").text("verborgen");
+      //-   console.log("verborgen");
+      //-   $("#isPublic").css({'background-color': '#9c3939', 'color': 'white' });
+      //- }
+      //- });

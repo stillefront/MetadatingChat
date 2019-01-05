@@ -38,6 +38,7 @@ $( document ).ready(function() {
         console.log(bot_array[1].length);
         ////change "suche bots to chat now"
         $( ".welcome-button-text p" ).replaceWith( "<p>Starte Chat</p>" );
+        $( ".welcome-button-text p" ).css("color", "white");
   
       }
       //if more than two clicks happen
