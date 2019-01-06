@@ -61,7 +61,7 @@ block content
     section
       div.hidden(id = "addDIV")
         form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
-            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="/images/bot_user.png").imgClicked
+            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="/images/bot_login.png").imgClicked
             input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
         form.form--admin(action='/admin/newbot'  method='post')
           input(type='text' id='name' name='name' placeholder = "Name" ).form--input-addname 
