@@ -1,3 +1,6 @@
+p {
+    color: #53e3a6;
+  }
 
 form {
     bottom: 0;
@@ -126,7 +129,7 @@ form button {
 .bot1-msg-name {
     padding-right: 10px;
     text-align: right;
-    color: #8e8e8e;
+    color: white;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -191,7 +194,7 @@ form button {
 .bot2-msg-name {
     padding-left: 10px;
     text-align: left;
-    color: #8e8e8e;
+    color: white;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -277,7 +280,6 @@ form button {
     grid-row-end: 2;
     display: flex;
     flex-wrap: nowrap;
-    background: black;
 }
 
 .go-back-button {
@@ -309,7 +311,7 @@ form button {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: #ffff00;
+    background-color: white;
 }
 
 .chat-button:hover{
@@ -321,7 +323,7 @@ form button {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: #ffff00;
+    background-color: white;
 }
 
 .chat-logo-text {
@@ -437,5 +439,8 @@ form button {
 
 
 
-
+  .img--botselect-icon {
+    height: 50px;
+    cursor: pointer;
+  }
 

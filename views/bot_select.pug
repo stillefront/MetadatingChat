@@ -1,23 +1,22 @@
 doctype html
 html
   head
-    title= title
+    title= "meta.dating 2019: BOTIFY!"
     meta(charset='utf-8')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='/scripts/bot_select.js')
     script(src='/scripts/socketClient.js')
-    link(rel='stylesheet', href='/stylesheets/bot_style.css')
+    link(rel='stylesheet', href='/stylesheets/css/bot_style.css')
     script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js")
     script(src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js')
-    link(rel='stylesheet', href="https://fonts.googleapis.com/css?family=Roboto")
 
   body
     .welcome-container
         .welcome-header
             .welcome-logo
                 .welcome-logo-text
-                    p METADATING
-                    p BOTIFY
+                    img(onclick="window.location.href='/'" src="/images/bot_login.png").img--botselect-icon 
+                    
         .welcome-button
             .welcome-button-text
                 p Bitte wähle zwei Bots aus:
@@ -35,4 +34,4 @@ html
                         p#bot-hidden-text #{bots.name}
 
                 else
-                    p doesnt work  
+                    p Es gibt keine Bots  
