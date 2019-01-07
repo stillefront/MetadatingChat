@@ -33,7 +33,7 @@ block content
           - var url = bots.image_path
           //--img.img--bot-admin(src=url, height="200" width="auto", alt="no picture")
           form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
-            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Heidi_Klum_Judges_Red_Carpet_event_April_2014_%28cropped%29.jpg/1280px-Heidi_Klum_Judges_Red_Carpet_event_April_2014_%28cropped%29.jpg").imgClicked
+            img.img--bot-admin(id = "imgupload" height="auto" width="200" src=url).imgClicked
             input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
             input(type = "text" id = "_id" name = "_id" value = bots._id).hidden 
 
