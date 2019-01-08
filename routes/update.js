@@ -77,10 +77,12 @@ router.post('/imgupload', async function(req, res) {
             console.log('newPath: ', newPath);
 
             // copy uploaded image from /tmp to designated path
+            
             fs.copyFileSync(oldPath, newPath, function (err) {
               if (err) throw err;
               console.log('file moved to  ', newPath);
           });
+          
             //delete uploaded image from /tmp
             fs.unlinkSync(oldPath, function (err) {
             if (err) throw err;
