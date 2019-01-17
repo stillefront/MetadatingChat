@@ -18,8 +18,7 @@ router.post('/', async function(req, res) {
   let name = await req.body.name;
   let description = await req.body.description;
   let workspace_id = await req.body.workspace_id;
-  let username_token = await req.body.username_token;
-  let password_token = await req.body.password_token;
+  let iam_apikey = await req.body.iam_apikey;
   let isPublic = await req.body.isPublic;
 
   console.log(isPublic); //debug
@@ -30,8 +29,7 @@ router.post('/', async function(req, res) {
       name: name,
       description: description,
       workspace_id: workspace_id,
-      username_token: username_token,
-      password_token: password_token,
+      iam_apikey: iam_apikey,
       isPublic: isPublic 
     }
   });
