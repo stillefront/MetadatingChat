@@ -6,22 +6,36 @@ $(document).ready(function() {
     });
 
     $(".clickable").on("click", function(){
+        //Hiden aller anderen DIVs
+        $("#updateDIV").removeClass("hidden");
+        $('#h1--admin-welcome').addClass('hidden');
+        $('#addDIV').addClass('hidden');
         
         var updateName = {};
         updateName.value = $(this).find(".show_name").text();
+        console.log(updateName);
 
         var updateDescription = {};
         updateDescription.value = $(this).find(".show_description").text();
 
         var updateWorkspaceID = {};
         updateWorkspaceID.value = $(this).find(".show_workspace_id").text();
+        console.log(updateWorkspaceID);
 
         var updateIamApikey = {};
         updateIamApikey.value = $(this).find(".show_iam_apikey").text();
+        console.log(updateIamApikey);
 
         var showDocumentID = {};
         //showDocumentID.value = $(this).find(".show_document_id").text();
         showDocumentID.value = $.trim($(this).find(".show_document_id").text());
+
+        var updateIsPublic = {};
+        updateIsPublic.value = $(this).find(".show_is_public").text();
+        $("#isPublic").prop('value', updateIsPublic.value);
+        console.log(updateIsPublic);
+
+
 
         var showPic;
         showPic = $(this).find(".show_pic").attr("src");
@@ -32,6 +46,7 @@ $(document).ready(function() {
         $('.updateWorkspaceID').attr(updateWorkspaceID);
         $('.updateIamApikey').attr(updateIamApikey);
         $('.showDocumentID').attr(showDocumentID);
+        $('.updateIsPublic').attr(updateIsPublic);
 
         $('.confirmTick').attr(showDocumentID);
 
@@ -46,5 +61,7 @@ $(document).ready(function() {
         //$('.showDocumentID').append(showDocumentID);
 
     });
+
+    
 
 });
