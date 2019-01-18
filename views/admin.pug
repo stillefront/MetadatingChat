@@ -59,13 +59,10 @@ block content
 
         //-Delete-Section des Bots
         form(action='/delete' method='post').delete
-              div.delete
-              label(for='confirm') Ja, ich will.
-              input.confirmTick(type='checkbox' id='confirm' name='confirm').delete
-              br
-              button(type='submit') delete
-              
-        
+          input.updateDocumentID(type = "text" id = "_idBot" name = "_idBot").hidden 
+          p(id="deleteBotButton").form--delete-bot Bot löschen
+          button(type='submit' id="confirmButton" ).form--finaldelete-bot.hidden Erneut klicken zum Bestätigen
+
           
 
     section
@@ -88,6 +85,7 @@ block content
       
 
     script.
+
       function showAdd() {
         $("#addDIV").removeClass("hidden");
         $('#h1--admin-welcome').addClass('hidden');

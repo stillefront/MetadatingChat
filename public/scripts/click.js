@@ -10,6 +10,8 @@ $(document).ready(function() {
         $("#updateDIV").removeClass("hidden");
         $('#h1--admin-welcome').addClass('hidden');
         $('#addDIV').addClass('hidden');
+        $('#deleteBotButton').removeClass('hidden');
+        $("#confirmButton").addClass("hidden");
         
         var updateName = {};
         updateName.value = $(this).find(".show_name").text();
@@ -29,6 +31,7 @@ $(document).ready(function() {
         var showDocumentID = {};
         //showDocumentID.value = $(this).find(".show_document_id").text();
         showDocumentID.value = $.trim($(this).find(".show_document_id").text());
+        console.log(showDocumentID);
 
         var updateIsPublic = {};
         updateIsPublic.value = $(this).find(".show_is_public").text();
@@ -48,7 +51,6 @@ $(document).ready(function() {
         $('.showDocumentID').attr(showDocumentID);
         $('.updateIsPublic').attr(updateIsPublic);
 
-        $('.confirmTick').attr(showDocumentID);
 
         $('form.imgupload').removeClass("hidden");
         $('section.imgupload').removeClass("hidden");
@@ -62,6 +64,16 @@ $(document).ready(function() {
 
     });
 
-    
+    $("#deleteBotButton").on("click", function(){
+        $('#deleteBotButton').addClass('hidden');
+        $("#confirmButton").removeClass("hidden");
+        
+        var showBotID = {};
+        //showDocumentID.value = $(this).find(".show_document_id").text();
+        showBotID.value = $('.showDocumentID').val();
+
+        $('.updateDocumentID').attr(showBotID);
+        console.log(showBotID);
+      });
 
 });

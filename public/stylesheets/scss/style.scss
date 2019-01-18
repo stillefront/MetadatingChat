@@ -562,6 +562,53 @@ width: 70%;
   transition-duration: 0.25s;
   font-weight: 300;
 }
+
+
+.form--delete-bot {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  margin: 20px auto 10px auto;
+  color: #fc3200;
+  border-radius: 3px;
+  width: 200px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}  
+
+.form--delete-bot:hover{
+  background-color: #ff0000;
+  color: white;
+}
+
+.form--finaldelete-bot {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  margin: 20px auto 10px auto;
+  color: white;
+  background-color: #ff0000;
+  border-radius: 3px;
+  width: 200px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+}  
+
+.form--finaldelete-bot:hover{
+  background-color: #571100;
+  color: white;
+  content: 'Ja, ich will den Bot löschen!';
+}
 /* ====== Nav Bar ====== */
 .wrapper--nav {
   position: absolute;

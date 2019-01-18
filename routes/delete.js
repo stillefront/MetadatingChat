@@ -9,7 +9,7 @@ const fs = require('fs');
 /*POST delete bot from database */
 router.post('/', async function(req, res) {
 
-  let botID = await req.body.confirm;
+  let botID = await req.body._idBot;
   let bot = await Bot.findOne({_id: botID});
   let image_path = bot.image_path;
   let botDir = 'uploads/' + req.session.userId + '/' + botID + '/';
