@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 
         var showPic;
-        showPic = $(this).find(".show_pic").attr("src");
+        showPic = $(this).find(".show_pic").text();
         console.log('showPic: ', showPic);
         
         $('.updateName').attr(updateName);
