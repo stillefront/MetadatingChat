@@ -12,7 +12,7 @@ router.post('/', async function(req, res) {
   let botID = await req.body._idBot;
   let bot = await Bot.findOne({_id: botID});
   let image_path = bot.image_path;
-  let botDir = 'uploads/' + req.session.userId + '/' + botID + '/';
+  //let botDir = 'uploads/' + req.session.userId + '/' + botID + '/';
 
   console.log('submitted document ID:', botID); //debug
 
@@ -23,13 +23,13 @@ router.post('/', async function(req, res) {
 
   // delete the directory
   
-  fs.rmdirSync(botDir, {recursive: true}, function(err){
+  /*fs.rmdirSync(image_path, {recursive: true}, function(err){
     if(err) throw err;
   });
-  //
+  */
   
 
-  console.log(result); // debug
+  //console.log(result); // debug
   
   res.redirect('/admin');
 

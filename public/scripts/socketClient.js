@@ -127,7 +127,7 @@ $(document).ready(function(){
         "id": socket.id,
         "content": "hallo",
         "type": 'userMessage',
-        "userId": Cookies.get('userId'),
+        "userId": Cookies.get('userId'), // should use the session information from database!?
     };
     socket.send(JSON.stringify(data))
     console.log("static msg was sent")

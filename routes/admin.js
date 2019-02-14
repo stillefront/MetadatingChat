@@ -17,8 +17,17 @@ router.get('/', auth, async function (req, res){
   const userName = req.session.userName;
   const userId = req.session.userId;
   
-  const bot_query = await Bot.find({owner : userId}); 
-  res.render('admin', {bot_query : bot_query, userName : userName});
+  const bot_query = await Bot.find({owner : userId});
+  const bot_query_admin = await Bot.find();
+
+  if(userName == 'metaKevin'){
+    res.render('admin', {bot_query : bot_query_admin, userName : userName});
+  } else {
+    res.render('admin', {bot_query : bot_query, userName : userName});
+  }
+
+
+  //res.render('admin', {bot_query : bot_query, userName : userName});
   //console.log(bot_query);
   
 });

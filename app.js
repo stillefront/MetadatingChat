@@ -17,6 +17,7 @@ const deleteRouter = require('./routes/delete');
 const botRouter = require('./routes/bots');
 const fetchRouter = require('./routes/fetch');
 const chatRouter = require('./routes/chat');
+const chatstartRouter = require('./routes/chatstart'); // new shit
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 
@@ -102,6 +103,7 @@ app.use('/', indexRouter);
 app.use('/bots', botRouter);
 app.use('/fetch', fetchRouter);
 app.use('/chat', chatRouter);
+app.use('/chatstart', chatstartRouter);
 app.use('/admin', adminRouter);
 app.use('/update', updateRouter);
 app.use('/delete', deleteRouter);

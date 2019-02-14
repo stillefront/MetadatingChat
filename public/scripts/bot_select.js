@@ -67,11 +67,26 @@ $( document ).ready(function() {
   
       if (counter == 2) {
         var userId = Math.floor(Math.random() * 1000000000000000)
-        Cookies.set('userId', userId);
+        Cookies.set('userId', userId); // should I use express sessions instead of cookies?
         console.log("do you have a cookie?" + Cookies.get('userId'));
         console.log("Send Bot information to the server and start chat between two Bots!");
-        $.post( "/chat", { bot1: bot_array[0], bot2: bot_array[1], userId: userId} );
-        window.location.href = "/chat";
+        //new solution with hidden form object:
+        /*
+        let form = $('<form action="' + '/chat' + '" method="post">' +
+        '<input type="text" name="bot1" value="' + bot_array[0] + '" />' +
+        '<input type="text" name="bot2" value="' + bot_array[1] + '" />' +
+        '<input type="text" name="userId" value="' + userId + '" />' +
+        '</form>');
+        $('body').append(form);
+        form.submit();
+        */
+
+        $.redirect('/chat', {'bot1': bot_array[0], 'bot2': bot_array[1], 'userId': userId});
+
+
+
+        //$.post( '/chat', { bot1: bot_array[0], bot2: bot_array[1], userId: userId});
+        //window.location.href = '/chat';
       }
       else {
         console.log("not working!");
