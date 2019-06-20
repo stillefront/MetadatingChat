@@ -32,6 +32,7 @@ $(document).ready(function(){
     function msgSizeTimer(msgContent) {
         let awrageCharactersPerMinute = 1150; // http://typefastnow.com/average-typing-speed
         let typingTime = Math.floor((JSON.stringify(msgContent).length * 1000) / (awrageCharactersPerMinute/60)); 
+        typingTime /= 2;
         return typingTime
     };
     
@@ -102,7 +103,7 @@ $(document).ready(function(){
                             smoothscroll();	
     
                         }, msgSizeTimer(botMsgContent));
-                    }, Math.floor((Math.random() * 3000)));
+                    }, Math.floor((Math.random() * 1500)));
                 }, msgSizeTimer(botMsgContent) * Math.random());
     
             } else {
@@ -113,7 +114,7 @@ $(document).ready(function(){
                     smoothscroll();	
                 }, msgSizeTimer(botMsgContent));
             };
-        }, Math.floor((Math.random() * 2000)));	
+        }, Math.floor((Math.random() * 1000)));	
     }
     // Functions end here
     
