@@ -34,7 +34,7 @@ Auf dem Liveserver ist das System mehrfach gestartet. Es kann einmal mit forever
 
 ### Profilbilder eintragen
 
-* Bilder hochladen in den Ordner `/var/www/vhosts/metathema.net/uploads/`. Eine Datei mit dem Pfad `/var/www/vhosts/metathema.net/uploads/profile_images_ss19/sternburg.jpg` ist dann über die URL `http://metathema.net:3000/uploads/profile_images_ss19/sternburg.jpg` erreichbar. Die Bilder sollten quadratisch und nicht zu groß sein. Möglich ist z.B. das JPG Format mit einer Auflösung 500x500 Pixeln.
+* Bilder hochladen in den Ordner `/var/www/vhosts/metathema.net/uploads/`. Eine Datei mit dem Pfad `/var/www/vhosts/metathema.net/uploads/profile_images_ss19/sternburg.jpg` ist dann über die URL `http://metathema.net:3000/uploads/profile_images_ss19/sternburg.jpg` erreichbar. Die Bilder sollten quadratisch und nicht zu groß sein. Möglich ist z.B. das JPG Format mit einer Auflösung 500x500 Pixeln. Benutz besser keine Leerzeichen in den Namen von Ordnern oder Dateien, weil du die später escapen musst.
 * Danach werden die Bilder in der MongoDB den Usern zugeordnet. Dazu auf der Shell diese Befehle ausführen:
 * Einloggen in die MongoDB: `mongo`
 * Richtige Datenbank auswählen: `use botDB`
