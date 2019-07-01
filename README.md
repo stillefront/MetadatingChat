@@ -39,5 +39,10 @@ Auf dem Liveserver ist das System mehrfach gestartet. Es kann einmal mit forever
 * Einloggen in die MongoDB: `mongo`
 * Richtige Datenbank auswählen: `use botDB`
 * Du brauchst eine Liste von allen Namen der Bots, die du updaten willst. Du kannst diese entweder von der Weboberfläche `http://metathema.net:3000` ablesen. Oder Du kannst über die Monto Shell alle Bots anzeigen mit `db.bots.find()`
-* Das Bild für jeden Bot einzeln eintragen. In diesem Beispiel wird das Bild für den Bot mit dem Namen Sternburg eingetragen: `db.bots.updateOne({name: "Sternburg"}, {$set: {image_path: "http://metathema.net:3000/uploads/profile_images_ss19/sternburg.jpg"}})`. In dem Beispiel müssen der Name ("Sternburg") und der image_path ausgetauscht werden. 
+* Das Bild für jeden Bot einzeln eintragen. In diesem Beispiel wird das Bild für den Bot mit dem Namen Sternburg eingetragen:
+```
+db.bots.updateOne({name: "Sternburg"}, {$set: {image_path: "http://metathema.net:3000/uploads/profile_images_ss19/sternburg.jpg"}})
+```
+
+In dem Beispiel müssen der Name ("Sternburg") und der image_path (von "http" bis ".jpg") ausgetauscht werden. 
 * Wenn das Bild eingetragen ist, dann sollte es nach einem Reload im Browser sofort auf der Weboberfläche zu sehen sein.
