@@ -23,15 +23,6 @@ npm start
 
 Bots können im Admin Panel initialisiert werden. 
 
-### Starten der zahlreichen Live Installationen, z.B. nach Server Neustart
-
-Auf dem Server anmelden und folgende Befehle ausführen. Bitte einen anderen PrivateKey eintragen.
-
-```
-sudo service mongod start
-cd /var/www/vhosts/metathema.net
-nohup ./restart.sh >/dev/null 2>&1 & 
-```
 
 ### Installation im Livebetrieb
 
@@ -41,6 +32,17 @@ Auf dem Liveserver ist das System mehrfach gestartet. Es kann einmal mit forever
 * *start-all.sh* führt start-one.sh mehrfach aus. In dem Skript ist einen Schleife implementiert, in der die Ports festgelegt sind. Derzeit werden Ports 3001-3010 gestartet.
 * *restart.sh* Ruft alle 30 Sekunden start-all.sh auf. Wenn die Installation bereits läuft, dann stürzt der Startskript (start-one.sh) ab. Sonst wird sie neu gestartet. Restart.sh muss einmal mit nohup gestartet werden `nohup ./restart.sh >/dev/null 2>&1 &` Eigentlich muss nur restart.sh aufgerufen werden, dadurch werden automatisch alle 10 Instanzen gestartet und dann regelmäßig neu gestartet.
 * *stop-all.sh* Stopt alle Instanzen, die mit start-one.sh gestartet wurden. Wenn ein Skript mit start-one.sh gestartet wurde, so legt er seine Prozess ID im Ordner pids/ ab. stop-all.sh stoppt alle PIDs, die in diesem Ordner liegen. Außerdem stoppt es noch einige Kindprozesse von denen.
+
+
+## Starten der zahlreichen Live Installationen, z.B. nach Server Neustart
+
+Auf dem Server anmelden und folgende Befehle ausführen. Bitte einen anderen PrivateKey eintragen.
+
+```
+sudo service mongod start
+cd /var/www/vhosts/metathema.net
+nohup ./restart.sh >/dev/null 2>&1 & 
+```
 
 ## Konfiguration
 
