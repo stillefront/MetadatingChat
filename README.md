@@ -23,6 +23,16 @@ npm start
 
 Bots können im Admin Panel initialisiert werden. 
 
+### Starten der zahlreichen Live Installationen, z.B. nach Server Neustart
+
+Auf dem Server anmelden und folgende Befehle ausführen. Bitte einen anderen PrivateKey eintragen.
+
+```
+sudo service mongod start
+cd /var/www/vhosts/metathema.net
+nohup ./restart.sh >/dev/null 2>&1 & 
+```
+
 ### Installation im Livebetrieb
 
 Auf dem Liveserver ist das System mehrfach gestartet. Es kann einmal mit forever gestartet werden. Zusätzlich kann es mehrmals gestartet werden über eine Reihe von Skripten. Durch das Starten von mehreren Installationen kann das Problem umgangen werden, dass jede Installation nur von einem User gleichzeitig benutzt werden kann. Dazu gibt es folgende Skripte:
