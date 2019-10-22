@@ -15,6 +15,36 @@ $(document).ready(function(){
         return msgStructure   
     };
     
+        //this is the structure for every msg from the bot
+        function audiomsg(msg, voice, nextbot, data) {
+            //var audioid="'audio_id'";
+
+            var validChars = "abcdefghijklmnopqrstuvwxyzäöüßABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ .,";
+            var clean = "";
+            console.log("audiomsg");
+            console.log(msg);
+
+            msgJoin = msg.join(" ");
+
+            for( var i=0; i<msgJoin.length; i++){
+                var c = msgJoin.charAt(i);
+                if(validChars.indexOf(c) >= 0){
+                    clean = clean + c;
+                }
+            }
+            console.log("dirty string: " + msgJoin + "\nclean string: " + clean);
+
+            msg = "hallo";
+            let msgStructure =  
+                '<audio id="bot_audio" autoplay src="http://localhost:3000/api/tts?voice='+voice+'&text='+clean+'" type="audio/ogg"></audio>';
+                /*'<script     language="JavaScript">'+
+                'var aud = document.getElementById("bot_audio"); '+
+                'aud.onended = function() {socket.emit('+nextbot+', JSON.stringify('+data+'));'+
+                'smoothscroll();'
+                '</script>';*/
+            return msgStructure   
+        };
+
     // This is a fake msg that shows the "is typing" chat box. id lottie is the ball animation
     function msgStructureIsTyping(botClass, botName, botPicturePath ) {
         let msgStructureIsTyping =  
@@ -81,6 +111,7 @@ $(document).ready(function(){
   */  
     //this is the function that fakes the whole "is typing" thing happen.
     function fakeItTillYouMakeIt (botClass, botName, botMsgContent, botPicturePath, SocketEmitPath, data) {
+        console.error(botName+' says "'+botMsgContent+'"');
         setTimeout(function() { 
             $('#messages').append(msgStructureIsTyping(botClass, botName, botPicturePath));
             lottieAnimation();
@@ -117,7 +148,56 @@ $(document).ready(function(){
         }, Math.floor((Math.random() * 1000)));	
     }
     // Functions end here
+    function fakeItTillYouMakeItaudio (botClass, botName, botMsgContent, botPicturePath, SocketEmitPath, data, voice) {
+        console.error(botName+' says "'+botMsgContent+'"');
+        setTimeout(function() { 
+            $('#messages').append(msgStructureIsTyping(botClass, botName, botPicturePath));
+            lottieAnimation();
+            smoothscroll();
+            
+            if ( Math.floor((Math.random() * 100) + 1) > 80) {
+                setTimeout(function(){
+                    $("." + botClass + "-is-typing-msg").remove();
+                    smoothscroll();
     
+                    setTimeout(function(){
+                        $('#messages').append(msgStructureIsTyping(botClass, botName, botPicturePath));
+                        lottieAnimation();
+                        smoothscroll();
+    
+                        setTimeout(function(){
+                            $("." + botClass + "-is-typing-msg").remove();
+                            $('#messages').append(msgStructure(botClass, botName, botMsgContent, botPicturePath));
+                            if(botMsgContent==""){console.log('calling2 '+SocketEmitPath); socket.emit(SocketEmitPath, JSON.stringify(data)); return console.log("Message was empty.")}
+                            $("audio").remove();
+                            $('#audios').append(audiomsg(botMsgContent,voice, SocketEmitPath, data));
+                            var aud = document.getElementById("bot_audio");
+                            aud.onended = function() {console.log('calling1 '+SocketEmitPath); socket.emit(SocketEmitPath, JSON.stringify(data));}
+                            smoothscroll();
+                            //console.error(aud);
+    
+                        }, msgSizeTimer(botMsgContent));
+                    }, Math.floor((Math.random() * 1500)));
+                }, msgSizeTimer(botMsgContent) * Math.random());
+    
+            } else {
+                setTimeout(function(){
+                    $("." + botClass + "-is-typing-msg").remove();
+                    $('#messages').append(msgStructure(botClass, botName, botMsgContent, botPicturePath));
+                    if(botMsgContent==""){console.log('calling2 '+SocketEmitPath); socket.emit(SocketEmitPath, JSON.stringify(data));return console.log("Message was empty.")}
+                    $("audio").remove();
+                    $('#audios').append(audiomsg(botMsgContent,voice, SocketEmitPath, data));
+                    var aud = document.getElementById("bot_audio");
+                    //console.log("aud ist " + aud);
+                    aud.onended = function() {
+                        console.log('calling2 '+SocketEmitPath);
+                        socket.emit(SocketEmitPath, JSON.stringify(data));
+                    }
+                    smoothscroll();
+                }, msgSizeTimer(botMsgContent));
+            };
+        }, Math.floor((Math.random() * 1000)));	
+    }
     // Party starts here
     var socket = io();
     var funnyButton = ".chat-button"
@@ -138,15 +218,24 @@ $(document).ready(function(){
         data = JSON.parse(data);
         console.log("Communication betwen msg sockets works")
 
+        var voice1 = $("select[name=voice1]").val();
+        var voice2 = $("select[name=voice2]").val();
         if (data.type == 'botAnswer') {
-    
-            fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
-            console.log(who + "send a msg")
+            if( voice1 == 0){
+                fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
+            } else{
+                // hier soll genau das gleiche passieren wie bei fakeItTillYouMakeIt aber
+                // zusätzlich soll das audio ausgegeben werden
+                // der zweite bot soll erst sprechen, wenn das audio abgespielt wurde
+                fakeItTillYouMakeItaudio("bot1", who, data.content, data.botPhoto, "callSecondBot", data, voice1)
+            }
     
         } else if (data.type == 'botAnswer2') {
-    
-            fakeItTillYouMakeIt("bot2", who, data.content, data.botPhoto, "callFirstBot", data)
-            console.log(who + "send a msg")
+            if( voice2 == 0){
+                fakeItTillYouMakeIt("bot2", who, data.content, data.botPhoto, "callFirstBot", data)
+            } else{
+                fakeItTillYouMakeItaudio("bot2", who, data.content, data.botPhoto, "callFirstBot", data, voice2)
+            }
 
         } else {
             console.log("Static msg says " + data.content)
