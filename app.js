@@ -20,6 +20,7 @@ const chatRouter = require('./routes/chat');
 const chatstartRouter = require('./routes/chatstart'); // new shit
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const apittsrouter = require('./routes/api_tts');
 
 const login = require('./routes/login');
 const logout = require('./routes/logout');
@@ -112,7 +113,7 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/login', login);
 app.use('/logout', logout);
-
+app.use('/api/tts', apittsrouter);
 
 
 
