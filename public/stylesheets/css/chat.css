@@ -444,3 +444,13 @@ form button {
     cursor: pointer;
   }
 
+  .form2{
+    position:absolute; top: 70px; left:30px;
+    width:20%;
+  }
+  .form1{
+    position:absolute; top: 70px; right:-80px;
+    width:20%;
+  }
+
+

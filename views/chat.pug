@@ -16,12 +16,29 @@ html
     
 
   body
+    form(action='#').form1
+      label Stimme
+      select(name='voice1')
+        option(value=0) Keine Sprachausgabe
+        option(value='de-DE_BirgitV2Voice') Weibliche Stimme 1
+        option(value='de-DE_BirgitV3Voice') Weibliche Stimme 2
+        option(value='de-DE_DieterV2Voice') Männliche Stimme 1
+        option(value='de-DE_DieterV3Voice') Männliche Stimme 2
+    form(action='#').form2
+      label Stimme
+      select(name='voice2')
+        option(value=0) Keine Sprachausgabe
+        option(value='de-DE_BirgitV2Voice') Weibliche Stimme 1
+        option(value='de-DE_BirgitV3Voice') Weibliche Stimme 2
+        option(value='de-DE_DieterV2Voice') Männliche Stimme 1
+        option(value='de-DE_DieterV3Voice') Männliche Stimme 2
     .chat
         .chat-header
             .chat-logo
                 .chat-logo-text
-                    img(onclick="window.location.href='/'" src="/images/bot_login.png").img--botselect-icon 
+                    img(onclick="window.location.href='/'" src="/images/bot_login.png").img--botselect-icon
         .chat-button
             .chat-button-text
                 p(onclick="") Zu den Bots!  
         #messages
+        #audios

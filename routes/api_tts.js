@@ -7,8 +7,8 @@ router.get('/', function(req,res, next)
     //für url-argumente
     var url= require('url');
     var q= url.parse(req.url, true).query;
-    res.writeHead(200, { 'Content-Type':'audio/ogg'});
     var request = require("request");
+    var auth = 'Basic ' + Buffer.from("apikey" + ':' + "3yJ_E9hsh8dkRD8fbs0V4_kR04XySilX0mKHa0EPHM_H").toString('base64');
     var options = { method: 'GET',
         url: 'https://stream-fra.watsonplatform.net/text-to-speech/api/v1/synthesize',
         qs: { voice: q.voice, text: q.text },
@@ -22,12 +22,13 @@ router.get('/', function(req,res, next)
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.17.1',
-            Authorization: 'Basic YXBpa2V5OmFKMU9KQnp0aXhfTWd2SVZIOUFtY1pVR1VTNkFIT24ydXBoYXB2WW5EN2Vs' } };
+            Authorization: auth } };
     request(options, function (error, response, body) {
         if (error)throw new Error(error);
 //        respons
  //       res.write('1: Test<br>');
-        const buffer = Buffer.from(body, 'utf8');
+        res.writeHead(200, { 'Content-Type':'audio/ogg'});
+        const buffer = Buffer.from(body, 'binary');
         res.write(buffer,'binary');
         res.end(null, 'binary');
     })
