@@ -99,6 +99,5 @@ $( document ).ready(function() {
   
   });
   */
-    console.log("lala" + bot_array);
   
   });

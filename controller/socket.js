@@ -13,9 +13,20 @@ var bot_array = {};
 var botdata = {};
 var botMessage = {};
 
+//let's try Maps instead
+let bot_objects = new Map();
+let ctext_bot1 = new Map();
+let ctext_bot2= new Map();
+let ctext_bot1_update = new Map();
+let ctext_bot2_update = new Map();
+
+
+let bot_names = new Map();
+
 //custom bot ids
 var bot_id_1
 var bot_id_2
+
 
 //mongo search var
 var clientSearch = {};
@@ -27,6 +38,7 @@ var context_bot1 = {}
 var context_bot1_update = {}
 var context_bot2 = {}
 var context_bot2_update = {}
+
 
 //and action!
 
@@ -42,7 +54,7 @@ function socket(io) {
 
         console.log(socket.id + ' connected to room ' + room); //for debuging in console
 
-        console.log('a user connected lala');
+        console.log('new user connected');
         socket.on('new message', function (msg) {
             var data = {
                 message: msg.message,
@@ -54,41 +66,52 @@ function socket(io) {
 
         socket.on('disconnect', function () {
             console.log('user disconnected');
+
+            // map delete!
+            bot_objects.delete(bot_id_1);
+            bot_objects.delete(bot_id_2);
+
+            bot_names.delete(bot_id_1);
+            bot_names.delete(bot_id_2);
+
+            /*
             delete bot_array.bot_id_1;
             console.log("bot_1 deleted");
             delete bot_array.bot_id_2;
             console.log("bot_2 deleted");
+            */
         });
 
         socket.on('message', async function (message) {
             botMessage[socket.id] = JSON.parse(message);
 
             console.log("message_json_esc: parse " + botMessage[socket.id].userId);
+            console.dir(botMessage[socket.id]);
 
             async function getClientInfo() {  
                 try {
                     clientSearch[socket.id] = await User_sessions_informations.findOne({ 'user_id': botMessage[socket.id].userId },).exec();                
-                    console.log("getClientInfo function gives: " + clientSearch[socket.id]);
+                    //console.log("getClientInfo function gives: " + clientSearch[socket.id]);
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
 
             async function getBot1Auth() {
                 try {
                     botAuth1[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot1 },).exec();
-                    console.log("getBot1Auth function gives: " + botAuth1[socket.id]);
+                    //console.log("getBot1Auth function gives: " + botAuth1[socket.id]);
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
 
             async function getBot2Auth() {
                 try {
                     botAuth2[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot2 },).exec();
-                    console.log("getBot2Auth function gives: " + botAuth2[socket.id]);
+                    //console.log("getBot2Auth function gives: " + botAuth2[socket.id]);
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
              
@@ -96,7 +119,7 @@ function socket(io) {
             await getBot1Auth();
             await getBot2Auth();        
 
-                    
+             /*       
             console.log("what happend first?");
             bot_array[bot_id_1] = new watson.AssistantV1({
                 iam_apikey: botAuth1[socket.id].iam_apikey, 
@@ -111,18 +134,46 @@ function socket(io) {
                 version: '2018-09-20',
                 url: 'https://gateway-fra.watsonplatform.net/assistant/api'
             });
+            */
 
+            // approach with map:
+
+            bot_objects.set(bot_id_1, new watson.AssistantV1({
+                iam_apikey: botAuth1[socket.id].iam_apikey,
+                version: '2018-09-20',
+                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
+            }));
+
+            bot_objects.set(bot_id_2, new watson.AssistantV1({
+                iam_apikey: botAuth2[socket.id].iam_apikey,
+                version: '2018-09-20',
+                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
+            }));
+
+            // save names for debugging:
+            bot_names.set(bot_id_1, botAuth1[socket.id].name);
+            bot_names.set(bot_id_2, botAuth2[socket.id].name);
+
+            // list all saved bots from map [bot_id] : [name]:
+
+            for (let elem of bot_names.entries()) {
+                console.log(`${elem[0]}: ${elem[1]}`);
+                };
+            
             
 
-            console.log("what is the bot1 token?" + botAuth1[socket.id].workspace_id_url);
+           socket.emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to client
+           socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room
 
-            socket.emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to client
-            socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room
+           ctext_bot1_update.set(bot_id_1);
 
-            bot_array[bot_id_1].message({
+            bot_objects.get(bot_id_1).message({
                 workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
-                context: context_bot1_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
+                context: ctext_bot1_update.get(bot_id_1), // context: context_bot1_update[socket.id]
+                input: { 'text': JSON.stringify(botMessage[socket.id].content),
+                'options': {
+                    'return_context': true
+                } }
 
             }, function (err, response) {
                 if (err)
@@ -133,8 +184,11 @@ function socket(io) {
                         type: 'botAnswer',
                         botPhoto: botAuth1[socket.id].image_path
                     }
-
-                console.log("wann kommt man hier hin? Und funktioniert das? ")
+                
+                console.log("initial message");
+                console.dir("context_bot1:" + JSON.stringify(ctext_bot1_update.get(bot_id_1)));
+                
+                
                 
                 socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
                 socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond to room
@@ -143,16 +197,25 @@ function socket(io) {
         });
 
         socket.on("callSecondBot", function (data) {
-            console.log("bin ich bei callseondbot?")
-            botMessage[socket.id] = JSON.parse(data);
+            botMessage[socket.id] = JSON.parse(data); 
+            
+            //!!
+            // empfangene messages werden wirklich jedes mal überschrieben, da sie nicht an eine botID oder SocketID gebunden sind!
+            //!!
 
-            context_bot2_update[socket.id] = context_bot2[socket.id]
-            console.log(context_bot2_update[socket.id])
 
-            bot_array[bot_id_2].message({
+            //context_bot2_update[socket.id] = context_bot2[socket.id]
+            ctext_bot2_update.set(bot_id_2, ctext_bot2.get(bot_id_2));
+
+            console.dir("context_bot2:" + JSON.stringify(ctext_bot2.get(bot_id_2)));
+
+            bot_objects.get(bot_id_2).message({
                 workspace_id: botAuth2[socket.id].workspace_id, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
-                context: context_bot2_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
+                context: ctext_bot2_update.get(bot_id_2), // context: context_bot2_update[socket.id]
+                input: { 'text': JSON.stringify(botMessage[socket.id].content),
+                'options': {
+                    'return_context': true
+                } }
 
             }, function (err, response) {
                 if (err)
@@ -163,7 +226,11 @@ function socket(io) {
                         type: "botAnswer2",
                         botPhoto: botAuth2[socket.id].image_path
                     }
-                context_bot2[socket.id] = response.context;
+                //context_bot2[socket.id] = response.context;
+               ctext_bot2.set(bot_id_2, response.context);
+                
+                console.log(bot_names.get(bot_id_2) + " called");
+                console.dir("context bot2" + JSON.stringify(ctext_bot2_update.get(bot_id_2)));
 
                 socket.emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
                 socket.to(room).emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
@@ -171,17 +238,25 @@ function socket(io) {
         });
 
         socket.on("callFirstBot", function (data) {
-            console.log("bin ich bei callFirstBot?")
 
             botMessage[socket.id] = JSON.parse(data);
+            
 
-            context_bot1_update[socket.id] = context_bot1[socket.id];
-            console.log(context_bot1_update[socket.id])
+            //context_bot1_update[socket.id] = context_bot1[socket.id];
+            //console.log(context_bot1_update[socket.id])
 
-            bot_array[bot_id_1].message({
+            ctext_bot1_update.set(bot_id_1, ctext_bot1.get(bot_id_1));
+
+            console.log(bot_names.get(bot_id_1) + " called");
+            console.dir("context bot1" + JSON.stringify(ctext_bot1.get(bot_id_1)));
+
+            bot_objects.get(bot_id_1).message({ // bot_array[bot_id_1].message({ 
                 workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
-                context: context_bot1_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
+                context: ctext_bot1_update.get(bot_id_1),
+                input: { 'text': JSON.stringify(botMessage[socket.id].content),
+                'options': {
+                    'return_context': true
+                }}
 
             }, function (err, response) {
                 if (err)
@@ -193,7 +268,15 @@ function socket(io) {
                         botPhoto: botAuth1[socket.id].image_path
                     }
 
-                context_bot1[socket.id] = response.context;
+                //context_bot1[socket.id] = response.context; // vlt. fängt es an hier zu brennen?
+                ctext_bot1.set(bot_id_1, response.context); //er bekommt am anfang gar keinen response?!
+
+                //debug
+                console.log(bot_names.get(bot_id_1) + " called");
+                console.dir("context bot1" + JSON.stringify(ctext_bot1.get(bot_id_1)));
+
+                console.dir(botdata[socket.id]);
+                
 
                 socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
                 socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond

@@ -127,7 +127,7 @@ $(document).ready(function(){
         "id": socket.id,
         "content": "hallo",
         "type": 'userMessage',
-        "userId": Cookies.get('userId'), // should use the session information from database!?
+        "userId": Cookies.get('userId'),
     };
     socket.send(JSON.stringify(data))
     console.log("static msg was sent")
@@ -137,12 +137,13 @@ $(document).ready(function(){
         data = JSON.parse(data);
         console.log("Communication betwen msg sockets works")
 
-        if (data.type == 'botAnswer') {
+        if (data.type == 'botAnswer') { // Hier mit IDs arbeiten, wie werden die übersetzt und abgeglichen?
+            // lieber sowas: https://socket.io/docs/rooms-and-namespaces/
     
             fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
             console.log(who + "send a msg")
     
-        } else if (data.type == 'botAnswer2') {
+        } else if (data.type == 'botAnswer2') { // Hier mit IDs arbeiten, wie werden die übersetzt und abgeglichen?
     
             fakeItTillYouMakeIt("bot2", who, data.content, data.botPhoto, "callFirstBot", data)
             console.log(who + "send a msg")
