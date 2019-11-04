@@ -36,7 +36,7 @@ $(document).ready(function(){
 
             msg = "hallo";
             let msgStructure =  
-                '<audio id="bot_audio" autoplay src="http://localhost:3000/api/tts?voice='+voice+'&text='+clean+'" type="audio/ogg"></audio>';
+                '<audio id="bot_audio" autoplay src="/api/tts?voice='+voice+'&text='+clean+'" type="audio/ogg"></audio>';
                 /*'<script     language="JavaScript">'+
                 'var aud = document.getElementById("bot_audio"); '+
                 'aud.onended = function() {socket.emit('+nextbot+', JSON.stringify('+data+'));'+
