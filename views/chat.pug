@@ -8,6 +8,7 @@ html
     script(src='/scripts/bot_select.js')
     script(src='/scripts/jquery.redirect.js')
     script(src='/scripts/socketClient.js')
+    script(src='/scripts/voice_selector.js')
     script(src='/scripts/lottie.js', type="text/javascript")
     script(src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js')
     link(rel='stylesheet', href="https://fonts.googleapis.com/css?family=Roboto")
@@ -16,25 +17,38 @@ html
     
 
   body
-    form(action='#').form1
-      label Stimme
-      select(name='voice1')
-        option(value=0) Keine Sprachausgabe
-        option(value='de-DE-Hedda') Hedda
-        option(value='de-AT-Michael') Michael
-        option(value='de-DE-Stefan-Apollo') Stefan Apollo
-        option(value='de-CH-Karsten') Karsten
-    form(action='#').form2
-      label Stimme
-      select(name='voice2')
-        option(value=0) Keine Sprachausgabe
-        option(value='de-DE-Hedda') Hedda
-        option(value='de-AT-Michael') Michael
-        option(value='de-DE-Stefan-Apollo') Stefan Apollo
-        option(value='de-CH-Karsten') Karsten
+    a(href='#' class='menu')
+      img(src='images/Hamburger_icon.png')
+    div(id='voice_selector')
+      a(href="#" class="close")
+        img(src="images/close.png")
+      div.clear
+      p Stimmen für Sprachausgabe auswählen
+      form(action='#').form1
+        label Stimme&nbsp;
+          span(class="bot1") 
+            Bot 1
+          span : &nbsp; 
+        select(name='voice1')
+          option(value=0) Keine Sprachausgabe
+          option(value='de-DE-Hedda') Hedda
+          option(value='de-AT-Michael') Michael
+          option(value='de-DE-Stefan-Apollo') Stefan Apollo
+          option(value='de-CH-Karsten') Karsten
+      form(action='#').form2
+        label Stimme&nbsp;
+          span(class="bot2") 
+            Bot 2
+          span : &nbsp; 
+        select(name='voice2')
+          option(value=0) Keine Sprachausgabe
+          option(value='de-DE-Hedda') Hedda
+          option(value='de-AT-Michael') Michael
+          option(value='de-DE-Stefan-Apollo') Stefan Apollo
+          option(value='de-CH-Karsten') Karsten
     .chat
         .chat-header
-            .chat-logo
+              .chat-logo
                 .chat-logo-text
                     img(onclick="window.location.href='/'" src="/images/bot_login.png").img--botselect-icon
         .chat-button

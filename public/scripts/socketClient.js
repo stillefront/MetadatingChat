@@ -215,12 +215,14 @@ $(document).ready(function(){
     
     //msg ping pong after automatic start
     socket.on('message', function(who, data){
+
         data = JSON.parse(data);
         console.log("Communication betwen msg sockets works")
 
         var voice1 = $("select[name=voice1]").val();
         var voice2 = $("select[name=voice2]").val();
         if (data.type == 'botAnswer') {
+            $("span.bot1").html(who);
             if( voice1 == 0){
                 fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
             } else{
@@ -231,6 +233,7 @@ $(document).ready(function(){
             }
     
         } else if (data.type == 'botAnswer2') {
+            $("span.bot2").html(who);
             if( voice2 == 0){
                 fakeItTillYouMakeIt("bot2", who, data.content, data.botPhoto, "callFirstBot", data)
             } else{

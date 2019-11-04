@@ -444,13 +444,35 @@ form button {
     cursor: pointer;
   }
 
-  .form2{
-    position:absolute; top: 70px; left:30px;
-    width:20%;
-  }
-  .form1{
-    position:absolute; top: 70px; right:-80px;
-    width:20%;
-  }
+.menu img{
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 40px;
+}
 
+#voice_selector{
+    width: 400px;
+    position: absolute;
+    right: 0px;
+    margin-right: -12px;
+    background-color: #67e9b2;
+    padding: 20px;
+    height: 100vh;
+    display: none;
+}
 
+#voice_selector p, #voice_selector span{
+    color: black;
+    margin-bottom: 16px;
+}
+
+.close img{
+    width: 40px;
+    float: right;
+    margin-bottom: 40px;
+}
+
+div.clear{
+    clear: both;
+}
