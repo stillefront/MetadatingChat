@@ -20,6 +20,7 @@ router.post('/', async function(req, res) {
   let workspace_id = await req.body.workspace_id;
   let iam_apikey = await req.body.iam_apikey;
   let isPublic = await req.body.isPublic;
+  let gruppe = await req.body.gruppe;
 
   console.log(isPublic); //debug
   console.log('submitted document ID:', botID); //debug
@@ -30,7 +31,8 @@ router.post('/', async function(req, res) {
       description: description,
       workspace_id: workspace_id,
       iam_apikey: iam_apikey,
-      isPublic: isPublic 
+      isPublic: isPublic ,
+      gruppe: gruppe
     }
   });
 

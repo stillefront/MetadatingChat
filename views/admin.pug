@@ -44,16 +44,27 @@ block content
 
         //-Update der Credentials
         form.form--admin(action='/update' method='post').update
+          p Name 
           input.updateName(type='text' id='name' name='name' placeholder = "Name").form--input-botname
           br
+          span Description
+          br
           input.updateDescription(type='textarea' id='description' name='description' rows="10" cols="30").form--input-botdescription
+          br
+          span Workspace ID / API Key
           br
           input.updateWorkspaceID(type='text' id='workspace_id' name='workspace_id').form--input-botworkspace_id
           input.updateIamApikey(type='text' id='iam_apikey' name='iam_apikey').form--input-botiam_apikey
           br
           //- button.updateIsPublic(type = "button" id='isPublic' name='isPublic').form--input-botpublic verborgen
+          span activated
+          br
+          br
           input.updateIsPublic(type = "text" id="isPublic" name="isPublic")
           br
+          p Gruppe 
+          input.updateGruppe(type='text' id='gruppe' name='gruppe' placeholder = "Gruppe").form--input-gruppe
+          p
           input.showDocumentID(type = "text" id = "_id" name = "_id").hidden 
           button(type='submit').form--button-bot Bot updaten
 
