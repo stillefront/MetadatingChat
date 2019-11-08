@@ -25,6 +25,7 @@ block content
               p.show_iam_apikey.hidden #{bots.iam_apikey}
               p.show_document_id.hidden #{bots._id}
               p.show_is_public.hidden #{bots.isPublic}
+              p.show_group.hidden #{bots.group}
             
         div.add(onclick="showAdd()")
           a.sidenav--add +
@@ -44,6 +45,7 @@ block content
 
         //-Update der Credentials
         form.form--admin(action='/update' method='post').update
+
           p Name 
           input.updateName(type='text' id='name' name='name' placeholder = "Name").form--input-botname
           br
@@ -62,8 +64,8 @@ block content
           br
           input.updateIsPublic(type = "text" id="isPublic" name="isPublic")
           br
-          p Gruppe 
-          input.updateGruppe(type='text' id='gruppe' name='gruppe' placeholder = "Gruppe").form--input-gruppe
+          p Group 
+          input.updateGroup(type='text' id='group' name='group' placeholder = "Group" ).form--input-group
           p
           input.showDocumentID(type = "text" id = "_id" name = "_id").hidden 
           button(type='submit').form--button-bot Bot updaten
@@ -86,6 +88,7 @@ block content
           input(type='text' id='description' name='description' placeholder = "Description").form--input-adddescription
           input(type='text' id='workspace_id' name='workspace_id' placeholder = "Workspace-ID").form--input-addworkspace_id
           input(type='text' id='iam_apikey' name='iam_apikey' placeholder = "IAM_Apikey" ).form--input-addiam_apikey
+          input(type='text' id='group' name='group' placeholder = "Group" ).form--input-addgroup 
           div.input
                 select(id='isPublic' name='isPublic')
                   option(id='isPublic' value='true') öffentlich

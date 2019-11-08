@@ -38,6 +38,10 @@ $(document).ready(function() {
         $("#isPublic").prop('value', updateIsPublic.value);
         console.log(updateIsPublic);
 
+        var updateGroup = {};
+        updateGroup.value = $(this).find(".show_group").text();
+        console.log(updateName);
+
 
 
         var showPic;
@@ -50,6 +54,7 @@ $(document).ready(function() {
         $('.updateIamApikey').attr(updateIamApikey);
         $('.showDocumentID').attr(showDocumentID);
         $('.updateIsPublic').attr(updateIsPublic);
+        $('.updateGroup').attr(updateGroup);
 
 
         $('form.imgupload').removeClass("hidden");

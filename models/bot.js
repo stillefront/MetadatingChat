@@ -33,7 +33,7 @@ const botSchema = new mongoose.Schema ({
           type: Boolean,
           //required: true
         },
-        gruppe: {
+        group: {
           type: String
         },
 });
@@ -51,9 +51,8 @@ function validateBot(bot) {
     owner: Joi.string().min(5).max(255),
     isPublic: Joi.boolean().truthy('true').falsy('false').insensitive(false),
     upload: Joi.binary(),
-    gruppe: Joi.string().min(0).max(20)
+    group: Joi.string().min(0).max(20)
   };
-  console.log(bot);
   return Joi.validate(bot, schema);
 }
 

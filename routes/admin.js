@@ -49,11 +49,12 @@ router.post('/newbot', async function (req, res){
     'iam_apikey' : req.body.iam_apikey, 
     'date_created' : req.body.date_created, 
     'owner' : req.session.userId, 
-    'isPublic' : req.body.isPublic
+    'isPublic' : req.body.isPublic,
+    'group' : req.body.group
   };
   console.log(botData);
 
-  bot = new Bot(_.pick(botData, ['name', 'description', 'image_path', 'workspace_id', 'iam_apikey', 'date_created', 'owner', 'isPublic']));
+  bot = new Bot(_.pick(botData, ['name', 'description', 'image_path', 'workspace_id', 'iam_apikey', 'date_created', 'owner', 'isPublic', "group"]));
 
   await bot.save();
 
