@@ -15,6 +15,7 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.2",
+    "ibm-watson": "^5.2.1",
     "joi": "^14.0.4",
     "joi-password-complexity": "^2.0.1",
     "jquery.redirect": "^1.1.4",

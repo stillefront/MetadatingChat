@@ -1,7 +1,28 @@
+/* Major SDK update from IBM: https://github.com/watson-developer-cloud/node-sdk/blob/master/MIGRATION-V5.md
+ *
+ *
+ *
+ *
+ *
+ */
 
-var watson = require('watson-developer-cloud');
+
+
+
+// var watson = require('watson-developer-cloud');
+
+// new authentication model
+const Assistant = require('ibm-watson/assistant/v2');
+const { IamAuthenticator } = require('ibm-watson/auth');
+
+// sessions are stored per bot in a hashmap
+
+let bot_sessions = new Map();
+
+
 var express = require('express');
 var app = express();
+
 
 //mongo database models
 const {Bot} = require ('../models/bot');
@@ -9,7 +30,6 @@ var User_sessions_informations = require ('../models/user_sessions_informations'
 
 //bot objects
 var people = {};
-var bot_array = {};
 var botdata = {};
 var botMessage = {};
 
@@ -32,12 +52,6 @@ var bot_id_2
 var clientSearch = {};
 var botAuth1 = {}
 var botAuth2 = {}
-
-//for context updating 
-var context_bot1 = {}
-var context_bot1_update = {}
-var context_bot2 = {}
-var context_bot2_update = {}
 
 
 //and action!
@@ -74,16 +88,14 @@ function socket(io) {
             bot_names.delete(bot_id_1);
             bot_names.delete(bot_id_2);
 
-            /*
-            delete bot_array.bot_id_1;
-            console.log("bot_1 deleted");
-            delete bot_array.bot_id_2;
-            console.log("bot_2 deleted");
-            */
         });
 
         socket.on('message', async function (message) {
             botMessage[socket.id] = JSON.parse(message);
+
+            //putting the message into queue
+            queue.enqueue(botMessage[socket.id]);
+            console.dir("Queuekram:" + queue.dequeue());
 
             console.log("message_json_esc: parse " + botMessage[socket.id].userId);
             console.dir(botMessage[socket.id]);
@@ -119,36 +131,51 @@ function socket(io) {
             await getBot1Auth();
             await getBot2Auth();        
 
-             /*       
-            console.log("what happend first?");
-            bot_array[bot_id_1] = new watson.AssistantV1({
-                iam_apikey: botAuth1[socket.id].iam_apikey, 
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
-            });
-
-            //Watson deklarierung bot
-            console.log("credentials for " + botAuth2[socket.id].name + " are " + botAuth2[socket.id].username_token)
-            bot_array[bot_id_2] = new watson.AssistantV1({
-                iam_apikey: botAuth2[socket.id].iam_apikey,
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
-            });
-            */
 
             // approach with map:
-
-            bot_objects.set(bot_id_1, new watson.AssistantV1({
-                iam_apikey: botAuth1[socket.id].iam_apikey,
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
+            // new authentication strategy for AssistantV2 – hacky mess for the time being!
+            bot_objects.set(bot_id_1, new Assistant({
+                version: '2019-02-28',
+                authenticator: new IamAuthenticator({
+                    apikey: botAuth1[socket.id].iam_apikey,
+                }),
+                url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
             }));
 
-            bot_objects.set(bot_id_2, new watson.AssistantV1({
-                iam_apikey: botAuth2[socket.id].iam_apikey,
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
+            bot_objects.set(bot_id_2, new Assistant({
+                version: '2019-02-28',
+                authenticator: new IamAuthenticator({
+                    apikey: botAuth2[socket.id].iam_apikey,
+                }),
+                url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
             }));
+
+            console.log("Bots und so: " + bot_objects.get(bot_id_1));
+
+            // create sessions for both bots
+            bot_sessions.set(bot_id_1, bot_objects.get(bot_id_1).createSession({
+                assistantId: botAuth1[socket.id].workspace_id
+              })
+                .then(res => {
+                  console.log(JSON.stringify(res, null, 2));
+                })
+                .catch(err => {
+                  console.log(err);
+                }));
+
+            bot_sessions.set(bot_id_2, bot_objects.get(bot_id_2).createSession({
+                assistantId: botAuth2[socket.id].workspace_id
+               })
+                    .then(res => {
+                      console.log(JSON.stringify(res, null, 2));
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    }));
+
+            // session debug:
+            console.log("Bot session kram: " + bot_sessions.get(bot_id_1));
+
 
             // save names for debugging:
             bot_names.set(bot_id_1, botAuth1[socket.id].name);
@@ -178,7 +205,7 @@ function socket(io) {
             }, function (err, response) {
                 if (err)
                     console.log('error:', err);
-                else
+                else {
                     botdata[socket.id] = {
                         content: response.output.text,
                         type: 'botAnswer',
@@ -186,8 +213,9 @@ function socket(io) {
                     }
                 
                 console.log("initial message");
+                ctext_bot1.set(bot_id_1, response.context);
                 console.dir("context_bot1:" + JSON.stringify(ctext_bot1_update.get(bot_id_1)));
-                
+                }
                 
                 
                 socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
@@ -199,9 +227,8 @@ function socket(io) {
         socket.on("callSecondBot", function (data) {
             botMessage[socket.id] = JSON.parse(data); 
             
-            //!!
-            // empfangene messages werden wirklich jedes mal überschrieben, da sie nicht an eine botID oder SocketID gebunden sind!
-            //!!
+            queue.enqueue(botMessage[socket.id]);
+            console.dir("Queuekram:" + queue.dequeue());
 
 
             //context_bot2_update[socket.id] = context_bot2[socket.id]
@@ -220,27 +247,29 @@ function socket(io) {
             }, function (err, response) {
                 if (err)
                     console.log('error:', err);
-                else
+                else {
                     botdata[socket.id] = {
                         content: response.output.text,
                         type: "botAnswer2",
-                        botPhoto: botAuth2[socket.id].image_path
+                        botPhoto: botAuth2[socket.id].image_path,
+                        namespace: bot_id_1 + bot_id_2
                     }
                 //context_bot2[socket.id] = response.context;
                ctext_bot2.set(bot_id_2, response.context);
-                
+                }
                 console.log(bot_names.get(bot_id_2) + " called");
                 console.dir("context bot2" + JSON.stringify(ctext_bot2_update.get(bot_id_2)));
 
                 socket.emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
                 socket.to(room).emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
             });
+
+        // });
         });
 
         socket.on("callFirstBot", function (data) {
 
             botMessage[socket.id] = JSON.parse(data);
-            
 
             //context_bot1_update[socket.id] = context_bot1[socket.id];
             //console.log(context_bot1_update[socket.id])
@@ -261,16 +290,17 @@ function socket(io) {
             }, function (err, response) {
                 if (err)
                     console.log('error:', err);
-                else
+                else {
                     botdata[socket.id] = {
                         content: response.output.text,
                         type: "botAnswer",
-                        botPhoto: botAuth1[socket.id].image_path
+                        botPhoto: botAuth1[socket.id].image_path,
+                        namespace: bot_id_1 + bot_id_2
                     }
 
                 //context_bot1[socket.id] = response.context; // vlt. fängt es an hier zu brennen?
                 ctext_bot1.set(bot_id_1, response.context); //er bekommt am anfang gar keinen response?!
-
+                }
                 //debug
                 console.log(bot_names.get(bot_id_1) + " called");
                 console.dir("context bot1" + JSON.stringify(ctext_bot1.get(bot_id_1)));

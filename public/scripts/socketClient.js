@@ -121,6 +121,10 @@ $(document).ready(function(){
     var socket = io();
     var funnyButton = ".chat-button"
 
+
+
+
+
     //automatic start. You can manipulate the static msg in data.content
     console.log("SocketClient is working. Sending first static 'hallo' msg to the first bot");
     var data = {
@@ -131,14 +135,17 @@ $(document).ready(function(){
     };
     socket.send(JSON.stringify(data))
     console.log("static msg was sent")
+
+
+
     
     //msg ping pong after automatic start
     socket.on('message', function(who, data){
         data = JSON.parse(data);
         console.log("Communication betwen msg sockets works")
 
-        if (data.type == 'botAnswer') { // Hier mit IDs arbeiten, wie werden die übersetzt und abgeglichen?
-            // lieber sowas: https://socket.io/docs/rooms-and-namespaces/
+        if (data.type == 'botAnswer') { 
+
     
             fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
             console.log(who + "send a msg")

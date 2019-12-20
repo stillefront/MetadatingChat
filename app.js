@@ -7,7 +7,7 @@ const config = require('config');
 const session = require('express-session');
 const formidable = require('formidable');
 
-const socket = require ('./controller/socket');
+//const socket = require ('./controller/socket_queue');
 
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
@@ -31,7 +31,7 @@ const app = express();
 // socket.io serverside integration
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-socket(io);
+//socket(io);
 
 
 /*
@@ -88,7 +88,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('*/uploads', express.static('uploads'));
 
 //check for cookies without session and delete them, put it into middleware folder!
-
 app.use((req, res, next) => {
   if (req.cookies.user_session && !req.session.userId) {
       res.clearCookie('user_session');
