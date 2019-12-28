@@ -43,10 +43,6 @@ function socket(io) {
         socket.on('message', async function (message){
             botMessage[socket.id] = JSON.parse(message);
 
-            //putting the message into queue
-            queue.enqueue(botMessage[socket.id]);
-            console.dir("Queuekram:" + queue.dequeue());
-
             console.log("message_json_esc: parse " + botMessage[socket.id].userId);
             console.dir(botMessage[socket.id]);
 
