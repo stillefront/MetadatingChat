@@ -8,10 +8,14 @@
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
+// map for storing the bot instances and their session IDs
+let assistantList = new Map();
+let sessionList = new Map();
+
 let express = require('express');
 let app = express();
 
-//mongo database models – should also be corrected for new authentication
+//mongo database models
 const {Bot} = require ('../models/bot');
 let User_sessions_informations = require ('../models/user_sessions_informations');
 
@@ -21,6 +25,8 @@ let clientSearch = {};
 let botAuth1 = {};
 let botAuth2 = {};
 let botdata = {};
+
+
 
 
 function socket(io) {
@@ -37,15 +43,16 @@ function socket(io) {
         console.log(socket.id + ' connected to room ' + room);
 
         socket.on('disconnect', function () {
-            console.log(socket.id + 'user disconnected');
+            console.log('user disconnected');
+
+            // delete bots
+            assistantList.delete(bot_id_1);
+            assistantList.delete(bot_id_2);
+
         });
 
         socket.on('message', async function (message){
             botMessage[socket.id] = JSON.parse(message);
-
-            //putting the message into queue
-            queue.enqueue(botMessage[socket.id]);
-            console.dir("Queuekram:" + queue.dequeue());
 
             console.log("message_json_esc: parse " + botMessage[socket.id].userId);
             console.dir(botMessage[socket.id]);
@@ -99,9 +106,8 @@ function socket(io) {
                 disableSslVerification: true,
               });
 
-            // experimenting with socket session
-            socket.bot1 = bot1;
-            socket.bot2 = bot2;
+            assistantList.set(bot_id_1, bot1);
+            assistantList.set(bot_id_2, bot2);
          
             
             // creating sessions for the respective bots:
@@ -111,15 +117,12 @@ function socket(io) {
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
-
-
-                // experimentation with socket session:
-                socket.bot1Session = res.result.session_id;
+                sessionList.set(bot_id_1, res.result.session_id);
 
                 // create message as soon as session is created:
-                socket.bot1.message({
+                assistantList.get(bot_id_1).message({
                     assistantId: botAuth1[socket.id].workspace_id,
-                    sessionId: socket.bot1Session ,
+                    sessionId: sessionList.get(bot_id_1),
                     input: {
                       'message_type': 'text',
                       'text': JSON.stringify(botMessage[socket.id].content)
@@ -151,9 +154,7 @@ function socket(io) {
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
-
-                // experimentation with socket session:
-                socket.bot2Session = res.result.session_id;
+                sessionList.set(bot_id_2, res.result.session_id);
             })
             .catch(err => {
                 console.log(err);
@@ -166,9 +167,9 @@ function socket(io) {
             
             botMessage[socket.id] = JSON.parse(data);
 
-            socket.bot2.message({
+            assistantList.get(bot_id_2).message({
                 assistantId: botAuth2[socket.id].workspace_id,
-                sessionId: socket.bot2Session,
+                sessionId: sessionList.get(bot_id_2),
                 input: {
                   'message_type': 'text',
                   'text': JSON.stringify(botMessage[socket.id].content)
@@ -196,9 +197,9 @@ function socket(io) {
 
             botMessage[socket.id] = JSON.parse(data);
 
-            socket.bot1.message({
+            assistantList.get(bot_id_1).message({
                 assistantId: botAuth1[socket.id].workspace_id,
-                sessionId: socket.bot1Session,
+                sessionId: sessionList.get(bot_id_1),
                 input: {
                   'message_type': 'text',
                   'text': JSON.stringify(botMessage[socket.id].content)
@@ -222,7 +223,10 @@ function socket(io) {
 
 
 
-    })  
+    })
+
+    
 }
+
 module.exports = socket;
 

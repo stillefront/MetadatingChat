@@ -124,6 +124,10 @@ $(document).ready(function(){
     console.log(socket);
     var funnyButton = ".chat-button"
 
+
+
+
+
     //automatic start. You can manipulate the static msg in data.content
     console.log("SocketClient is working. Sending first static 'hallo' msg to the first bot");
     var data = {
@@ -134,6 +138,9 @@ $(document).ready(function(){
     };
     socket.send(JSON.stringify(data))
     console.log("static msg was sent")
+
+
+
     
     //msg ping pong after automatic start
     socket.on('message', function(who, data){
