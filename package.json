@@ -15,14 +15,15 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.2",
+    "ibm-watson": "^5.2.1",
     "joi": "^14.0.4",
     "joi-password-complexity": "^2.0.1",
     "jquery.redirect": "^1.1.4",
     "jsonwebtoken": "^8.3.0",
-    "lodash": "^4.17.11",
-    "mongoose": "^5.3.8",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.8.3",
     "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "socket.io": "^2.1.1",
     "watson-developer-cloud": "^3.13.1"
   }
