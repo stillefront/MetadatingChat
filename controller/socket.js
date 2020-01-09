@@ -2,8 +2,6 @@
 // https://cloud.ibm.com/apidocs/assistant/assistant-v2?code=node
 // https://docs.google.com/spreadsheets/d/1QKZFLldQtYRXabLBym-oeTAs6VrhUeX9DeMMxKZ7BV8/edit#gid=0
 
-
-
 // watson assistant auth + sdk
 const AssistantV2 = require('ibm-watson/assistant/v2');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -152,65 +150,46 @@ function socket(io) {
 
         })
 
-
         socket.on("callSecondBot", function (data) {
                       
             socket.botMessage = JSON.parse(data);
 
-            socket.bot2.message({
-                assistantId: socket.botAuth2.workspace_id,
-                sessionId: socket.bot2Session,
-                input: {
-                  'message_type': 'text',
-                  'text': JSON.stringify(socket.botMessage.content)
-                  }
-                })
-                .then(res => {
-                  console.log(JSON.stringify(res.result.output.generic, null, 2));
-                  socket.botdata = {
-                    content: res.result.output.generic[0].text,
-                    type: 'botAnswer2',
-                    botPhoto: socket.botAuth1.image_path
-                  }
-
-                  socket.emit('message', socket.botAuth2.name, JSON.stringify(socket.botdata)); // let bot respond in client
-                  socket.to(room).emit('message', socket.botAuth2.name, JSON.stringify(socket.botdata)); // let bot respond to room
-                })
-                .catch(err => {
-                  console.log(err);
-                });
+            callBot(socket.bot2, socket.botAuth2, socket.bot2Session, socket.botMessage,'botAnswer2');
         })
 
         socket.on("callFirstBot", function (data) {
 
             socket.botMessage = JSON.parse(data);
 
-            socket.bot1.message({
-                assistantId: socket.botAuth1.workspace_id,
-                sessionId: socket.bot1Session,
-                input: {
-                  'message_type': 'text',
-                  'text': JSON.stringify(socket.botMessage.content)
-                  }
-                })
-                .then(res => {
-                  console.log(JSON.stringify(res.result.output.generic, null, 2));
-                  socket.botdata = {
-                    content: res.result.output.generic[0].text,
-                    type: 'botAnswer',
-                    botPhoto: socket.botAuth1.image_path
-                  }
-
-                  socket.emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond in client
-                  socket.to(room).emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond to room
-                })
-                .catch(err => {
-                  console.log(err);
-                });
+            callBot(socket.bot1, socket.botAuth1, socket.bot1Session, socket.botMessage,'botAnswer');
+           
         })
 
 
-
+        function callBot(bot, auth, session, messageData, type){
+          bot.message({
+              assistantId: auth.workspace_id,
+              sessionId: session,
+              input: {
+                'message_type': 'text',
+                'text': JSON.stringify(messageData.content)
+                }
+              })
+              .then(res => {
+                console.log(JSON.stringify(res.result.output.generic, null, 2));
+                socket.botdata = {
+                  content: res.result.output.generic[0].text,
+                  type: type,
+                  botPhoto: auth.image_path
+                }
+      
+                socket.emit('message', auth.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                socket.to(room).emit('message', auth.name, JSON.stringify(socket.botdata)); // let bot respond to room
+              })
+              .catch(err => {
+                console.log(err);
+              });
+      }
     })  
 }
 module.exports = socket;
