@@ -15,13 +15,6 @@ let app = express();
 const {Bot} = require ('../models/bot');
 let User_sessions_informations = require ('../models/user_sessions_informations');
 
-// blown up stuff, which should be ommitted as soon as possible
-let botMessage = {};
-let clientSearch = {};
-let botAuth1 = {};
-let botAuth2 = {};
-let botdata = {};
-
 
 function socket(io) {
 
@@ -41,14 +34,15 @@ function socket(io) {
         });
 
         socket.on('message', async function (message){
-            botMessage[socket.id] = JSON.parse(message);
 
-            console.log("message_json_esc: parse " + botMessage[socket.id].userId);
-            console.dir(botMessage[socket.id]);
+            socket.botMessage = JSON.parse(message);
+            console.dir("socket save: " + socket.botMessage.userId);
+
+           
 
             async function getClientInfo() {  
                 try {
-                    clientSearch[socket.id] = await User_sessions_informations.findOne({ 'user_id': botMessage[socket.id].userId },).exec();                
+                    socket.clientSearch = await User_sessions_informations.findOne({ 'user_id': socket.botMessage.userId },).exec();                
                 } catch(err) {
                     console.log(err);
                 }
@@ -56,7 +50,7 @@ function socket(io) {
 
             async function getBot1Auth() {
                 try {
-                    botAuth1[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot1 },).exec();
+                    socket.botAuth1 =  await Bot.findOne({ 'name': socket.clientSearch.bot1 },).exec();
                 } catch(err) {
                     console.log(err);
                 }
@@ -64,7 +58,7 @@ function socket(io) {
 
             async function getBot2Auth() {
                 try {
-                    botAuth2[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot2 },).exec();
+                    socket.botAuth2 =  await Bot.findOne({ 'name': socket.clientSearch.bot2 },).exec();
                 } catch(err) {
                     console.log(err);
                 }
@@ -73,6 +67,10 @@ function socket(io) {
             await getClientInfo();
             await getBot1Auth();
             await getBot2Auth();
+
+            console.dir("clientSearch: " + socket.clientSearch);
+            console.dir("botAuth1: " + socket.botAuth1);
+            console.dir("botAuth2: " + socket.botAuth2);
             
             
             // using new authentication strategy for AssistantV2:
@@ -80,7 +78,7 @@ function socket(io) {
             const bot1 = new AssistantV2 ({
                 version: '2019-02-28',
                 authenticator: new IamAuthenticator({
-                  apikey: botAuth1[socket.id].iam_apikey,
+                  apikey: socket.botAuth1.iam_apikey,
                 }),
                 url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
                 disableSslVerification: true, // disabling ssl verification for now
@@ -89,7 +87,7 @@ function socket(io) {
             const bot2 = new AssistantV2 ({
                 version: '2019-02-28',
                 authenticator: new IamAuthenticator({
-                  apikey: botAuth2[socket.id].iam_apikey,
+                  apikey: socket.botAuth2.iam_apikey,
                 }),
                 url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
                 disableSslVerification: true,
@@ -103,7 +101,7 @@ function socket(io) {
             // creating sessions for the respective bots:
             
             bot1.createSession({
-                assistantId: botAuth1[socket.id].workspace_id
+                assistantId: socket.botAuth1.workspace_id
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
@@ -114,23 +112,23 @@ function socket(io) {
 
                 // create message as soon as session is created:
                 socket.bot1.message({
-                    assistantId: botAuth1[socket.id].workspace_id,
+                    assistantId: socket.botAuth1.workspace_id,
                     sessionId: socket.bot1Session ,
                     input: {
                       'message_type': 'text',
-                      'text': JSON.stringify(botMessage[socket.id].content)
+                      'text': JSON.stringify(socket.botMessage.content)
                       }
                     })
                     .then(res => {
                       console.log(JSON.stringify(res.result.output.generic, null, 2));
-                      botdata[socket.id] = {
+                      socket.botdata = {
                         content: res.result.output.generic[0].text,
                         type: 'botAnswer',
-                        botPhoto: botAuth1[socket.id].image_path
+                        botPhoto: socket.botAuth1.image_path
                       }
 
-                      socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
-                      socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond to room
+                      socket.emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                      socket.to(room).emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond to room
                     })
                     .catch(err => {
                       console.log(err);
@@ -141,14 +139,11 @@ function socket(io) {
                 console.log(err);
             });
             
-
             bot2.createSession({
-                assistantId: botAuth2[socket.id].workspace_id
+                assistantId: socket.botAuth2.workspace_id
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
-
-                // experimentation with socket session:
                 socket.bot2Session = res.result.session_id;
             })
             .catch(err => {
@@ -159,57 +154,55 @@ function socket(io) {
 
 
         socket.on("callSecondBot", function (data) {
-            
-            botMessage[socket.id] = JSON.parse(data);
+                      
+            socket.botMessage = JSON.parse(data);
 
             socket.bot2.message({
-                assistantId: botAuth2[socket.id].workspace_id,
+                assistantId: socket.botAuth2.workspace_id,
                 sessionId: socket.bot2Session,
                 input: {
                   'message_type': 'text',
-                  'text': JSON.stringify(botMessage[socket.id].content)
+                  'text': JSON.stringify(socket.botMessage.content)
                   }
                 })
                 .then(res => {
                   console.log(JSON.stringify(res.result.output.generic, null, 2));
-                  botdata[socket.id] = {
+                  socket.botdata = {
                     content: res.result.output.generic[0].text,
                     type: 'botAnswer2',
-                    botPhoto: botAuth1[socket.id].image_path
+                    botPhoto: socket.botAuth1.image_path
                   }
 
-                  socket.emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
-                  socket.to(room).emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond to room
+                  socket.emit('message', socket.botAuth2.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                  socket.to(room).emit('message', socket.botAuth2.name, JSON.stringify(socket.botdata)); // let bot respond to room
                 })
                 .catch(err => {
                   console.log(err);
                 });
-
-
         })
 
         socket.on("callFirstBot", function (data) {
 
-            botMessage[socket.id] = JSON.parse(data);
+            socket.botMessage = JSON.parse(data);
 
             socket.bot1.message({
-                assistantId: botAuth1[socket.id].workspace_id,
+                assistantId: socket.botAuth1.workspace_id,
                 sessionId: socket.bot1Session,
                 input: {
                   'message_type': 'text',
-                  'text': JSON.stringify(botMessage[socket.id].content)
+                  'text': JSON.stringify(socket.botMessage.content)
                   }
                 })
                 .then(res => {
                   console.log(JSON.stringify(res.result.output.generic, null, 2));
-                  botdata[socket.id] = {
+                  socket.botdata = {
                     content: res.result.output.generic[0].text,
                     type: 'botAnswer',
-                    botPhoto: botAuth1[socket.id].image_path
+                    botPhoto: socket.botAuth1.image_path
                   }
 
-                  socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
-                  socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond to room
+                  socket.emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                  socket.to(room).emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond to room
                 })
                 .catch(err => {
                   console.log(err);
