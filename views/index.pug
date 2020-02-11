@@ -1,33 +1,80 @@
 extends layout
 
 block content
+        #fullpage
+            //- .section.active
+                h1 meta.dating:BOTIFY!
 
-  section.front
-  div.wrapper--nav
-    div.container--nav
-      ul.nav
-        //a.nav--links(href="/login") test
-        a.nav--links(href="/admin") Admin-Panel
+            //- .section#section1
+                h1 Project Explanation
 
-  div.wrapper
-    div.container
-      img(id = "img--index" height="40%" src="/images/bot_login.png")
-      br
-      br
-      form(action='/login').form
-        button.form--button-login
-        
-      form(action='/register')
-        button.btn-2 Registrieren
-      br
-      button(id = "gotobots" onclick="window.location.href='/bots'").form--button-bot zu den Bots
+            .section.active
 
-  script.
-    $(document).ready(function(){
-      $('#gotobots').hover(
-       function(){ $("#img--index").addClass('img--index') },
-       function(){ $("#img--index").removeClass('img--index') }
-    )
+                .slide.active#slide1
+                    //- .animated.fadeIn.delay-0-5s#selectSemester-container
+                    #selectSemester-container
+                        //- #1819ws 18/19 Wintersemester
+                        //- #1819ss 18/19 Sommersemester
+                        #1920ws 19/20 Wintersemester
+                        //- #alles Allesemester
 
-        
-    });
+                .slide#slide2
+                    #selectBot-container
+                        #bot_list_1
+                        #preview_img_1
+                        #preview_name_1
+                        #preview_des_1
+                    #preview_btn
+                        button(onclick="backToSelectSemester()" class="selectBtn") Back
+                        button(onclick="selectFirstBot()" class="selectBtn") Select
+                    .warning.animated.infinite.flash.slow
+
+                .slide#slide3
+                    #selectBot-container
+                        #bot_list_2
+                        #preview_img_2
+                        #preview_name_2
+                        #preview_des_2
+                    #preview_btn
+                        button(onclick="backToFirstBot()" class="selectBtn") Back
+                        button(onclick="selectSecondBot()" class="selectBtn") Select
+                    .warning.animated.infinite.flash.slow
+
+                .slide#slide4  
+                    .summerizeBot-container
+                        #firstchosenbot
+                        #secondchosenbot
+                    h.chat-container
+                        #messages
+                          
+                    .slider-container
+                        input(type="range" min="1" max="100" value="50" class="slider" id="myRange")
+                        p(style={'font-size':'1em'}) speed 
+                            span(id="value")
+                    .bot_summary_btns
+                        button(onclick="backToSecondBot()" class="selectBtn") Back
+                        button(onclick="startChat()" class="selectBtn" id="startChatbtn") Start Chat <!-- hier den kram abfangen und einbauen -->
+                        
+
+            .section#section3
+
+            .section#section4
+                h1 Admin Panel / Credits
+
+        script(type="text/javascript" src="dist/fullpage.js")
+        script. 
+            var myFullpage = new fullpage('#fullpage', {
+                sectionsColor: ['black', 'black', 'black', 'green', 'blueviolet'],
+                anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+                lazyLoad: true,
+                verticalCentered: true,
+                controlArrows: false
+                });
+        script. 
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("value");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }

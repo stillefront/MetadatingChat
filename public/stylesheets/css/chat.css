@@ -1,5 +1,8 @@
 p {
-    color: #53e3a6;
+    color: whitesmoke;
+    font: arial;
+    font-size: 1.5em;
+
   }
 
 form {
@@ -56,14 +59,14 @@ form button {
     flex-wrap: nowrap;
     flex-direction: column;
     grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 5;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
     max-height: 100%;
     overflow-y: auto;
-    /* border-style: solid; */
-    /* border-color: #e0e0e0; */
-    /* border-width: 2px; */
+    border-style: solid;
+    border-color: whitesmoke;
+    border-width: 1px;
     /* border-top-style: solid; */
 }
 
@@ -253,8 +256,8 @@ form button {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 8% 6% 6% 75% 5%;
+    grid-template-columns: 10% 27% 27% 27% 10%;
+    grid-template-rows: 10% 65% 5% 7% 10%;
 }
 
 .chat-input {
@@ -271,13 +274,12 @@ form button {
     border-width: 1px;
 }
 
-/* chose nickname */
 
 .chat-header {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-column-start: 0;
+    grid-column-end: 0;
+    grid-row-start: 0;
+    grid-row-end: 0;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -307,28 +309,38 @@ form button {
 }
 
 .chat-button {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    background-color: white;
+    grid-column-start: 3;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    background-color: none;
+    border-style:solid;
+    border-width:1px;
+    border-color:whitesmoke;
 }
 
 .chat-button:hover{
     cursor: pointer;
+    background-color: ghostwhite;
+    color: black;
    }
+.chat-button-text:hover{
+    color: black;
+}
 
 .chat-button-back {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: white;
+    background-color: ghostwhite;
 }
 
 .chat-logo-text {
     position: relative;
     float: left;
+    font-family: arial;
+    font-size: 0.8em;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

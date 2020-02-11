@@ -1,0 +1,33 @@
+extends layout
+
+block content
+
+  section.front
+  div.wrapper--nav
+    div.container--nav
+      ul.nav
+        //a.nav--links(href="/login") test
+        a.nav--links(href="/admin") Admin-Panel
+
+  div.wrapper
+    div.container
+      img(id = "img--index" height="40%" src="/images/bot_login.png")
+      br
+      br
+      form(action='/login').form
+        button.form--button-login
+        
+      form(action='/register')
+        button.btn-2 Registrieren
+      br
+      button(id = "gotobots" onclick="window.location.href='/bots'").form--button-bot zu den Bots
+
+  script.
+    $(document).ready(function(){
+      $('#gotobots').hover(
+       function(){ $("#img--index").addClass('img--index') },
+       function(){ $("#img--index").removeClass('img--index') }
+    )
+
+        
+    });

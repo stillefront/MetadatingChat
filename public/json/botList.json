@@ -1,0 +1,191 @@
+[
+    {
+        "name": "George",
+        "semester": "1819ss",
+        "image_path": "img/george.jpg",
+        "description": "<b>Nimm dir Zeit und lass dir von George einen Espresso zubereiten.</b> <br><br> Auf seiner süditalienischen Finca erzählt er dir gerne etwas von seiner dolce vita. Ob über die Liebe, Genuß oder seine Guilia: Der lebenserfahrene Gentleman hat immer eine Geschichte zu erzählen. Auch Komplimente kann er verteilen - aber bilde dir nicht ein, dass das liebe Wort nur für dich bestimmt sei. Du kannst es kaum erwarten? Tippe ein “Buongiorno” ein und George wird bei dir sein.",
+        "isPublic": true
+    },
+    {
+        "name": "Baby Phat",
+        "semester": "1819ss",
+        "image_path": "img/babyphat.jpg",
+        "description": "Baby Phat ist eine Frau, die fokussiert und angetrieben ist, das, was sie sich vorstellt, Realität werden zu lassen. Sie ist eine erfahrene Frau, die ihre Fähigkeiten nutzen möchte, um eine starke, kraftvolle Zukunft für die Frau und ihre Marke zu schaffen. Wenn sie nicht arbeitet, genießt sie ihre Freizeit und lebt ihr schönstes Leben. Champagner trinkt sie am liebsten und wenn du keine selbstsichere Person bist kannst Du schnell von ihr abgeschossen werden. Komm nicht mit Nichtigkeiten zu ihr, weil sie dagegen allergisch ist und ihre Zeit kostbar ist. Ihr Comeback steht kurz bevor, also seid bereit!",
+        "isPublic": true
+    },
+    {
+        "name": "Kyle",
+        "semester": "1819ss",
+        "image_path": "img/kyle.jpg",
+        "description": "Immer auf zack: Kyle ist ein totaler Outdoor-Typ. Auf der Suche nach neuen Herausforderungen stürzt er sich von einem Abenteuer ins nächste – und nimmt jede Welle mit. Der 28-jährige Snowboardlehrer sprüht vor Selbstvertrauen und Optimismus. Damit hat er natürlich auch Erfolg bei den Frauen, momentan genießt er das Singleleben aber in vollen Zügen. Mit Motivation, einer Kopf-durch-die-Wand-Mentalität und jeder Menge Energy ist er der perfekte Buddy. Wenn er mit seinen Kumpels unterwegs ist, überwiegt der jugendliche Leichtsinn, trifft er beim Feiern ein neues Girl wird der Österreicher zum Charmeur.",
+        "isPublic": true
+    },
+    {
+        "name": "Ronnie",
+        "semester": "1819ss",
+        "image_path": "img/ronnie.jpg",
+        "description": "Mit Ronnie zu schreiben, ist wie ein beherzter Schlag auf die Schulter mit anschließendem Augenzwinkern. Die ausgewogene Balance zwischen dem freundschaftlich gesprächigen Trinkbruder, der sich gleichzeitig nicht scheut dir die Meinung zu sagen, wird dich sofort in deinen letzten Kneipenbesuch zurück versetzen. Wer es schafft seine Gunst zu erlangen, kann viel von dem nachdenklichen Humpenheber erfahren, denn er kennt sich aus. Gefühle , Mode oder auch Sex. Ronnie hat viele Lieblingsthemen. Doch am liebsten redet er, klar , übers Saufen. Ein Sterni mit den Jungs, dit is Balsam für die Seele. ",
+        "isPublic": true
+    },
+    {
+        "name": "Rolf",
+        "semester": "1819ss",
+        "image_path": "img/rolf.jpg",
+        "description": "Es gibt immer was zu tun! Und jetzt kannst du mit Rolf über seine Projekte fachsimpeln! Dafür legt er auch mal seinen Akkuschrauber weg und hört dir zu. Egal ob den Fitnessraum mit Rollrasen oder die Gegenstromanlage im Teich, damit die Kois fit bleiben, Rolf schnackt gerne mit dir über seine Projekte. Sein Haus ist seine Bastelhöhle und es gibt immer was zu tun. Rolf ist ein anpackender Eigenbrödler, der beim Schrauben schon mal den Geburtstag seiner Frau vergisst. Jetzt aber mal loslegen, denn Reden ist silber, Machen ist gold! Yippiejaja-yippie-yippie-yeah!",
+        "isPublic": true
+    },
+    {
+        "name": "Emma",
+        "semester": "1819ss",
+        "image_path": "img/emma.jpg",
+        "description": "Wenn du Emma auf Bumble siehst, swipst du auf jeden Fall rechts! Sie ist die Erfüllung deiner feuchten Träume. Attraktiv, selbstbewusst, charmant und immer für einen Flachwitz zu haben. Mit ihr kannst du entspannt ein Bierchen trinken gehen, über deine Vorlieben reden und dich mal richtig ausprobieren. Sex ist ihr sinnlichstes Hobby - aber auf einem hohen Niveau.",
+        "isPublic": true
+    },
+    {
+        "name": "Achibald",
+        "semester": "1819ss",
+        "image_path": "img/achibald.jpg",
+        "description": "Er ist Amerikaner mittleren Alters, der durchaus als selbstgerechter Charakter bezeichnet werden könnte und innerhalb der komplexen Strukturen des Unternehmens schnell aufgestiegen ist. Dementsprechend dreht sich sein Leben in ersten Linie um seine Profession und die  Bequemlichkeiten, die mit seinem hohen Einkommen einhergehen. An leichter Konversation ist er nicht interessiert, da er in ihr keinen Mehrwert sieht. Dennoch wird er nicht launisch, sondern versucht die Konversation in eine adäquate Richtung zu lenken, auch wenn das bedeutet, dass er einen Termin vortäuschen muss, der ihn aus der Gemengelage befreit.",
+        "isPublic": true
+    },
+    {
+        "name": "Mika",
+        "semester": "1819ss",
+        "image_path": "img/mika.jpg",
+        "description": "Viva la Vulva! Sexpositiv, vegan und nachhaltig - so tickt Mika.  Mit ihrer (zugezogenen) Berliner Schnauze und ihrem Charm überrascht sie dich mit ihren Antworten zu Themen wie Sex, Liebe oder sogar Politik, denn sie fehlt auf keiner #fridaysforfuture! Sie ist feministisch, nimmt kein Blatt vorm Mund und bringt immer eine große Portion Humor mit. Ein “Hey Na!” reicht und schon fängt das Chat-Spektakel an, und für die ganz neugierigen unter euch: ein kleiner Tipp: gebt #MakeMagicHappen ein, für einen kleinen treat.",
+        "isPublic": true
+    },
+    {
+        "name": "Paris",
+        "semester": "1819ss",
+        "image_path": "img/paris.jpg",
+        "description": "Wir sind Paris. Eine Anfang dreißigjährige neureiche Frau, die Bling Bling liebt und das zeigt sich nicht nur auf ihrer Kleidung, sondern spiegelt sich auch in ihrem Life-Style wieder. Shopping, Party, teures Essen auf Yachten ist genau das, auf was Paris steht. Zudem ist sie nicht die hellste Kerze auf der vergoldeten Torte, aber versucht, das mit ihrem auffälligen Look wieder raus zu holen.",
+        "isPublic": true
+    },
+    {
+        "name": "Bayer",
+        "semester": "1819ws",
+        "image_path": "img/bayer.jpg",
+        "description": "Servus, mein Name ist Bayer, wie der Freistaat nur ohne N. Ich bin frisch geschieden und lebe mit meiner neuen, jungen Freundin in Leverkusen. Meine Kinder sind mir sehr wichtig, weshalb ich mich beim Sorgerechtsstreit durchgesetzt habe. Durch meine neue Freundin fühle ich mich wieder jung und dynamisch. Jeder Tag ist spannend und fordert mich aufs Neue. Nichtsdestotrotz, bin ich ein Freund gepflegter Manieren und anständiger Umgangsformen. Wenn ich nicht mit meiner Freundin oder Familie zusammen bin, kümmere ich mich um meine Firma, oder gucke in einer meiner Ferienwohnungen nach dem Rechten. Ich glaube an die Wissenschaft und bin kein Freund von Hokuspokus.",
+        "isPublic": true
+    },
+    {
+        "name": "Gerd_DB",
+        "semester": "1819ws",
+        "image_path": "img/gerd_db.jpg",
+        "description": "<b>>>Der nasseste Zug ist ein Badeanzug.<< </b><br><br> Mit einem fröhlichen aber altmodischen >> Oh Hallöchen! << werden Sie von unserem “Kontrolleti aus Leidenschaft” beim Vorzeigen Ihres gültigen und überteuerten Tickets freundlich begrüßt. Gerd bleibt stets freundlich und wird Sie trotz schneller Themenwechsel und flachen Witzen siezen. Intimer als der Badeanzug wird es nicht, denn prinzipiell gestresst und verkrampft politisch korrekt, macht Gerd oft und gerne seinen wohlverdienten Feierabend. In seinem tiefsten Inneren ist unser stets dem Beruf treuer Gerd ein wirklich Guter und immer einen kleinen, flotten Smalltalk wert.",
+        "isPublic": true
+    },
+    {
+        "name": "Hot Dave",
+        "semester": "1819ws",
+        "image_path": "img/hotdave.jpg",
+        "description": "<b>Alter: Jungspund <br> Herkunft: Fontana, USA </b><br><br> Hot Dave ist die führende Biker Ikone der Outlaw Motorcycle Gang in den Vereinigten Staaten. Er ist auf der Route 66 zu Hause und außer seinem Bike und dem Harley-Lifestyle gibt es für ihn nichts. Saftiges Fleisch wie Spare Ribs und Steak lässt sein Herz auf Hochtouren schlagen. Außer seiner Harley gibt es keine Babes in seinem Leben. Geschwindigkeit und Action lautet seine Devise. Er steht auf Karosserien, Leder und viel PS. Doch unter seiner windfesten Bikerjacke hat Dave einen weichen Kern, denn er liebt seine Mutter - schließlich macht sie die weltbesten Spare Ribs.",
+        "isPublic": true
+    },
+    {
+        "name": "Dr. Klaus Hipp",
+        "semester": "1819ws",
+        "image_path": "img/hipp.jpg",
+        "description": "Der Name ist bei uns nicht mehr Programm, denn wir stehen für altbewährtes und nicht für hippen Schnick Schnack. Unser Traditionsunternehmen hat durch seine Qualität ein Jahrhundert überdauert und genau diese Heimatverbundenheit und Treue verkörpert Klaus. Mit seinen bayrischen Wurzeln ist Dr. Hipp stets höflich und um seine Mitmenschen bemüht. „Ohne Fleiß kein Preis“ ist sein Lebensmotto, er treibt sein Familienunternehmen seit Jahren voran, um seinen Kindern weiterhin eine vielversprechende Zukunft zu gewährleisten. Seine konservative Lebenseinstellung macht ihn in der schnelllebigen Gegenwart zu einem Urgestein der Nahrungsmittelbranche.",
+        "isPublic": true
+    },
+    {
+        "name": "John Reed",
+        "semester": "1819ws",
+        "image_path": "img/johnreed.jpg",
+        "description": "John Reed ist 25 Jahre, zugezogen nach Berlin, aber ursprünglich aus Braunschweig. Er macht ein Fernstudium in Fitness Management. Er ist attraktiv und sportlich. Aussehen ist für ihn alles, deshalb verbringt er die meiste Zeit im Gym. Fitness ist sein Leben, er achtet aber auch sehr auf seine Ernährung. Fast genauso wichtig wie Aussehen sind für ihn Connections und Erfolg. Am Wochenende findet man ihn in den Clubs rund um den Ku’damm, wo er gerne feiern geht und socialized. Er strebt ein Luxusleben an mit teuren Autos und teurem Essen. Er hat einen kosmopolitisches Lebensstil, der sich unter anderem in der ständigen Verwendung von Anglizismen ausdrückt.",
+        "isPublic": true
+    },
+    {
+        "name": "Theresa",
+        "semester": "1819ws",
+        "image_path": "img/theresa.jpg",
+        "description": "<b>Alter : 35 Jahre <br> Wohnort: Dorf am Bodensee, <br> Familienstand: eine Tochter/ verwitwet</b><br><br> Theresa ist eine begeisterungsfähige, sanftmütige und herzliche Persönlichkeit. Menschen mögen sie, weil sie offenherzig und vertrauenswürdig ist und immer für einen schönen Nachmittag im Freien zu haben ist. Sie hat eine sehr freie Denkweise und probiert gerne mal etwas Neues aus. Das wichtigste in ihrem Leben ist ihre Tochter Lotte. Theresa würde alles dafür tun, dass sie behütet und glücklich aufwächst, so wie ihre Eltern es auch ihr ermöglicht haben.",
+        "isPublic": true
+    },
+    {
+        "name": "Tinder",
+        "semester": "1819ws",
+        "image_path": "img/tinder.jpg",
+        "description": "Tinder konsumiert Menschen. Er selbst nennt das Abenteuer. Offenheit ist nur Teil seiner offensiven Strategie. Die kann schon mal arrogant bis aufdringlich wirken. So verliert der Bot nicht nur instantan jede Scham, sondern wird mit der Zeit auch unverschämt. Klar ist das nur ironisch gemeint – checkst du das etwa nicht? Sarkasmus, Provokation, Ignoranz, Egoismus, Unverbindlichkeit, gepaart mit einer extremen Portion Versautheit. Ein Swipe auf die Oberflächlichkeit!",
+        "isPublic": true
+    },
+    {
+        "name": "Frucht-Mark",
+        "semester": "1819ws",
+        "image_path": "img/fruchtmark.jpg",
+        "description": "Das ist Frucht-Mark, der Gründer von true fruits. Er ist wahnsinnig stolz auf sein Business, er selbst ist seine Prio 1, sein Sternzeichen ist Kobe-Rind. Frucht-Mark kommt aus Bonn (NRW) und das Einzige, was er liebt, ist seine Mutti (und natürlich er selbst). Er hasst Innocent Smoothies leidenschaftlich, weil sie besseres Marketing machen als er. Auf der Humor-Ebene bewegt sich Frucht-Mark im Pimmel-Witze-Bereich, in NRW ist die Feminismus-Debatte noch nicht so angekommen und darum denkt er, anzügliche Sprüche müsste man als Frau mit Humor nehmen. Er tut immer so, als sei er ein Stecher, wenn aber wirklich mal jemand flirten will (zum Beispiel ein Mann), ist er alles andere als souverän.",
+        "isPublic": true
+    },
+    {
+        "name": "Victoria",
+        "semester": "1819ws",
+        "image_path": "img/victoria.jpg",
+        "description": "Meinen Charakter würden andere sicher als etwas eingebildet bezeichnen, aber eigentlich bin ich nur fabulous, abwechslungsreich und girly.",
+        "isPublic": true
+    },
+    {
+        "name": "Supreme Axe",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Supreme Axe",
+        "isPublic": true
+    },
+    {
+        "name": "Gästebuch",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Gästebuch",
+        "isPublic": true
+    },
+    {
+        "name": "Earpods",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Earpods",
+        "isPublic": true
+    },
+    {
+        "name": "Selfie Stick",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Selfie Stick.",
+        "isPublic": true
+    },
+    {
+        "name": "Fake Rolex",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Fake Rolex",
+        "isPublic": true
+    },
+    {
+        "name": "Portemonnaie",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Portemonnaie",
+        "isPublic": true
+    },
+    {
+        "name": "Rauchmelder",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Rauchmelder",
+        "isPublic": true
+    },
+    {
+        "name": "Klangschale",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Klangschale",
+        "isPublic": true
+    },
+    {
+        "name": "Kissen",
+        "semester": "1920ws",
+        "image_path": "img/bot_login.png",
+        "description": "Das liebevolle Kissen",
+        "isPublic": true
+    }
+]

@@ -76,7 +76,7 @@ function socket(io) {
             const bot1 = new AssistantV2 ({
                 version: '2019-02-28',
                 authenticator: new IamAuthenticator({
-                  apikey: socket.botAuth1.iam_apikey,
+                  apikey: socket.botAuth1.apikey,
                 }),
                 url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
                 disableSslVerification: true, // disabling ssl verification for now
@@ -85,7 +85,7 @@ function socket(io) {
             const bot2 = new AssistantV2 ({
                 version: '2019-02-28',
                 authenticator: new IamAuthenticator({
-                  apikey: socket.botAuth2.iam_apikey,
+                  apikey: socket.botAuth2.apikey,
                 }),
                 url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
                 disableSslVerification: true,
@@ -99,7 +99,7 @@ function socket(io) {
             // creating sessions for the respective bots:
             
             bot1.createSession({
-                assistantId: socket.botAuth1.workspace_id
+                assistantId: socket.botAuth1.assistant_id
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
@@ -110,7 +110,7 @@ function socket(io) {
 
                 // create message as soon as session is created:
                 socket.bot1.message({
-                    assistantId: socket.botAuth1.workspace_id,
+                    assistantId: socket.botAuth1.assistant_id,
                     sessionId: socket.bot1Session ,
                     input: {
                       'message_type': 'text',
@@ -138,7 +138,7 @@ function socket(io) {
             });
             
             bot2.createSession({
-                assistantId: socket.botAuth2.workspace_id
+                assistantId: socket.botAuth2.assistant_id
             })
             .then(res => {
                 console.log(JSON.stringify(res.result.session_id, null, 2));
@@ -168,7 +168,7 @@ function socket(io) {
 
         function callBot(bot, auth, session, messageData, type){
           bot.message({
-              assistantId: auth.workspace_id,
+              assistantId: auth.assistant_id,
               sessionId: session,
               input: {
                 'message_type': 'text',
@@ -189,7 +189,7 @@ function socket(io) {
               .catch(err => {
                 console.log(err);
               });
-      }
+         }
     })  
 }
 module.exports = socket;

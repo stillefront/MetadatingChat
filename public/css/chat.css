@@ -1,0 +1,37 @@
+#messages {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.bot1-msg {
+    padding: 3px 10px 3px 19px;
+    height: auto;
+    width: auto;
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-column-gap: 8px;
+    grid-row-gap: 2px;
+}
+
+.bot2-msg {
+    height: auto;
+    width: auto;
+	align-self: flex-start;
+	display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-column-gap: 8px;
+    grid-row-gap: 2px;
+    padding: 3px 18px 3px 10px;
+}

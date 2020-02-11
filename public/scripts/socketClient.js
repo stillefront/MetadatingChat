@@ -165,7 +165,7 @@ $(document).ready(function(){
 
     $('.go-back-button').click(function(){
         socket.disconnect(); // disconnect and stop chat!
-        window.location.href = "/bot";
+        window.location.href = "/bots";
     });
 
     $('.stop').click(function(){
@@ -177,7 +177,7 @@ $(document).ready(function(){
         //$( ".chat-button p" ).replaceWith( "<p>Zurück!<p>" );
         $( this ).removeClass( "chat-button" );
         $( this ).addClass( "chat-button-back" );
-        window.location.href = "/bots";
+        window.location.href = "/#3rdPage";
         //$( "div.chat-button" ).toggleClass( "chat-button-back" )
     });
 

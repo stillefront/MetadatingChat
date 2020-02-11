@@ -13,11 +13,11 @@ const botSchema = new mongoose.Schema ({
         image_path: {
           type: String
         },
-        assistant_id: {
+        workspace_id: {
           type: String,
           required: true
         },
-        apikey: {
+        iam_apikey: {
           type: String,
           required: true
         },
@@ -42,8 +42,8 @@ function validateBot(bot) {
     _id: Joi.string().min(5).max(50),
     name: Joi.string().min(5).max(50).required(),
     description: Joi.string().min(0).max(255),
-    assistant_id: Joi.string().min(5).max(255).required(),
-    apikey: Joi.string().min(5).max(255).required(),
+    workspace_id: Joi.string().min(5).max(255).required(),
+    iam_apikey: Joi.string().min(5).max(255).required(),
     date_created: Joi.string().min(5).max(255),
     owner: Joi.string().min(5).max(255),
     isPublic: Joi.boolean().truthy('true').falsy('false').insensitive(false),

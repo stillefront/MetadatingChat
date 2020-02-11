@@ -1,13 +1,26 @@
 doctype html
 html
-  head
-    title= "meta.dating 2019: BOTIFY!"
-    link(rel="shortcut icon", href="/images/bot_user.png")
-    link(rel='stylesheet', href='/stylesheets/css/style.css')
-    link(rel='stylesheet', href='/stylesheets/css/animate.css')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js")
-    script(src='/scripts/click.js')
-    
-  body
-    block content
+    head
+        title= 'meta.dating 2019:BOTIFY!'
+        link(rel="stylesheet" type="text/css" href="dist/fullpage.css")
+        link(rel="stylesheet" type="text/css" href="css/animate.css")
+        link(rel="stylesheet" type="text/css" href="css/main.css")
+        link(rel="stylesheet" type="text/css" href="css/chat.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+        script(src='/scripts/jquery.redirect.js')
+        script(src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js")
+
+        script(src="js/chat.js")
+
+        script(src="js/selectSemester.js")
+        script(src="js/chooseBot.js")
+        script(src="js/selectBot.js")
+        script(src="js/wow.min.js")
+        script. 
+            new WOW().init();
+        script(type='text/javascript').
+            var bot_list =!{JSON.stringify(bot_list)} // getting bot information out of local memory
+
+    body
+      block content

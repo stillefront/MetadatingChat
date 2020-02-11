@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-const router = express.Router();
 
 const {Bot} = require ('../models/bot');
 var User_sessions_informations = require ('../models/user_sessions_informations');
@@ -8,16 +7,10 @@ var User_sessions_informations = require ('../models/user_sessions_informations'
 //var async = require('async');
 var bodyParser = require("body-parser");
 
+        app.locals.bot1 = firstSelectedBot;
+        app.locals.bot2 = secondSelectedBot;
+        app.locals.userId = userId;
 
-// Route to chat
-
-
-router.post('/', function(req, res, next) {
-        app.locals.bot1 = req.body.bot1;
-        app.locals.bot2 = req.body.bot2;
-        app.locals.userId = req.body.userId;
-
-        console.log("ka zaj?"+ req.body.userId);
 
         userData = { user_id: req.body.userId, bot1: app.locals.bot1, bot2: app.locals.bot2 }
 
@@ -40,8 +33,30 @@ router.post('/', function(req, res, next) {
                 return bot_2
               });
               
-    //redirect nach chat oder chatstart!
-  res.redirect('/chatstart');
-});
+ 
 
-module.exports = router;
+
+
+console.log(firstSelectedBot + " " + secondSelectedBot + " " + userId); // debug
+
+console.log(bot_1 + " " + bot_2 + " " + "database success?"); // debug
+
+
+var tmpMsg1 = "<div class='bot1-msg'><p>First Message</p></div>"
+var tmpMsg2 = "<div class='bot2-msg'><p>Second Message</p></div>"
+
+function pingpong() {
+    setTimeout(function () {
+        console.log('pingpong start')
+
+        $('#messages').append(tmpMsg1)
+
+        setTimeout(function() {
+            $('#messages').append(tmpMsg2)
+        }, 1000)
+
+    }, 1000)
+}
+
+
+
