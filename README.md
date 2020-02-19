@@ -1,6 +1,6 @@
 # meta.dating Platform
 
-Hier werden Installation und Konfiguratino der meta.dating Platform beschrieben.
+Hier werden Installation und Konfiguration der meta.dating Platform beschrieben.
 
 ## Installationsanweisungen
 
