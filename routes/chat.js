@@ -5,7 +5,7 @@ const router = express.Router();
 const {Bot} = require ('../models/bot');
 var User_sessions_informations = require ('../models/user_sessions_informations');
 
-var async = require('async');
+//var async = require('async');
 var bodyParser = require("body-parser");
 
 
@@ -43,24 +43,5 @@ router.post('/', function(req, res, next) {
     //redirect nach chat oder chatstart!
   res.redirect('/chatstart');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-router.post('/', chat_start.searchForBothToken);
-router.get('/', chat_start.index);
-*/
-
-
-
 
 module.exports = router;

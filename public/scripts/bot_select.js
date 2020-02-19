@@ -70,16 +70,7 @@ $( document ).ready(function() {
         Cookies.set('userId', userId); // should I use express sessions instead of cookies?
         console.log("do you have a cookie?" + Cookies.get('userId'));
         console.log("Send Bot information to the server and start chat between two Bots!");
-        //new solution with hidden form object:
-        /*
-        let form = $('<form action="' + '/chat' + '" method="post">' +
-        '<input type="text" name="bot1" value="' + bot_array[0] + '" />' +
-        '<input type="text" name="bot2" value="' + bot_array[1] + '" />' +
-        '<input type="text" name="userId" value="' + userId + '" />' +
-        '</form>');
-        $('body').append(form);
-        form.submit();
-        */
+       
 
         $.redirect('/chat', {'bot1': bot_array[0], 'bot2': bot_array[1], 'userId': userId});
 
@@ -92,13 +83,4 @@ $( document ).ready(function() {
         console.log("not working!");
       }
     });
-  /*
-    $(".welcome-bot-box").hover(function(){
-        $(this).children('.bot-box-mouse-hover').css("background-color", "#ffff00");
-      }, function(){$(this).children('.bot-box-mouse-hover').css("background-color", "#eeebf4");
-  
-  });
-  */
-    console.log("lala" + bot_array);
-  
   });

@@ -31,6 +31,8 @@ const app = express();
 // socket.io serverside integration
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+
+
 socket(io);
 
 
@@ -134,6 +136,6 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = {app: app, server: server};
-//module.exports = app;
+// module.exports = app;
 
 // export metadating_PrivateKey=sicheresPasswort

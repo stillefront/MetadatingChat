@@ -119,31 +119,42 @@ $(document).ready(function(){
     // Functions end here
     
     // Party starts here
-    var socket = io();
+    const userId = Cookies.get('userId');
+    const socket = io({ forceNew: true });
+    //const newSocket = io('/'+ userId, {forceNew: true});
+    console.log(socket);
     var funnyButton = ".chat-button"
+
+
+
+
 
     //automatic start. You can manipulate the static msg in data.content
     console.log("SocketClient is working. Sending first static 'hallo' msg to the first bot");
     var data = {
-        "id": socket.id,
+        "id": socket.id, 
         "content": "hallo",
         "type": 'userMessage',
-        "userId": Cookies.get('userId'), // should use the session information from database!?
+        "userId": Cookies.get('userId'),
     };
     socket.send(JSON.stringify(data))
     console.log("static msg was sent")
+
+
+
     
     //msg ping pong after automatic start
     socket.on('message', function(who, data){
         data = JSON.parse(data);
         console.log("Communication betwen msg sockets works")
 
-        if (data.type == 'botAnswer') {
+        if (data.type == 'botAnswer') { 
+            
     
             fakeItTillYouMakeIt("bot1", who, data.content, data.botPhoto, "callSecondBot", data)
             console.log(who + "send a msg")
     
-        } else if (data.type == 'botAnswer2') {
+        } else if (data.type == 'botAnswer2') { // Hier mit IDs arbeiten, wie werden die übersetzt und abgeglichen?
     
             fakeItTillYouMakeIt("bot2", who, data.content, data.botPhoto, "callFirstBot", data)
             console.log(who + "send a msg")
@@ -155,7 +166,7 @@ $(document).ready(function(){
 
     $('.go-back-button').click(function(){
         socket.disconnect(); // disconnect and stop chat!
-        window.location.href = "/bot";
+        window.location.href = "/bots";
     });
 
     $('.stop').click(function(){
@@ -163,11 +174,11 @@ $(document).ready(function(){
     });
     
     $('.chat-button').click(function(){
-        socket.disconnect(); // disconnect and stop chat!
+        socket.disconnect();// disconnect and stop chat!
         //$( ".chat-button p" ).replaceWith( "<p>Zurück!<p>" );
         $( this ).removeClass( "chat-button" );
         $( this ).addClass( "chat-button-back" );
-        window.location.href = "/bots";
+        window.location.href = "/#3rdPage";
         //$( "div.chat-button" ).toggleClass( "chat-button-back" )
     });
 

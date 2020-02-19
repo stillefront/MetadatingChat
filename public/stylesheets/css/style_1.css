@@ -14,7 +14,8 @@
 }
 
 html, body {
-  background-image:linear-gradient(-45deg, #50a3a2 0%, #53e3a6 100%);
+  background-color: black;
+  /* background-image:linear-gradient(-45deg, #50a3a2 0%, #53e3a6 100%); */
   height: 100%;
 }
 

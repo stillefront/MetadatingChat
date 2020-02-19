@@ -1,10 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-
+const {Bot} = require('../models/bot');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MetadatingChat' });
+router.get('/', async function(req, res, next) {
+
+  const bot_list = await Bot.find({ isPublic: "true" }, 'name description image_path');
+  res.render('index', { title: 'meta.dating', bot_list : bot_list});
 });
 
 

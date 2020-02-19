@@ -13,11 +13,11 @@ const botSchema = new mongoose.Schema ({
         image_path: {
           type: String
         },
-        workspace_id: {
+        assistant_id: {
           type: String,
           required: true
         },
-        iam_apikey: {
+        apikey: {
           type: String,
           required: true
         },
@@ -42,8 +42,8 @@ function validateBot(bot) {
     _id: Joi.string().min(5).max(50),
     name: Joi.string().min(5).max(50).required(),
     description: Joi.string().min(0).max(255),
-    workspace_id: Joi.string().min(5).max(255).required(),
-    iam_apikey: Joi.string().min(5).max(255).required(),
+    assistant_id: Joi.string().min(5).max(255).required(),
+    apikey: Joi.string().min(5).max(255).required(),
     date_created: Joi.string().min(5).max(255),
     owner: Joi.string().min(5).max(255),
     isPublic: Joi.boolean().truthy('true').falsy('false').insensitive(false),
@@ -53,7 +53,7 @@ function validateBot(bot) {
   return Joi.validate(bot, schema);
 }
 
-// Virtual for Bot's URL
+// virtual for bot's URL
 botSchema
 .virtual('url')
 .get(function () {

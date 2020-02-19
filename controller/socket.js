@@ -1,205 +1,196 @@
+// sources:
+// https://cloud.ibm.com/apidocs/assistant/assistant-v2?code=node
+// https://docs.google.com/spreadsheets/d/1QKZFLldQtYRXabLBym-oeTAs6VrhUeX9DeMMxKZ7BV8/edit#gid=0
 
-var watson = require('watson-developer-cloud');
-var express = require('express');
-var app = express();
+// watson assistant auth + sdk
+const AssistantV2 = require('ibm-watson/assistant/v2');
+const { IamAuthenticator } = require('ibm-watson/auth');
 
-//mongo database models
+let express = require('express');
+let app = express();
+
+//mongo database models – should also be corrected for new authentication
 const {Bot} = require ('../models/bot');
-var User_sessions_informations = require ('../models/user_sessions_informations');
+let User_sessions_informations = require ('../models/user_sessions_informations');
 
-//bot objects
-var people = {};
-var bot_array = {};
-var botdata = {};
-var botMessage = {};
-
-//custom bot ids
-var bot_id_1
-var bot_id_2
-
-//mongo search var
-var clientSearch = {};
-var botAuth1 = {}
-var botAuth2 = {}
-
-//for context updating 
-var context_bot1 = {}
-var context_bot1_update = {}
-var context_bot2 = {}
-var context_bot2_update = {}
-
-//and action!
 
 function socket(io) {
 
-    io.on('connection', function (socket) {
-
-        var room = ('room_' + socket.id); // generate dynamic room name
+    // a room name is generated for the chosen bots on connection
+    io.on('connection', function (socket){
+        let room = ('room_' + socket.id);
         socket.join(room);
 
         bot_id_1 = (socket.id + '_bot1');
         bot_id_2 = (socket.id + '_bot2');
 
-        console.log(socket.id + ' connected to room ' + room); //for debuging in console
-
-        console.log('a user connected lala');
-        socket.on('new message', function (msg) {
-            var data = {
-                message: msg.message,
-                username: msg.username,
-                data: Date.now()
-            };
-            io.emit('chat message', data);
-        });
+        console.log('new user connected');
+        console.log(socket.id + ' connected to room ' + room);
 
         socket.on('disconnect', function () {
-            console.log('user disconnected');
-            delete bot_array.bot_id_1;
-            console.log("bot_1 deleted");
-            delete bot_array.bot_id_2;
-            console.log("bot_2 deleted");
+            console.log(socket.id + 'user disconnected');
         });
 
-        socket.on('message', async function (message) {
-            botMessage[socket.id] = JSON.parse(message);
+        socket.on('message', async function (message){
 
-            console.log("message_json_esc: parse " + botMessage[socket.id].userId);
+            socket.botMessage = JSON.parse(message);
+            console.dir("socket save: " + socket.botMessage.userId);
+
+           
 
             async function getClientInfo() {  
                 try {
-                    clientSearch[socket.id] = await User_sessions_informations.findOne({ 'user_id': botMessage[socket.id].userId },).exec();                
-                    console.log("getClientInfo function gives: " + clientSearch[socket.id]);
+                    socket.clientSearch = await User_sessions_informations.findOne({ 'user_id': socket.botMessage.userId },).exec();                
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
 
             async function getBot1Auth() {
                 try {
-                    botAuth1[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot1 },).exec();
-                    console.log("getBot1Auth function gives: " + botAuth1[socket.id]);
+                    socket.botAuth1 =  await Bot.findOne({ 'name': socket.clientSearch.bot1 },).exec();
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
 
             async function getBot2Auth() {
                 try {
-                    botAuth2[socket.id] = await Bot.findOne({ 'name': clientSearch[socket.id].bot2 },).exec();
-                    console.log("getBot2Auth function gives: " + botAuth2[socket.id]);
+                    socket.botAuth2 =  await Bot.findOne({ 'name': socket.clientSearch.bot2 },).exec();
                 } catch(err) {
-                    alert(err);
+                    console.log(err);
                 }
             }
              
             await getClientInfo();
             await getBot1Auth();
-            await getBot2Auth();        
+            await getBot2Auth();
 
-                    
-            console.log("what happend first?");
-            bot_array[bot_id_1] = new watson.AssistantV1({
-                iam_apikey: botAuth1[socket.id].iam_apikey, 
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
-            });
-
-            //Watson deklarierung bot
-            console.log("credentials for " + botAuth2[socket.id].name + " are " + botAuth2[socket.id].username_token)
-            bot_array[bot_id_2] = new watson.AssistantV1({
-                iam_apikey: botAuth2[socket.id].iam_apikey,
-                version: '2018-09-20',
-                url: 'https://gateway-fra.watsonplatform.net/assistant/api'
-            });
-
+            console.dir("clientSearch: " + socket.clientSearch);
+            console.dir("botAuth1: " + socket.botAuth1);
+            console.dir("botAuth2: " + socket.botAuth2);
             
+            
+            // using new authentication strategy for AssistantV2:
+          
+            const bot1 = new AssistantV2 ({
+                version: '2019-02-28',
+                authenticator: new IamAuthenticator({
+                  apikey: socket.botAuth1.apikey,
+                }),
+                url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
+                disableSslVerification: true, // disabling ssl verification for now
+              });
 
-            console.log("what is the bot1 token?" + botAuth1[socket.id].workspace_id_url);
+            const bot2 = new AssistantV2 ({
+                version: '2019-02-28',
+                authenticator: new IamAuthenticator({
+                  apikey: socket.botAuth2.apikey,
+                }),
+                url: 'https://api.eu-de.assistant.watson.cloud.ibm.com',
+                disableSslVerification: true,
+              });
 
-            socket.emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to client
-            socket.to(room).emit('message', people[socket.id], JSON.stringify(botMessage[socket.id])); // send to room
+            // experimenting with socket session
+            socket.bot1 = bot1;
+            socket.bot2 = bot2;
+         
+            
+            // creating sessions for the respective bots:
+            
+            bot1.createSession({
+                assistantId: socket.botAuth1.assistant_id
+            })
+            .then(res => {
+                console.log(JSON.stringify(res.result.session_id, null, 2));
 
-            bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
-                context: context_bot1_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
 
-            }, function (err, response) {
-                if (err)
-                    console.log('error:', err);
-                else
-                    botdata[socket.id] = {
-                        content: response.output.text,
+                // experimentation with socket session:
+                socket.bot1Session = res.result.session_id;
+
+                // create message as soon as session is created:
+                socket.bot1.message({
+                    assistantId: socket.botAuth1.assistant_id,
+                    sessionId: socket.bot1Session ,
+                    input: {
+                      'message_type': 'text',
+                      'text': JSON.stringify(socket.botMessage.content)
+                      }
+                    })
+                    .then(res => {
+                      console.log(JSON.stringify(res.result.output.generic, null, 2));
+                      socket.botdata = {
+                        content: res.result.output.generic[0].text,
                         type: 'botAnswer',
-                        botPhoto: botAuth1[socket.id].image_path
-                    }
+                        botPhoto: socket.botAuth1.image_path
+                      }
 
-                console.log("wann kommt man hier hin? Und funktioniert das? ")
-                
-                socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond in client
-                socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond to room
+                      socket.emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                      socket.to(room).emit('message', socket.botAuth1.name, JSON.stringify(socket.botdata)); // let bot respond to room
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
 
+            })
+            .catch(err => {
+                console.log(err);
             });
-        });
+            
+            bot2.createSession({
+                assistantId: socket.botAuth2.assistant_id
+            })
+            .then(res => {
+                console.log(JSON.stringify(res.result.session_id, null, 2));
+                socket.bot2Session = res.result.session_id;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        })
 
         socket.on("callSecondBot", function (data) {
-            console.log("bin ich bei callseondbot?")
-            botMessage[socket.id] = JSON.parse(data);
+                      
+            socket.botMessage = JSON.parse(data);
 
-            context_bot2_update[socket.id] = context_bot2[socket.id]
-            console.log(context_bot2_update[socket.id])
-
-            bot_array[bot_id_2].message({
-                workspace_id: botAuth2[socket.id].workspace_id, //"65719630-1501-4db2-95db-0448295faabf", //workspace_id2, //workspace_id2,
-                context: context_bot2_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
-
-            }, function (err, response) {
-                if (err)
-                    console.log('error:', err);
-                else
-                    botdata[socket.id] = {
-                        content: response.output.text,
-                        type: "botAnswer2",
-                        botPhoto: botAuth2[socket.id].image_path
-                    }
-                context_bot2[socket.id] = response.context;
-
-                socket.emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
-                socket.to(room).emit('message', botAuth2[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
-            });
-        });
+            callBot(socket.bot2, socket.botAuth2, socket.bot2Session, socket.botMessage,'botAnswer2');
+        })
 
         socket.on("callFirstBot", function (data) {
-            console.log("bin ich bei callFirstBot?")
 
-            botMessage[socket.id] = JSON.parse(data);
+            socket.botMessage = JSON.parse(data);
 
-            context_bot1_update[socket.id] = context_bot1[socket.id];
-            console.log(context_bot1_update[socket.id])
-
-            bot_array[bot_id_1].message({
-                workspace_id: botAuth1[socket.id].workspace_id, //"fa73acd9-16d4-42cb-935f-d0b13a25395d", //workspace_id1,
-                context: context_bot1_update[socket.id],
-                input: { 'text': JSON.stringify(botMessage[socket.id].content) }
-
-            }, function (err, response) {
-                if (err)
-                    console.log('error:', err);
-                else
-                    botdata[socket.id] = {
-                        content: response.output.text,
-                        type: "botAnswer",
-                        botPhoto: botAuth1[socket.id].image_path
-                    }
-
-                context_bot1[socket.id] = response.context;
-
-                socket.emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
-                socket.to(room).emit('message', botAuth1[socket.id].name, JSON.stringify(botdata[socket.id])); // let bot respond
-            });
+            callBot(socket.bot1, socket.botAuth1, socket.bot1Session, socket.botMessage,'botAnswer');
+           
         })
-    });
-};
 
+
+        function callBot(bot, auth, session, messageData, type){
+          bot.message({
+              assistantId: auth.assistant_id,
+              sessionId: session,
+              input: {
+                'message_type': 'text',
+                'text': JSON.stringify(messageData.content)
+                }
+              })
+              .then(res => {
+                console.log(JSON.stringify(res.result.output.generic, null, 2));
+                socket.botdata = {
+                  content: res.result.output.generic[0].text,
+                  type: type,
+                  botPhoto: auth.image_path
+                }
+      
+                socket.emit('message', auth.name, JSON.stringify(socket.botdata)); // let bot respond in client
+                socket.to(room).emit('message', auth.name, JSON.stringify(socket.botdata)); // let bot respond to room
+              })
+              .catch(err => {
+                console.log(err);
+              });
+         }
+    })  
+}
 module.exports = socket;
+
