@@ -25,6 +25,7 @@ block content
               p.show_iam_apikey.hidden #{bots.iam_apikey}
               p.show_document_id.hidden #{bots._id}
               p.show_is_public.hidden #{bots.isPublic}
+              p.show_pic.hidden #{bots.image_path}
             
         div.add(onclick="showAdd()")
           a.sidenav--add +
@@ -34,13 +35,18 @@ block content
         div.h1--admin-welcome
           h1.animated.zoomIn Herzlich willkommen in deinem Dashboard!
 
+
+
+    
+
+
     section
       div(id="updateDIV").hidden
-        //-Update des Image-Upload
         form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
-          img.show_pic(id = "imgupload" height="auto" width="200").img--bot-admin
-          input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
-          input(type = "text" id = "_id" name = "_id").hidden 
+          img(height="auto" width="200" id = "imgupload" alt="no picture").imgClicked.img--bot-admin
+          input(type='file' id='upload' name='upload' onchange="this.form.submit()").input.hidden
+          input.showDocumentID(type='text' id='_id' name='_id').input.hidden
+        
 
         //-Update der Credentials
         form.form--admin(action='/update' method='post').update
@@ -67,9 +73,8 @@ block content
 
     section
       div.hidden(id = "addDIV")
-        form.form--admin-imgupload(action='/update/imgupload' enctype='multipart/form-data' method='post').imgupload
-            img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="/images/bot_login.png").imgClicked
-            input(type='file' id='upload' name='upload' onchange="this.form.submit()").hidden
+        //- div.form--admin-imgupload
+        //-     img.img--bot-admin(id = "imgupload" height="auto" width="200" src ="/images/bot_login.png").imgClicked
         form.form--admin(action='/admin/newbot'  method='post')
           input(type='text' id='name' name='name' placeholder = "Name" ).form--input-addname 
           input(type='text' id='description' name='description' placeholder = "Description").form--input-adddescription
